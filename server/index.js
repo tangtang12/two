@@ -51,6 +51,7 @@ app.use(bodyParser.json());
 // app.use('/personal', require('./routes/personal'));
 // app.use('/store', require('./routes/store'));
 app.use('/home',require('./routes/home'));
+app.use('/classify',require('./routes/classify'));
 app.use((req, res, next) => {
     res.status(404);
     res.send('NOT FOUND!');
