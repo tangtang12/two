@@ -23,3 +23,19 @@
 "view":多少人在浏览,
 "state":"正在浏览",
 ```
+
+## CLASSIFY
+- /classify/query
+- get
+- 问号传参lx=xxx 
+> xxx的值
+- manList
+- womenList
+- kidsList
+> 得到数据({code: 0, msg: "OK!", data: []代表成功)
+- data 的具体说明(需要就获取)
+```
+"id": x,
+"pic": 图片地址,
+"desc": 图片描述
+```
