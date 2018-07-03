@@ -1,7 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
 import BottomNav from '../component/BottomNav';
-
+import Top from './wander/Top';
+import '../static/css/wander.less';
 class Wander extends React.Component {
     constructor(props,context) {
         super(props,context);
@@ -10,9 +11,10 @@ class Wander extends React.Component {
 
     render() {
 
-        return <div>
+        return <section className='wanderBox'>
+            <Top/>
             <BottomNav/>
-        </div>
+        </section>
     }
 }
 
