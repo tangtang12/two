@@ -11,7 +11,7 @@ class Yoho extends React.Component {
     render() {
 
         return <div>
-            <BottomNav/>
+
         </div>
     }
 }
