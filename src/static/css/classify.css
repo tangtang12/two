@@ -1,0 +1,30 @@
+.Topbox ul {
+  overflow: hidden;
+  border-bottom: .01rem lavender solid;
+}
+.Topbox ul li {
+  border-right: .01rem lavender solid;
+  display: inline-block;
+  width: 33%;
+  text-align: center;
+  font-size: .4rem;
+  height: 1rem;
+  line-height: 1rem;
+}
+.Topbox ul li:last-child {
+  border-right: .01rem #FFF solid;
+}
+.menBox ul {
+  width: 2rem;
+  height: 100%;
+}
+.menBox ul li {
+  display: block;
+  margin: .02rem auto;
+  height: 1rem;
+  line-height: 1rem;
+  font-size: .25rem;
+  background: #f5fffa;
+  text-align: center;
+}
+/*# sourceMappingURL=classify.css.map */

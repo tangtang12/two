@@ -11,6 +11,8 @@ import Wander from "./routes/Wander";
 import Cart from "./routes/Cart";
 import Self from "./routes/Self";
 import Yoho from "./routes/Yoho";
+
+import './static/css/reset.min.css'
 import BottomNav from "./component/BottomNav";
 
 
@@ -32,7 +34,7 @@ render(<Provider store={store}>
                     </Switch>
                 </main>
                 {/*公共插件*/}
-                <BottomNav/>
+
             </div>
         </LocaleProvider>
     </HashRouter>
