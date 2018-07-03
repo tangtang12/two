@@ -12,6 +12,7 @@ import Cart from "./routes/Cart";
 import Self from "./routes/Self";
 import Yoho from "./routes/Yoho";
 import BottomNav from "./component/BottomNav";
+import './static/css/reset.min.css'
 
 
 render(<Provider store={store}>
