@@ -1,14 +1,21 @@
 import React from "react";
 import {connect} from "react-redux";
+import {query} from "../../api/home";
+import action from "../../store/action";
 
 class HomeTop extends React.Component {
-    constructor(props,context) {
-        super(props,context);
+    constructor(props, context) {
+        super(props, context);
+    }
+
+    async componentDidMount() {
+        let res =  await this.props.queryData();
+
     }
 
 
     render() {
-
+        console.log(this.props);
         return <div className="homeTopBox">
             <div className="homeSwipeOne"></div>
 
@@ -35,7 +42,9 @@ class HomeTop extends React.Component {
 
             <div className="off50">
                 <a href="#">
-                    <img src="//img10.static.yhbimg.com/yhb-img01/2018/06/27/15/01d3b473fb61b8396b93f4065e02185d9d.jpg?imageView2/3/w/640/h/200/q/60" alt="off50"/>
+                    <img
+                        src="//img10.static.yhbimg.com/yhb-img01/2018/06/27/15/01d3b473fb61b8396b93f4065e02185d9d.jpg?imageView2/3/w/640/h/200/q/60"
+                        alt="off50"/>
                 </a>
             </div>
 
@@ -43,12 +52,14 @@ class HomeTop extends React.Component {
 
             <div className="off50">
                 <a href="#">
-                    <img src="//img11.static.yhbimg.com/yhb-img01/2018/06/27/15/011d1adf46e89e79bdbd2dfd53ab17bf34.jpg?imageView2/3/w/640/h/200/q/60" alt="off50"/>
+                    <img
+                        src="//img11.static.yhbimg.com/yhb-img01/2018/06/27/15/011d1adf46e89e79bdbd2dfd53ab17bf34.jpg?imageView2/3/w/640/h/200/q/60"
+                        alt="off50"/>
                 </a>
             </div>
         </div>
     }
 }
 
-export default connect()(HomeTop);
+export default connect(state => state.home, action.home)(HomeTop);
 
