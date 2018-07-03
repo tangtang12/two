@@ -1,0 +1,70 @@
+[
+  {
+    "id": 1,
+    "pic": "//img12.static.yhbimg.com/goodsimg/2017/02/15/10/02457ec06697ff2a7f364d8aefd23574df.jpg?imageMogr2/thumbnail/153x206/background/d2hpdGU=/position/center/quality/60",
+    "desc": "goods",
+    "price":695,
+    "view":137,
+    "state":"正在浏览"
+  },
+  {
+    "id": 2,
+    "pic": "//img11.static.yhbimg.com/goodsimg/2017/03/21/10/0184ff1f80a38f9527c9cb4a87e99a476d.jpg?imageMogr2/thumbnail/153x206/background/d2hpdGU=/position/center/quality/60",
+    "desc": "goods",
+    "price":188,
+    "view":108,
+    "state":"正在浏览"
+  },
+  {
+    "id": 3,
+    "pic": "//img11.static.yhbimg.com/goodsimg/2018/01/30/10/01e923ab34073995ca9b97fb9dccdde40f.jpg?imageMogr2/thumbnail/153x206/background/d2hpdGU=/position/center/quality/60",
+    "desc": "goods",
+    "price":299,
+    "view":141,
+    "state":"正在浏览"
+  },
+  {
+    "id": 4,
+    "pic": "//img13.static.yhbimg.com/goodsimg/2018/04/30/09/02e439e12fec341c45390ad31db3f75f1c.jpg?imageMogr2/thumbnail/153x206/background/d2hpdGU=/position/center/quality/60",
+    "desc": "goods",
+    "price":699,
+    "view":178,
+    "state":"正在浏览"
+  }, {
+  "id": 5,
+  "pic": "//img11.static.yhbimg.com/goodsimg/2018/04/13/15/01f25b9e919f97291ef5cfcbf3695c55a5.jpg?imageMogr2/thumbnail/153x206/background/d2hpdGU=/position/center/quality/60",
+  "desc": "goods",
+  "price":273,
+  "view":120,
+  "state":"正在浏览"
+},{
+  "id": 6,
+  "pic": "//img10.static.yhbimg.com/goodsimg/2018/03/15/15/01f321e2133d8c8e3480eaa33fb6914f85.jpg?imageMogr2/thumbnail/153x206/background/d2hpdGU=/position/center/quality/60",
+  "desc": "goods",
+  "price":1299,
+  "view":157,
+  "state":"正在浏览"
+},{
+  "id": 7,
+  "pic": "//img12.static.yhbimg.com/goodsimg/2018/04/03/10/0245f6e5d333a6b828b14bd32925a427ec.jpg?imageMogr2/thumbnail/153x206/background/d2hpdGU=/position/center/quality/60",
+  "desc": "goods",
+  "price":167,
+  "view":185,
+  "state":"正在浏览"
+},{
+  "id": 8,
+  "pic": "//img11.static.yhbimg.com/goodsimg/2017/09/28/18/01ec52601bb8dbc6daa3d20cd1dbede366.jpg?imageMogr2/thumbnail/153x206/background/d2hpdGU=/position/center/quality/60",
+  "desc": "goods",
+  "price":699,
+  "view":124,
+  "state":"正在浏览"
+},{
+  "id": 9,
+  "pic": "//img13.static.yhbimg.com/goodsimg/2018/03/13/14/02312c4973eb35b9c35c7285ac3e9269b1.jpg?imageMogr2/thumbnail/153x206/background/d2hpdGU=/position/center/quality/60",
+  "desc": "goods",
+  "price":89,
+  "view":65,
+  "state":"正在浏览"
+}
+
+]

@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import BottomNav from '../component/BottomNav';
 
 class Wander extends React.Component {
     constructor(props,context) {
@@ -10,7 +11,7 @@ class Wander extends React.Component {
     render() {
 
         return <div>
-            Wander
+            <BottomNav/>
         </div>
     }
 }

@@ -39,21 +39,3 @@ render(<Provider store={store}>
     </HashRouter>
 </Provider>,window.root);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

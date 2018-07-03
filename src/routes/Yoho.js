@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import BottomNav from '../component/BottomNav';
 
 class Yoho extends React.Component {
     constructor(props,context) {
@@ -10,7 +11,7 @@ class Yoho extends React.Component {
     render() {
 
         return <div>
-            Yoho
+            <BottomNav/>
         </div>
     }
 }
