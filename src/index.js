@@ -12,8 +12,10 @@ import Cart from "./routes/Cart";
 import Self from "./routes/Self";
 import Yoho from "./routes/Yoho";
 import BottomNav from "./component/BottomNav";
+import Details from "./routes/Details";
 import './static/css/reset.min.css'
 import "./static/css/common.less";
+
 
 
 render(<Provider store={store}>
@@ -30,6 +32,7 @@ render(<Provider store={store}>
                         <Route path="/wander" component={Wander}/>
                         <Route path="/cart" component={Cart}/>
                         <Route path="/self" component={Self}/>
+                        <Route path="/details" component={Details}/>
                         <Redirect to="/"/>
                     </Switch>
                 </main>
