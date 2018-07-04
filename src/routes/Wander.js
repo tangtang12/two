@@ -9,10 +9,12 @@ class Wander extends React.Component {
     }
 
 
+
     render() {
 
         return <section className='wanderBox'>
             <Top/>
+
             <BottomNav/>
         </section>
     }
