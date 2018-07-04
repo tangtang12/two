@@ -12,11 +12,11 @@ import Cart from "./routes/Cart";
 import Self from "./routes/Self";
 import Yoho from "./routes/Yoho";
 import BottomNav from "./component/BottomNav";
-import "./static/css/reset.min.css";
-import "./static/css/common.less"
-import Login from './routes/self/Login'
-import './static/css/reset.min.css'
+import Details from "./routes/Details";
+import Login from './routes/self/Login';
+import './static/css/reset.min.css';
 import "./static/css/common.less";
+
 
 render(<Provider store={store}>
     <HashRouter>
@@ -31,9 +31,8 @@ render(<Provider store={store}>
                         <Route path="/wander" component={Wander}/>
                         <Route path="/cart" component={Cart}/>
                         <Route path="/self" component={Self}/>
-
+                        <Route path="/details" component={Details}/>
                         <Route path='/login' component={Login}/>
-
                         <Redirect to="/"/>
                     </Switch>
                 </main>
