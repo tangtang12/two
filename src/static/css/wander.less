@@ -7,6 +7,7 @@
     left: 0;
     top: 0;
     background: #414141;
+    z-index: 999;
     a {
       display: inline-block;
       &:first-child{
@@ -26,6 +27,72 @@
       font-family: inherit;
       font-size: 20px;
       margin: 0;
+    }
+  }
+  .wanderSlide{
+    margin-top: 1.05rem;
+    margin-bottom: .1rem;
+    img{
+      display: block;
+      width: 100%;
+    }
+    .slick-dots{
+      li{
+        button{
+          height: 6px;
+          width: 6px;
+          border-radius: 6px;
+        }
+      }
+    }
+  }
+  .tab{
+    height: 3.2rem;
+    background: yellow;
+  }
+  .main{
+    background: #eaeaea;
+    img{
+      display: block;
+      width: 100%;
+    }
+
+    .blockBox{
+      margin-bottom: .2rem;
+      background: #FFFFFF;
+      .big-title{
+        height: 1rem;
+        color:#444;
+        font-weight: 500;
+        position: relative;
+
+        h3{
+          text-align: center;
+          line-height: 1rem ;
+          font-size: 18px;
+        }
+        a{
+          position: absolute;
+          font-weight: bold;
+          right: .2rem;
+          color: #b0b0b0;
+          font-size: 16px;
+        }
+      }
+      .fz{
+        p{
+          text-align: center;
+          &:nth-of-type(1){
+            margin-top: .2rem;
+            font-size: 12px;
+          }
+          &:nth-of-type(2){
+            font-size: 14px;
+            line-height: .6rem;
+            color: #cccccc;
+          }
+        }
+      }
     }
   }
 }
