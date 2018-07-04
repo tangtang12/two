@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import Topbox from './Topbox'
+import  List from './kids/List'
 
-class Kids extends React.Component {
+class Men extends React.Component {
     constructor(props, context) {
         super(props, context)
     }
@@ -10,11 +11,11 @@ class Kids extends React.Component {
     render() {
         return <div>
             <Topbox/>
-            <ul>
-                <li></li>
-            </ul>
+            <List/>
+            <div></div>
         </div>
+
     }
 }
 
-export default connect()(Kids)
+export default connect()(Men)

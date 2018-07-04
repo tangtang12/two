@@ -1,0 +1,172 @@
+.homeBox {
+  background-color: #f4f4f4;
+}
+.homeBox .homeTopBox .Crevice {
+  height: .3rem;
+}
+.homeBox .homeTopBox .homeSwipeOne {
+  height: 3.6rem;
+  background: lightblue;
+}
+.homeBox .homeTopBox .toClassify {
+  height: 1.5rem;
+  line-height: 1.5rem;
+  background: #fff;
+  padding-bottom: .5rem;
+}
+.homeBox .homeTopBox .toClassify > ul {
+  padding-top: .3rem;
+}
+.homeBox .homeTopBox .toClassify > ul li {
+  width: 25%;
+  text-align: center;
+  float: left;
+}
+.homeBox .homeTopBox .toClassify > ul li .ico {
+  margin: 0 auto;
+  width: .8rem;
+  height: .8rem;
+  background: lightgray;
+}
+.homeBox .homeTopBox .toClassify > ul li span {
+  height: .4rem;
+  line-height: .4rem;
+  display: block;
+}
+.homeBox .homeTopBox .off50 a {
+  display: block;
+  height: 2.3rem;
+}
+.homeBox .homeTopBox .off50 a img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.homeBox .hotCateGoryBox .hot-category {
+  border-bottom: 1px solid #e0e0e0;
+}
+.homeBox .hotCateGoryBox .hot-category .hot-title {
+  height: 1rem;
+  line-height: 1rem;
+  font-size: .25rem;
+  color: #000;
+  text-align: center;
+  font-weight: 300;
+}
+.homeBox .hotCateGoryBox .hot-category .category-list {
+  background: #fff;
+}
+.homeBox .hotCateGoryBox .hot-category .category-list li {
+  box-sizing: border-box;
+  float: left;
+  width: 25%;
+  overflow: hidden;
+  border-top: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+}
+.homeBox .hotCateGoryBox .hot-category .category-list li .img-box {
+  width: 100%;
+  height: 100%;
+  line-height: 100%;
+  text-align: center;
+  overflow: hidden;
+  font-size: 0;
+}
+.homeBox .hotCateGoryBox .hot-category .category-list li .img-box img {
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+}
+.homeBox .hotCateGoryBox .hot-swipe {
+  height: 3rem;
+  background: lightgreen;
+  margin-top: .3rem;
+}
+.homeBox .hotCategoryBox .hotBrand .brand-title {
+  height: 1rem;
+  line-height: 1rem;
+  font-size: .25rem;
+  color: #000;
+  text-align: center;
+  font-weight: 300;
+}
+.homeBox .hotCategoryBox .hotBrand .brand {
+  box-sizing: border-box;
+  float: left;
+  width: 25%;
+  background: #e0e0e0;
+  overflow: hidden;
+  padding: 1px;
+}
+.homeBox .hotCategoryBox .hotBrand .brand a {
+  display: block;
+}
+.homeBox .hotCategoryBox .hotBrand .brand a .brand-logo {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 0;
+  vertical-align: center;
+}
+.homeBox .hotCategoryBox .hotBrand .brand a .brand-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.homeBox .hotCategoryBox .hotBrand .last {
+  box-sizing: border-box;
+  float: left;
+  width: 25%;
+  background: #e0e0e0;
+  overflow: hidden;
+  padding: 1px;
+  width: 50%;
+}
+.homeBox .hotCategoryBox .hotBrand .last a {
+  display: block;
+}
+.homeBox .hotCategoryBox .hotBrand .last a .brand-logo {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 0;
+  vertical-align: center;
+}
+.homeBox .hotCategoryBox .hotBrand .last a .brand-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.homeBox .hotCategoryBox .newPeople {
+  margin-top: .15rem;
+}
+.homeBox .hotCategoryBox .newPeople > a {
+  display: block;
+  height: 2.5rem;
+}
+.homeBox .hotCategoryBox .newPeople > a img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.homeBox .hotSingleBox {
+  position: relative;
+}
+.homeBox .hotSingleBox .single-title {
+  position: relative;
+  height: 1rem;
+  line-height: 1rem;
+}
+.homeBox .hotSingleBox .single-title h2 {
+  text-align: center;
+  font-size: .25rem;
+  font-weight: 300;
+}
+.homeBox .hotSingleBox .single-title i {
+  position: absolute;
+  right: .2rem;
+  top: 50%;
+  margin-top: -0.4rem;
+  font-size: .8rem;
+}
+/*# sourceMappingURL=home.css.map */

@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import Topbox from './Topbox'
-import{Link} from 'react-router-dom'
-import  List from './men/List'
+import {Link} from 'react-router-dom'
+import List from './men/List'
+
 class Men extends React.Component {
     constructor(props, context) {
         super(props, context)
@@ -10,11 +11,9 @@ class Men extends React.Component {
 
     render() {
         return <div>
-
             <Topbox/>
-           <List/>
-                    <div></div>
-                </div>
+            <List/>
+        </div>
 
     }
 }

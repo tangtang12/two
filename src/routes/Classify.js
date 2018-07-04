@@ -2,10 +2,12 @@ import React from "react";
 import {connect} from "react-redux";
 import Topbox from './classify/Topbox'
 import {Switch,Route,Redirect}  from 'react-router-dom'
-import '../static/css/classify.less'
+
 import Men from "./classify/Men";
 import Women from "./classify/Women";
 import Kids from "./classify/Kids";
+
+import '../static/css/classify.less'
 
 class Classify extends React.Component {
     constructor(props,context) {

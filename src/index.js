@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM,{render} from "react-dom";
+import {render} from "react-dom";
 import {Provider} from "react-redux";
 import {HashRouter,Route,Switch,Redirect} from "react-router-dom";
 import {LocaleProvider} from "antd";
@@ -11,10 +11,9 @@ import Wander from "./routes/Wander";
 import Cart from "./routes/Cart";
 import Self from "./routes/Self";
 import Yoho from "./routes/Yoho";
-
-import './static/css/reset.min.css'
 import BottomNav from "./component/BottomNav";
-
+import "./static/css/reset.min.css";
+import "./static/css/common.less"
 
 render(<Provider store={store}>
     <HashRouter>
@@ -38,7 +37,9 @@ render(<Provider store={store}>
             </div>
         </LocaleProvider>
     </HashRouter>
-</Provider>,window.root);
+</Provider>, window.root);
+
+
 
 
 

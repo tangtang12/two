@@ -18,8 +18,8 @@
                 return;
             }
             HTML.style.fontSize = winW / 750 * 100 + "px";
+            HTML.style.fontSize = winW / desW * 100 + "px";
         }
-
         computed();
         window.addEventListener("resize", computed, false);
     })();
@@ -31,3 +31,5 @@
 
 </body>
 </html>
+
+
