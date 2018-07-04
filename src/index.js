@@ -14,8 +14,10 @@ import Yoho from "./routes/Yoho";
 import BottomNav from "./component/BottomNav";
 import Details from "./routes/Details";
 import Login from './routes/self/Login';
+import Register from "./routes/self/Register";
 import './static/css/reset.min.css';
 import "./static/css/common.less";
+
 
 
 render(<Provider store={store}>
@@ -33,6 +35,7 @@ render(<Provider store={store}>
                         <Route path="/self" component={Self}/>
                         <Route path="/details" component={Details}/>
                         <Route path='/login' component={Login}/>
+                        <Route path="/register" component={Register}/>
                         <Redirect to="/"/>
                     </Switch>
                 </main>
