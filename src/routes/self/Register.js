@@ -18,7 +18,7 @@ class Register extends React.Component {
 
         return <div className="registerBox">
             <div className="top-bar">
-                <Icon type="left-circle-o"/>
+                <Icon type="left-circle-o" onClick={ev=>{this.props.history.go(-1)}}/>
                 <span>注册</span>
             </div>
 

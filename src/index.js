@@ -31,7 +31,7 @@ render(<Provider store={store}>
                 {/*公共插件*/}
                 <main className="container">
                     <Switch>
-                        <Route path="/" exact component={Yoho}/>
+                        <Route path="/" exact component={Home}/>
                         <Route path="/home" component={Home}/>
                         <Route path="/classify" component={Classify}/>
                         <Route path="/wander" component={Wander}/>

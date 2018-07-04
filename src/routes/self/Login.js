@@ -110,7 +110,7 @@ class Login extends React.Component {
                     <Button className='back-ceng' onClick={this.back}>
                         <Icon type='left'/>
                     </Button>
-                    <Link to='/self/register' className='register'>注册</Link>
+                    <Link to='/register' className='register'>注册</Link>
                 </div>
                 <div className='tip'>
                     Yoho!Family账号可登录Yoho!Buy有货

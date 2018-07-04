@@ -99,7 +99,7 @@ class Login extends React.Component {
                 <Option value="87">+87</Option>
             </Select>
         );
-        return <div className='personLoginBox'>
+        return <div className='personLoginBox' style={{marginTop:".25rem"}}>
 
 <div className='title-f' style={{margin:"0 auto"}}>
     <div style={{display:"flex"}}>

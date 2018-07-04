@@ -106,11 +106,12 @@ class Login extends React.Component {
             <Form onSubmit={this.handleSubmit} className="login-form">
 
                 {/*账号*/}
-                <FormItem style={{width: '4rem'}}>
+                <FormItem style={{width: '4rem',marginTop:' .3rem',
+                    marginLeft: '1.7rem'}}>
                     {getFieldDecorator('userName', {})(<Input prefix={<Icon type="user"/>} placeholder="用户名!"/>)}
                 </FormItem>
                 {/*密码*/}
-                <FormItem style={{width: '4rem'}}>
+                <FormItem style={{width: '4rem',marginLeft: '1.7rem'}}>
                     {getFieldDecorator('userPass', {})(
                         <Input prefix={<Icon type="lock"/>} placeholder="密码!"
                                type="password"/>)}
