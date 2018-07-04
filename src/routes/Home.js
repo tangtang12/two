@@ -26,7 +26,7 @@ class Home extends React.Component {
 
     render() {
         let {homeData} = this.props;
-        if (homeData.n<7) return "";
+        if (homeData.n<8) return "";
         return <section className="homeBox">
             <HomeTop homeData={homeData}/>
             <HotCategory homeData={homeData}/>
