@@ -14,10 +14,10 @@ class Classify extends React.Component {
     render() {
         return <section className='classifyBox'>
             <Switch>
-                <Route exact path='/classify'  component={Men}/>
                 <Route  path='/classify/men'  component={Men}/>
                 <Route path='/classify/women' component={Women}/>
                 <Route path='/classify/kids' component={Kids}/>
+                <Redirect from='/classify' to='/classify/men'></Redirect>
             <Topbox/>
             </Switch>
         </section>
@@ -25,4 +25,3 @@ class Classify extends React.Component {
 }
 
 export default connect()(Classify);
-

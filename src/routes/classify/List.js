@@ -31,7 +31,7 @@ class List extends React.Component {
         return <div className='menListBox'>
                 <ul>
                     {keys.map((item, index) => {
-                        return <li key={index}><a onClick={() => {
+                        return <li key={index} className={this.state.index===index?'active':''}><a onClick={() => {
                             this.setState({
                                 index
                             });
