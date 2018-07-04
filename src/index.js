@@ -13,8 +13,11 @@ import Self from "./routes/Self";
 import Yoho from "./routes/Yoho";
 import BottomNav from "./component/BottomNav";
 import Login from './routes/self/Login'
+import Back from './routes/self/login/Back'
+import Other from './routes/self/login/Other'
 import './static/css/reset.min.css'
 import "./static/css/common.less";
+
 
 
 render(<Provider store={store}>
@@ -32,6 +35,8 @@ render(<Provider store={store}>
                         <Route path="/cart" component={Cart}/>
                         <Route path="/self" component={Self}/>
                         <Route path='/login' component={Login}/>
+                        <Route path='/back' component={Back}/>
+                        <Route path='/other' component={Other}/>
                         <Redirect to="/"/>
                     </Switch>
                 </main>

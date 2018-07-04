@@ -3,11 +3,10 @@ import {connect} from 'react-redux';
 import {Form, Icon, Input, Button, Row, Col, Modal, Select, Cascader} from 'antd';
 import {Link, Switch, Route} from 'react-router-dom';
 import md5 from 'blueimp-md5';
-import {query} from '../../api/home';
-import action from '../../store/action/index';
-import '../../static/css/login.less'
-import Other from './login/Other'
-import Back from './login/Back'
+import action from '../../../store/action/index';
+import {query} from '../../../api/home';
+
+
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -39,8 +38,8 @@ class Login extends React.Component {
         this.state = {
             enter: false,
             a: [],
-            dataF:false,
-            dataG:false
+            dataF: false,
+            dataG: false
         }
     }
 
@@ -48,8 +47,7 @@ class Login extends React.Component {
         let captchaAry = document.getElementById('captcha'),
             iphone = document.getElementById('phone');
 
-        this.setState({
-    })
+        this.setState({})
     }
 
     back = () => {
@@ -103,20 +101,16 @@ class Login extends React.Component {
         );
         return <div className='personLoginBox'>
 
-            {/*demo*/}
-            <div className='demo-1'>
+<div className='title-f' style={{margin:"0 auto"}}>
+    <div style={{display:"flex"}}>
+        <Button style={{borderRadius:"50%",flex:"0",width:".65rem",padding:"0 .2rem 0",marginLeft:"1rem"}} className='back-ceng' onClick={this.back}>
+            <Icon type='left'/>
+        </Button>
 
-                <div>
-                    <Button className='back-ceng' onClick={this.back}>
-                        <Icon type='left'/>
-                    </Button>
-                    <Link to='/self/register' className='register'>注册</Link>
-                </div>
-                <div className='tip'>
-                    Yoho!Family账号可登录Yoho!Buy有货
-                    <Icon type="question-circle-o"/>
-                </div>
-            </div>
+        <span style={{flex:"3",lineHeight: '.65rem',
+            marginLeft: '1.25rem',fontSize:'.3rem'}}>海外账号登录</span>
+    </div>
+</div>
 
             <Form onSubmit={this.handleSubmit} className="login-form">
 
@@ -145,30 +139,13 @@ class Login extends React.Component {
                            style={{width: '100%'}}/>
                 )}
                 </FormItem>
-
-                <FormItem
-                    style={{
-                        marginLeft: '.7rem',
-                        width: '6rem',
-                        height: '2rem',
-                        marginBottom: '0'
-                    }}
-                    {...formItemLayout}
-                    extra="您是否在当前操作！"
-                >
-                    <Row gutter={8}>
-                        <Col span={12}>
-                            {getFieldDecorator('captcha', {
-                                rules: [{required: true, message: '请输入验证码!'}],
-                            })(
-                                <Input/>
-                            )}
-                        </Col>
-                        <Col span={12}>
-                            <Button onClick={this.captcha}>获取验证码</Button>
-                        </Col>
-                    </Row>
+                {/*密码*/}
+                <FormItem style={{width: '4rem',marginLeft:".7rem"}}>
+                    {getFieldDecorator('userPass', {})(
+                        <Input prefix={<Icon type="lock"/>} placeholder="密码!"
+                               type="password"/>)}
                 </FormItem>
+
 
                 {/*登录按钮*/}
                 <FormItem>
@@ -181,16 +158,11 @@ class Login extends React.Component {
                 </FormItem>
             </Form>
             <div className='login-f'>
-                <Link to='/other'> <span>海外账号登录</span></Link>
-                <Link to='/back'> <span>账号密码登录</span></Link>
+                <Link to='/login/other'> <span>海外账号登录</span></Link>
+                <Link to='/login/back'> <span>账号密码登录</span></Link>
                 <Link to='/sss'><span>忘记密码?</span></Link>
             </div>
-            <Switch>
 
-                <Route path='/other' exact component={Other}/>
-                <Route path='/back' component={Back}/>
-
-            </Switch>
         </div>
 
     }

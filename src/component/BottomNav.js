@@ -1,9 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {Icon} from 'antd';
-
 import {NavLink,withRouter} from 'react-router-dom';
-
 import '../static/css/common.less'
 
 
