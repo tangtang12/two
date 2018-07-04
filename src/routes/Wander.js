@@ -7,7 +7,6 @@ import Tab from './wander/Tab';
 import Main from './wander/Main';
 import '../static/css/wander.less';
 
-
 class Wander extends React.Component {
     constructor(props,context) {
         super(props,context);
