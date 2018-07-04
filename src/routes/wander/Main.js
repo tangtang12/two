@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import queryData from '../../api/wander';
+import { Carousel } from 'antd';
+
 class Main extends React.Component {
     constructor(props) {
         super(props);
@@ -28,10 +30,29 @@ class Main extends React.Component {
                     {title? <div className='big-title'>
                         <h3>{title} <a href="javascript:;">MORE&gt;</a></h3>
                     </div>:''}
-
                     <div className='fz'>
+                        { show ==='banner' ?<div className='banner'>
+                            <Carousel autoplay>
+                                {pic.map((item,index) =>{
+                                    let {pic,id,desc} = item;
+                                    return <div key={index}>
+                                        <img src={pic} alt=''/>
+                                        <p>{desc}</p>
+                                    </div>
+                                }) }
+                        </Carousel></div> : ''}
+                        { show ==='list' ? <div className='goodsList'>
+                                {pic.map((item,index)=>{
+                                    let {pic,desc,title} =item;
+                                    return <div key={index} className='bigListBox'>
+                                       <div className='imgBox'> <img src={pic} alt=""/></div>
+                                       <div className='psapnBox'> <p>{desc}</p>
+                                        <span>{title}</span></div>
+                                    </div>
+                                })}
+                        </div>:''}
+
                         <img src={pic instanceof Array?pic[0]:pic} alt=""/>
-                        <p>{desc}</p>
                         {type? <p>{type}</p>:''}
                     </div>
                 </div>

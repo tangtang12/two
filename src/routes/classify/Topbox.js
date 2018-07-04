@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 class Topbox extends React.Component {
     constructor(props, context) {
@@ -8,12 +8,16 @@ class Topbox extends React.Component {
     }
 
     render() {
-        return <div className='Topbox'>
+        return <div className="sss">
+        <div className='Topbox'>
             <ul className="clearfix">
-                <li> <Link to='/classify/men'>Men</Link></li>
-                <li> <Link to='/classify/women'>Women</Link></li>
-                <li><Link to='/classify/kids'>Kids</Link></li>
+                <li><NavLink to='/classify/men'>Men</NavLink></li>
+                <span>|</span>
+                <li><NavLink to='/classify/women'>Women</NavLink></li>
+                <span>|</span>
+                <li><NavLink to='/classify/kids'>Kids</NavLink></li>
             </ul>
+        </div>
         </div>
     }
 }

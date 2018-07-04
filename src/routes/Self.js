@@ -55,7 +55,7 @@ class Self extends React.Component {
                         <Icon type='left' style={{
                             fontSize: '.6rem',
                             marginTop: '.23rem'
-                        }}/>
+                        }} onClick={this.back}/>
 
                         <span className='center'> 个人中心</span>
 
@@ -223,6 +223,11 @@ class Self extends React.Component {
             this.setState({in: false});
         }
     };
+
+    back=()=>{
+        let {history}=this.props;
+        history.go(-1)
+    }
 }
 
 export default withRouter(connect(state => ({...state.homeData}), action.homeData)(Self));

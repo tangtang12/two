@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import Topbox from './Topbox'
-import List from './women/List'
+import List from './List'
 
 class Women extends React.Component {
     constructor(props, context) {
@@ -11,10 +11,7 @@ class Women extends React.Component {
     render() {
         return <div>
             <Topbox/>
-            <List/>
-           <ul>
-               <li></li>
-           </ul>
+            <List type='womenList'/>
         </div>
     }
 }
