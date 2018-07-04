@@ -50,7 +50,7 @@ class Self extends React.Component {
         return <div className='fgg_Box'>
             <header className='headerNavBox'>
                 {/*头部导航*/}
-                <div className='homeBox'>
+                <div className='homeBox1'>
                     <div className='baseBox'>
                         <Icon type='left' style={{
                             fontSize: '.6rem',
