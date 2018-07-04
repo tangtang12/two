@@ -2,41 +2,35 @@ import React from "react";
 import {connect} from "react-redux";
 import {query} from "../../api/home";
 import action from "../../store/action";
+import {Carousel} from "antd";
 
 class HomeTop extends React.Component {
     constructor(props, context) {
         super(props, context);
     }
 
-    async componentDidMount() {
-        let res =  await this.props.queryData();
-
-    }
-
 
     render() {
-        console.log(this.props);
+        let {slide,iconsList} = this.props.homeData;
         return <div className="homeTopBox">
-            <div className="homeSwipeOne"></div>
+            <div className="homeSwipeOne">
+                <Carousel autoplay>
+                    {slide.map((item, index) => {
+                        return   <div key={index}><img src={item.pic} alt={item.desc}/></div>
+                    })}
+                </Carousel>
+            </div>
 
             <div className="toClassify">
                 <ul className="clearfix">
-                    <li>
-                        <div className="ico"></div>
-                        <span>新品着装</span>
-                    </li>
-                    <li>
-                        <div className="ico"></div>
-                        <span>人气搭配</span>
-                    </li>
-                    <li>
-                        <div className="ico"></div>
-                        <span>折扣专区</span>
-                    </li>
-                    <li>
-                        <div className="ico"></div>
-                        <span>全部分类</span>
-                    </li>
+                    {iconsList.map((item, index) => {
+
+                        return <li key={index}>
+                            <div className="ico"><img src={item.pic} alt=""/></div>
+                            <span>{item.desc}</span>
+                        </li>
+                    })}
+
                 </ul>
             </div>
 
@@ -57,7 +51,7 @@ class HomeTop extends React.Component {
                         alt="off50"/>
                 </a>
             </div>
-        </div>
+        </div>;
     }
 }
 
