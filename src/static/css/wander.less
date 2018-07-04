@@ -10,7 +10,7 @@
     z-index: 999;
     a {
       display: inline-block;
-      &:first-child{
+      &:first-child {
         transform: translateX(50%);
       }
     }
@@ -29,16 +29,16 @@
       margin: 0;
     }
   }
-  .wanderSlide{
+  .wanderSlide {
     margin-top: 1.05rem;
     margin-bottom: .1rem;
-    img{
+    img {
       display: block;
       width: 100%;
     }
-    .slick-dots{
-      li{
-        button{
+    .slick-dots {
+      li {
+        button {
           height: 6px;
           width: 6px;
           border-radius: 6px;
@@ -46,32 +46,32 @@
       }
     }
   }
-  .tab{
+  .tab {
     height: 3.2rem;
     background: yellow;
   }
-  .main{
+  .main {
     background: #eaeaea;
-    img{
+    img {
       display: block;
       width: 100%;
     }
 
-    .blockBox{
+    .blockBox {
       margin-bottom: .2rem;
       background: #FFFFFF;
-      .big-title{
+      .big-title {
         height: 1rem;
-        color:#444;
+        color: #444;
         font-weight: 500;
         position: relative;
 
-        h3{
+        h3 {
           text-align: center;
-          line-height: 1rem ;
+          line-height: 1rem;
           font-size: 18px;
         }
-        a{
+        a {
           position: absolute;
           font-weight: bold;
           right: .2rem;
@@ -79,18 +79,64 @@
           font-size: 16px;
         }
       }
-      .fz{
-        p{
+      .fz {
+        p {
           text-align: center;
-          &:nth-of-type(1){
+          &:nth-of-type(1) {
             margin-top: .2rem;
             font-size: 12px;
           }
-          &:nth-of-type(2){
+          &:nth-of-type(2) {
             font-size: 14px;
             line-height: .6rem;
             color: #cccccc;
           }
+        }
+      }
+    }
+  }
+  .banner {
+    text-align: center;
+    height: 100%;
+    line-height: 100%;
+    background: #fff;
+    overflow: hidden;
+    img {
+      margin: .2rem auto;
+      width: 75%;
+    }
+  }
+  .goodsList {
+    .bigListBox {
+      width: 100%;
+      height: 3rem;
+      .imgBox {
+        width: 50%;
+        float: left;
+        img {
+          display: block;
+          width: 100%;
+          padding-top: .5rem;
+        }
+      }
+      .psapnBox {
+        position: relative;
+        width: 50%;
+        float: left;
+        p {
+          text-align: left;
+          font-weight: bold;
+          font-size: .5rem;
+          color: #000;
+          position: absolute;
+          top: .5rem;
+          left: .2rem;
+
+        }
+        span{
+          position: absolute;
+          left: .5rem;
+          top: 2.5rem;
         }
       }
     }
