@@ -11,7 +11,7 @@
 - BANNER_SLIDE 小轮播图
 - HOT_BRANDS 热门品牌
 - HOT_SINGLE_GOODS 人气推荐
-- MAYBE_LIKE 可能喜欢
+- MAYBE_LINK 可能喜欢
 > 得到数据({code: 0, msg: "OK!", data: []代表成功)
 ![image](https://note.youdao.com/yws/api/personal/file/6485DD8557454B8D8418454A88DB7CF7?method=download&shareKey=1987b4db48078095843274336d0387ca)
 - data 的具体说明(需要就获取)

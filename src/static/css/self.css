@@ -1,0 +1,305 @@
+/*IMPORT ANTD*/
+@import "~antd/dist/antd.css";
+/*REM*/
+html {
+  font-size: 100px;
+  /*750:1REM=100PX*/
+}
+#root {
+  margin: 0 auto;
+  max-width: 750px;
+}
+/*NAV-TOP*/
+.fgg_Box .headerNavBox {
+  z-index: 9999;
+  width: 100%;
+  height: 1rem;
+  line-height: 1rem;
+  background-image: Linear-gradient(#323232, #414141);
+  color: #FFF;
+}
+.fgg_Box .headerNavBox .homeBox1 {
+  height: 100%;
+  background: #333;
+}
+.fgg_Box .headerNavBox .homeBox1 .baseBox {
+  position: relative;
+  height: 100%;
+}
+.fgg_Box .headerNavBox .homeBox1 .baseBox .logo {
+  position: absolute;
+  left: .16rem;
+  top: 49%;
+  margin-top: -0.31rem;
+  width: 2.1rem;
+  height: .62rem;
+  font-size: 0;
+  /* background: url("../images/logo.png") no-repeat;*/
+  background-size: 100% 100%;
+}
+.fgg_Box .headerNavBox .homeBox1 .baseBox .center {
+  position: absolute;
+  top: 0;
+  left: 36%;
+  font-size: .4rem;
+}
+.fgg_Box .headerNavBox .homeBox1 .baseBox .up {
+  position: absolute;
+  top: .85rem;
+  right: .23rem;
+  z-index: 9999;
+  font-size: .45rem;
+  color: #2A2A2A;
+}
+.fgg_Box .headerNavBox .homeBox1 .baseBox .icon {
+  position: absolute;
+  right: .16rem;
+  top: 50%;
+  margin-top: -0.24rem;
+}
+.fgg_Box .headerNavBox .homeBox1 .filterBox {
+  position: absolute;
+  top: 1.1rem;
+  right: .1rem;
+  z-index: 999;
+  padding: 0 .5rem;
+  width: 2.3rem;
+  background-image: Linear-gradient(#323232, #414141);
+  border-radius: 4%;
+}
+.fgg_Box .headerNavBox .homeBox1 .filterBox li {
+  line-height: .75rem;
+  color: #FFF;
+  font-size: .25rem;
+  border-top: 0.02rem solid #5d5d5d;
+}
+.fgg_Box .headerNavBox .homeBox1 .filterBox li i {
+  padding: 0 .3rem 0 0;
+}
+.fgg_Box .headerNavBox .login-button {
+  height: 2rem;
+  background: url("../images/person-bg.png") no-repeat;
+  background-size: cover;
+  text-align: center;
+  line-height: 2rem;
+}
+.fgg_Box .headerNavBox .shop {
+  background: #f0f0f0;
+  font-weight: 500;
+}
+.fgg_Box .headerNavBox .shop .shop-channel {
+  background: #fff;
+  height: .85rem;
+  line-height: .85rem;
+}
+.fgg_Box .headerNavBox .shop .shop-channel a {
+  color: #444;
+  font-size: .25rem;
+}
+.fgg_Box .headerNavBox .shop .shop-channel a .shop-1 {
+  margin-left: .45rem;
+}
+.fgg_Box .headerNavBox .shop .shop-channel a .shop-1-1 {
+  margin-left: 3.6rem;
+}
+.fgg_Box .headerNavBox .shop .shop-channel a .shop-1-T {
+  margin-left: .1rem;
+  color: #e0e0e0;
+}
+.fgg_Box .headerNavBox .shop .order {
+  margin-top: .2rem;
+  background: #fff;
+  height: .85rem;
+  line-height: .85rem;
+}
+.fgg_Box .headerNavBox .shop .order a {
+  color: #444;
+  font-size: .25rem;
+}
+.fgg_Box .headerNavBox .shop .order a .shop-1 {
+  margin-left: .45rem;
+}
+.fgg_Box .headerNavBox .shop .order a .shop-1-1 {
+  margin-left: 4.16rem;
+}
+.fgg_Box .headerNavBox .shop .order a .shop-1-T {
+  margin-left: .1rem;
+  color: #e0e0e0;
+}
+.fgg_Box .headerNavBox .shop .address {
+  background: #fff;
+  margin-top: .02rem;
+  display: flex;
+  color: black;
+}
+.fgg_Box .headerNavBox .shop .address li {
+  text-align: center;
+  flex: 1;
+}
+.fgg_Box .headerNavBox .shop .address li i {
+  display: block;
+  font-size: .4rem;
+  padding-top: .3rem;
+}
+.fgg_Box .headerNavBox .shop .address li span {
+  display: block;
+  height: .5rem;
+  line-height: .4rem;
+}
+.fgg_Box .headerNavBox .shop .address1 {
+  background: #fff;
+  margin-top: .02rem;
+  display: flex;
+  color: black;
+  margin-bottom: .2rem;
+}
+.fgg_Box .headerNavBox .shop .address1 li {
+  text-align: center;
+  flex: 1;
+}
+.fgg_Box .headerNavBox .shop .address1 li p {
+  display: block;
+  font-size: .25rem;
+  height: .67rem;
+}
+.fgg_Box .headerNavBox .shop .address1 li span {
+  display: block;
+  height: .5rem;
+  line-height: .4rem;
+}
+.fgg_Box .headerNavBox .shop .tip1 {
+  color: black;
+  background: #fff;
+  height: .85rem;
+}
+.fgg_Box .headerNavBox .shop .tip1 .redBag {
+  margin-left: .4rem;
+  font-size: .35rem;
+}
+.fgg_Box .headerNavBox .shop .tip1 .money {
+  border: none;
+}
+.fgg_Box .headerNavBox .shop .tip1 a {
+  font-size: .25rem;
+  margin-left: .16rem;
+  color: #000;
+  border-bottom: .02rem solid #e0e0e0;
+  padding-bottom: .19rem;
+}
+.fgg_Box .headerNavBox .shop .tip1 a .box-f {
+  margin-left: 4.82rem;
+}
+.fgg_Box .headerNavBox .shop .tip1 a i {
+  margin-left: 5.35rem;
+  padding-right: .1rem;
+  color: #e0e0e0;
+  font-size: .3rem;
+}
+.fgg_Box .headerNavBox .shop .space {
+  display: block;
+  height: .2rem;
+  width: 100%;
+  background: #f0f0f0;
+}
+.fgg_Box .headerNavBox .shop .you_bg {
+  height: 1.5rem;
+  background: url("../images/youhuo-bg2.jpg") no-repeat;
+  background-size: cover;
+}
+.fgg_Box .headerNavBox .shop .you_bg1 {
+  margin-top: .3rem;
+  height: 2.25rem;
+  background: url("../images/youhuo-bg1.jpg") no-repeat;
+  background-size: cover;
+}
+.fgg_Box .headerNavBox .guess .bg_data {
+  color: black;
+}
+.fgg_Box .headerNavBox .guess .bg_data .li_box {
+  position: relative;
+  float: left;
+  margin: .4rem 0 0 .24rem;
+  height: 6rem;
+  width: 3.4rem;
+}
+.fgg_Box .headerNavBox .guess .bg_data .li_box .none {
+  position: relative;
+  height: 4.5rem;
+  background-size: 3.4rem 4.6rem;
+}
+.fgg_Box .headerNavBox .guess .bg_data .li_box .none .cover_f {
+  display: none;
+}
+.fgg_Box .headerNavBox .guess .bg_data .li_box .none .cover_f span {
+  position: absolute;
+  top: 36%;
+  left: 36%;
+  background: red;
+  width: 1rem;
+  text-align: center;
+  border-radius: 50%;
+  z-index: 22;
+}
+.fgg_Box .headerNavBox .guess .bg_data .li_box .none .cover_f .none-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3.4rem;
+  height: 4.5rem;
+  background: #000;
+  opacity: .5;
+}
+.fgg_Box .headerNavBox .guess .bg_data .li_box .desc {
+  color: black;
+  text-align: center;
+  width: 2.7rem;
+  height: .6rem;
+  display: block;
+  line-height: .35rem;
+  margin: 0 auto;
+  padding-top: .2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.3rem;
+}
+.fgg_Box .headerNavBox .guess .bg_data .li_box .price {
+  margin-left: .4rem;
+}
+.fgg_Box .headerNavBox .guess .bg_data .li_box p {
+  position: absolute;
+  right: .3rem;
+  top: 5.4rem;
+  width: .5rem;
+  height: .5rem;
+  line-height: .1rem;
+  margin-left: 1.8rem;
+  color: #777;
+  font-size: .5rem;
+}
+.fgg_Box .headerNavBox .shop2 {
+  border-top: .03rem solid #eee;
+}
+.fgg_Box .headerNavBox .shop2 a {
+  color: black;
+  font-size: .27rem;
+  font-weight: bold;
+}
+.fgg_Box .headerNavBox .shop2 a .shop-1 {
+  margin: 0 .3rem;
+}
+.fgg_Box .headerNavBox .shop2 a .shop-1-1 {
+  margin-left: .3rem;
+}
+.fgg_Box .headerNavBox .shop2 a .top {
+  margin-left: 3.6rem;
+  padding-right: .27rem;
+}
+.fgg_Box .headerNavBox .foo-f {
+  height: 2.5rem;
+  line-height: 1.5rem;
+  background: #eee;
+  color: #666;
+  text-align: center;
+}
+/*# sourceMappingURL=self.css.map */

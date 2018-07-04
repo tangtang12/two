@@ -1,0 +1,51 @@
+.Topbox ul {
+  overflow: hidden;
+  border-bottom: .01rem lavender solid;
+}
+.Topbox ul li {
+  border-right: .01rem lavender solid;
+  display: inline-block;
+  width: 33%;
+  text-align: center;
+  font-size: .4rem;
+  height: 1rem;
+  line-height: 1rem;
+}
+.Topbox ul li:last-child {
+  border-right: .01rem #FFF solid;
+}
+.menListBox ul {
+  float: left;
+  width: 2rem;
+  height: 100%;
+}
+.menListBox ul li {
+  display: block;
+  margin-top: 0.05rem;
+  height: 1.2rem;
+  line-height: 1.2rem;
+  font-size: .25rem;
+  background: #f5fffa;
+  text-align: center;
+}
+span {
+  display: block;
+  text-align: center;
+}
+.menImgBox {
+  width: 73%;
+  height: 100%;
+  float: left;
+}
+.menImgBox .imgMenListBox {
+  padding: .01rem;
+  width: 33%;
+  text-align: center;
+  background: #f5fffa;
+}
+.menImgBox .imgMenListBox img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/*# sourceMappingURL=classify.css.map */

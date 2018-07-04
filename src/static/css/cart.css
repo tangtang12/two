@@ -1,0 +1,94 @@
+.cartBox {
+  background: #f4f4f4;
+  padding-bottom: 3rem;
+}
+.cartBox .cartLogin {
+  height: .5rem;
+  padding: .25rem;
+  color: #24acaa;
+  font-size: .35rem;
+}
+.cartBox .cartLogin .login {
+  display: inline-block;
+  background: #ed0010;
+  color: #fff;
+  height: .5rem;
+  width: 1.15rem;
+  line-height: .5rem;
+  text-align: center;
+  margin: 0 .1rem;
+}
+.cartBox .priceCartBox .cart-zero {
+  text-align: center;
+  padding-top: 2rem;
+  padding-bottom: 25%;
+  width: 100%;
+  height: auto;
+}
+.cartBox .priceCartBox .cart-zero i {
+  font-size: 1.5rem;
+}
+.cartBox .priceCartBox .cart-zero p {
+  font-size: .3rem;
+  padding-top: .2rem;
+}
+.cartBox .priceCartBox .cart-zero a {
+  display: block;
+  width: 27%;
+  height: .6rem;
+  line-height: .6rem;
+  overflow: hidden;
+  margin: .2rem auto;
+  border-radius: 5px;
+  color: #fff;
+  background: #444;
+}
+.cartBox .forYou .title {
+  height: 1rem;
+  line-height: 1rem;
+  background: #fff;
+  text-align: center;
+  font-size: .3rem;
+  font-weight: bold;
+}
+.cartBox .forYou .goods-list .goods-info {
+  display: inline-block;
+  box-sizing: border-box;
+  padding-top: .5rem;
+  padding-right: .2rem;
+  width: 50%;
+}
+.cartBox .forYou .goods-list .goods-info a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.cartBox .forYou .goods-list .goods-info a img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.cartBox .forYou .goods-list .goods-info .detail {
+  padding-left: .3rem;
+  position: relative;
+}
+.cartBox .forYou .goods-list .goods-info .detail .name {
+  height: .8rem;
+  line-height: .4rem;
+  color: #000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cartBox .forYou .goods-list .goods-info .detail .price {
+  color: red;
+}
+.cartBox .forYou .goods-list .goods-info .detail .price del {
+  color: #999;
+}
+.cartBox .forYou .goods-list .goods-info .detail i {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  font-size: .6rem;
+}
+/*# sourceMappingURL=cart.css.map */

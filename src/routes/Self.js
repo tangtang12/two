@@ -3,8 +3,12 @@ import {connect} from "react-redux";
 import {Icon, Button} from "antd"
 import '../static/css/self.less'
 import Transition from 'react-transition-group/Transition';
-import {withRouter, Link} from 'react-router-dom'
-import Guess from "./self/Guess";
+import {withRouter, Link,Switch,Route} from 'react-router-dom'
+import action from "../store/action/index"
+import {query} from '../api/home'
+
+
+
 
 const duration = 300,
     defaultStyle = {
@@ -20,24 +24,33 @@ class Self extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            in: false
-        }
+            in: false,
+            data: []
+        };
+        let {...sss} = this.props;
+
+
     }
 
-    handleClick = ev => {
-        let target = ev.target,
-            tarTag = target.tagName;
-        if (tarTag === 'LI') {
-            this.setState({in: false});
-        }
-    };
+    async componentDidMount() {
+        let result = await query("MAYBE_LINK");
+
+        let {data} = result;
+        this.setState({
+            data: data,
+        })
+
+    }
 
 
     render() {
 
+        let {data} = this.state;
+
         return <div className='fgg_Box'>
             <header className='headerNavBox'>
-                <div className='homeBox'>
+                {/*头部导航*/}
+                <div className='homeBox1'>
                     <div className='baseBox'>
                         <Icon type='left' style={{
                             fontSize: '.6rem',
@@ -70,9 +83,11 @@ class Self extends React.Component {
                         }}
                     </Transition>
                 </div>
+                {/*登录注册*/}
                 <div className='login-button'>
-                    <Button>登录/注册</Button>
+                    <Button><Link to='/login'>登录/注册</Link></Button>
                 </div>
+                {/*状态栏*/}
                 <div className="shop">
 
                     <div className='shop-channel'>
@@ -90,8 +105,8 @@ class Self extends React.Component {
                             <Icon className='shop-1-T' type='right'/>
                         </Link>
                     </div>
-                    <ul className='address'>
 
+                    <ul className='address'>
                         <li><Icon type='pay-circle-o'/><span>待付款</span>
                         </li>
                         <li><Icon type='shop'/><span>待发货</span>
@@ -148,13 +163,67 @@ class Self extends React.Component {
                     <i className='space'/>
 
                 </div>
+                {/*为你优选*/}
+                <div className='guess'>
+                    <div className="toper"
+                         style={{color: 'black', fontSize: '.26rem', borderBottom: '.02rem solid #e0e0e0',}}>
+                   <span style={{
+                       marginLeft: '.5rem',
+                       borderLeft: '.05rem solid',
+                       paddingLeft: '.3rem'
+                   }}>为你优选</span>
+                    </div>
+                    <ul className='bg_data clearfix'>
 
-                <Guess/>
+                        {data.length === 0 ? '' : data.map((item, index) => {
+                            let {pic, desc, price} = item;
+                            return <li className='li_box' key={index}>
+                                <div className='none' style={{
+                                    background: `url(${pic}) no-repeat`
+                                }}>
+                                    <div className='cover_f' id='link'>
+                                        <span>找相似</span>
+                                        <i className='none-1'/>
+                                    </div>
+                                </div>
+                                <a className='desc'>{desc}</a>
+                                <span className='price'>￥{price}</span>
+                                <p className='act'>...</p>
+                            </li>
+                        })}
+                    </ul>
+
+                </div>
+                {/*回到顶部*/}
+                <div className='shop2 clearfix'>
+                    <Link to='/login'>
+                        <span className='shop-1'>登录</span>
+                        <b>|</b>
+                        <span className='shop-1-1'>注册</span></Link>
+
+                    <Link to="self"> <span className='top'>回到顶部</span>
+                        <b>^</b>
+                    </Link>
+                </div>
+                <div className='foo-f'>
+
+                    CopyRight©2007-2018 南京新与力文化传播有限公司
+
+                </div>
 
             </header>
+
         </div>;
     }
+
+    handleClick = ev => {
+        let target = ev.target,
+            tarTag = target.tagName;
+        if (tarTag === 'LI') {
+            this.setState({in: false});
+        }
+    };
 }
 
-export default withRouter(connect()(Self));
+export default withRouter(connect(state => ({...state.homeData}), action.homeData)(Self));
 

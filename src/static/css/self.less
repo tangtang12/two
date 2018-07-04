@@ -13,243 +13,342 @@ html {
 
 /*NAV-TOP*/
 
-.fgg_Box{
-  height: 111rem;
+.fgg_Box {
+  //height: 111rem;
 
-.headerNavBox {
-  @BG: #2A2A2A;
+  .headerNavBox {
+    @BG: #2A2A2A;
 
+    z-index: 9999;
+    width: 100%;
+    height: 1rem;
+    line-height: 1rem;
+    background-image: Linear-gradient(#323232, #414141);
+    color: #FFF;
 
-  z-index: 9999;
-  width: 100%;
-  height: 1rem;
-  line-height: 1rem;
-  background-image: Linear-gradient(#323232, #414141);
-  color: #FFF;
-
-  .homeBox {
-    height: 100%;
-
-    .baseBox {
-      position: relative;
+    .homeBox1 {
       height: 100%;
+      background: #333;
+      .baseBox {
+        position: relative;
+        height: 100%;
 
-      .logo {
-        position: absolute;
-        left: .16rem;
-        top: 49%;
-        margin-top: -.31rem;
-        width: 2.1rem;
-        height: .62rem;
-        font-size: 0;
-        /* background: url("../images/logo.png") no-repeat;*/
-        background-size: 100% 100%;
-      }
-
-      .center {
-        position: absolute;
-        top: 0;
-        left: 36%;
-        font-size: .4rem;
-
-      }
-      .up {
-        position: absolute;
-        top: .85rem;
-        right: .23rem;
-        z-index: 9999;
-        font-size: .45rem;
-        color: @BG;
-      }
-      .icon {
-        position: absolute;
-        right: .16rem;
-        top: 50%;
-        margin-top: -.24rem;
-      }
-    }
-
-    .filterBox {
-      position: absolute;
-      top: 1.1rem;
-      right: .1rem;
-      z-index: 999;
-      padding: 0 .5rem;
-      width: 2.3rem;
-      background-image: Linear-gradient(#323232, #414141);
-      border-radius: 4%;
-
-      li {
-
-        line-height: .75rem;
-
-        color: #FFF;
-        font-size: .25rem;
-        border-top: .02rem solid lighten(@BG, 20%); //=>LESS中降低颜色的方法
-        i {
-          padding: 0 .3rem 0 0;
+        .logo {
+          position: absolute;
+          left: .16rem;
+          top: 49%;
+          margin-top: -.31rem;
+          width: 2.1rem;
+          height: .62rem;
+          font-size: 0;
+          /* background: url("../images/logo.png") no-repeat;*/
+          background-size: 100% 100%;
         }
 
-      }
-    }
-  }
-  .login-button {
-
-    height: 2rem;
-    background: url("../images/person-bg.png") no-repeat;
-    background-size: cover;
-    text-align: center;
-    line-height: 2rem;
-  }
-  .shop {
-    background: #f0f0f0;
-    font-weight: 500;
-    .shop-channel {
-      background: #fff;
-      height: .85rem;
-      line-height: .85rem;
-      a {
-        color: #444;
-        font-size: .25rem;
-
-        .shop-1 {
-          margin-left: .35rem;
-        }
-        .shop-1-1 {
-          margin-left: 3rem;
-        }
-        .shop-1-T {
-          margin-left: .1rem;
-          color: #e0e0e0;
-        }
-      }
-    }
-
-    .order {
-      margin-top: .2rem;
-      background: #fff;
-      height: .85rem;
-      line-height: .85rem;
-
-      a {
-        color: #444;
-        font-size: .25rem;
-
-        .shop-1 {
-          margin-left: .35rem;
-        }
-        .shop-1-1 {
-          margin-left: 3.58rem;
-        }
-        .shop-1-T {
-          margin-left: .1rem;
-          color: #e0e0e0;
-        }
-      }
-    }
-
-    .address {
-      background: #fff;
-      margin-top: .02rem;
-      display: flex;
-      color: black;
-
-      li {
-        text-align: center;
-        flex: 1;
-
-        i {
-          display: block;
+        .center {
+          position: absolute;
+          top: 0;
+          left: 36%;
           font-size: .4rem;
-          padding-top: .3rem;
-        }
-        span {
-          display: block;
-          height: .5rem;
-          line-height: .4rem;
-        }
 
+        }
+        .up {
+          position: absolute;
+          top: .85rem;
+          right: .23rem;
+          z-index: 9999;
+          font-size: .45rem;
+          color: @BG;
+        }
+        .icon {
+          position: absolute;
+          right: .16rem;
+          top: 50%;
+          margin-top: -.24rem;
+        }
       }
-    }
-    .address1 {
-      background: #fff;
-      margin-top: .02rem;
-      display: flex;
-      color: black;
-      margin-bottom: .2rem;
-      li {
-        text-align: center;
-        flex: 1;
 
-        p {
-          display: block;
+      .filterBox {
+        position: absolute;
+        top: 1.1rem;
+        right: .1rem;
+        z-index: 999;
+        padding: 0 .5rem;
+        width: 2.3rem;
+        background-image: Linear-gradient(#323232, #414141);
+        border-radius: 4%;
+
+        li {
+
+          line-height: .75rem;
+
+          color: #FFF;
           font-size: .25rem;
-          height: .67rem;
-        }
-        span {
-          display: block;
-          height: .5rem;
-          line-height: .4rem;
-        }
+          border-top: .02rem solid lighten(@BG, 20%); //=>LESS中降低颜色的方法
+          i {
+            padding: 0 .3rem 0 0;
+          }
 
-      }
-    }
-    .tip1 {
-
-      color: black;
-      background: #fff;
-      height: .85rem;
-
-      .redBag {
-        margin-left: .35rem;
-        font-size: .35rem;
-      }
-      .money {
-        border: none;
-      }
-      a {
-        font-size: .25rem;
-        margin-left: .16rem;
-        color: #000;
-        border-bottom: .02rem solid #e0e0e0;
-        padding-bottom: .19rem;
-        .box-f{
-          margin-left: 3.82rem;
-        }
-        i {
-          margin-left: 4.35rem;
-          padding-right: .1rem;
-          color: #e0e0e0;
-          font-size: .3rem;
         }
       }
     }
-    .space {
-      display: block;
-      height: .2rem;
-      width: 100%;
+    .login-button {
+
+      height: 2rem;
+      background: url("../images/person-bg.png") no-repeat;
+      background-size: cover;
+      text-align: center;
+      line-height: 2rem;
+    }
+    .shop {
       background: #f0f0f0;
+      font-weight: 500;
+      .shop-channel {
+        background: #fff;
+        height: .85rem;
+        line-height: .85rem;
+        a {
+          color: #444;
+          font-size: .25rem;
+
+          .shop-1 {
+            margin-left: .45rem;
+          }
+          .shop-1-1 {
+            margin-left: 3.6rem;
+          }
+          .shop-1-T {
+            margin-left: .1rem;
+            color: #e0e0e0;
+          }
+        }
+      }
+
+      .order {
+        margin-top: .2rem;
+        background: #fff;
+        height: .85rem;
+        line-height: .85rem;
+
+        a {
+          color: #444;
+          font-size: .25rem;
+
+          .shop-1 {
+            margin-left: .45rem;
+          }
+          .shop-1-1 {
+            margin-left: 4.16rem;
+          }
+          .shop-1-T {
+            margin-left: .1rem;
+            color: #e0e0e0;
+          }
+        }
+      }
+
+      .address {
+        background: #fff;
+        margin-top: .02rem;
+        display: flex;
+        color: black;
+
+        li {
+          text-align: center;
+          flex: 1;
+
+          i {
+            display: block;
+            font-size: .4rem;
+            padding-top: .3rem;
+          }
+          span {
+            display: block;
+            height: .5rem;
+            line-height: .4rem;
+          }
+
+        }
+      }
+      .address1 {
+        background: #fff;
+        margin-top: .02rem;
+        display: flex;
+        color: black;
+        margin-bottom: .2rem;
+        li {
+          text-align: center;
+          flex: 1;
+
+          p {
+            display: block;
+            font-size: .25rem;
+            height: .67rem;
+          }
+          span {
+            display: block;
+            height: .5rem;
+            line-height: .4rem;
+          }
+
+        }
+      }
+      .tip1 {
+
+        color: black;
+        background: #fff;
+        height: .85rem;
+
+        .redBag {
+          margin-left: .4rem;
+          font-size: .35rem;
+        }
+        .money {
+          border: none;
+        }
+        a {
+          font-size: .25rem;
+          margin-left: .16rem;
+          color: #000;
+          border-bottom: .02rem solid #e0e0e0;
+          padding-bottom: .19rem;
+          .box-f {
+            margin-left: 4.82rem;
+          }
+          i {
+            margin-left: 5.35rem;
+            padding-right: .1rem;
+            color: #e0e0e0;
+            font-size: .3rem;
+          }
+        }
+      }
+      .space {
+        display: block;
+        height: .2rem;
+        width: 100%;
+        background: #f0f0f0;
+
+      }
+      .you_bg {
+
+        height: 1.5rem;
+        background: url("../images/youhuo-bg2.jpg") no-repeat;
+        background-size: cover;
+      }
+      .you_bg1 {
+        margin-top: .3rem;
+        height: 2.25rem;
+        background: url("../images/youhuo-bg1.jpg") no-repeat;
+        background-size: cover;
+      }
 
     }
 
-    .you_bg{
+    .guess {
 
-      height: 1.5rem;
-      background: url("../images/youhuo-bg2.jpg") no-repeat;
-      background-size: cover;
+      .bg_data {
+        color: black;
+        .li_box {
+          position: relative;
+          float: left;
+          margin: .4rem 0 0 .24rem;
+          height: 6rem;
+          width: 3.4rem;
+          .none {
+            position: relative;
+            height: 4.5rem;
+
+            background-size: 3.4rem 4.6rem;
+
+            .cover_f {
+              display: none;
+              span {
+                position: absolute;
+
+                top: 36%;
+                left: 36%;
+                background: red;
+                width: 1rem;
+                text-align: center;
+                border-radius: 50%;
+                z-index: 22;
+              }
+              .none-1 {
+
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                width: 3.4rem;
+                height: 4.5rem;
+                background: #000;
+                opacity: .5;
+              }
+            }
+
+          }
+          .desc {
+            color: black;
+            text-align: center;
+            width: 2.7rem;
+            height: .6rem;
+            display: block;
+            line-height: .35rem;
+            margin: 0 auto;
+            padding-top: .2rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 0.3rem;
+          }
+          .price {
+            margin-left: .4rem;
+          }
+          p {
+            position: absolute;
+            right: .3rem;
+            top: 5.4rem;
+            width: .5rem;
+            height: .5rem;
+            line-height: .1rem;
+            margin-left: 1.8rem;
+            color: #777;
+            font-size: .5rem;
+
+          }
+        }
+      }
     }
 
-    .you_bg1{
-      margin-top: .3rem;
-      height: 2.25rem;
-      background: url("../images/youhuo-bg1.jpg") no-repeat;
-      background-size: cover;
+    .shop2 {
+      border-top: .03rem solid #eee;
+      a {
+        color: black;
+        font-size: .27rem;
+        font-weight: bold;
+        .shop-1 {
+          margin: 0 .3rem;
+
+        }
+        .shop-1-1 {
+          margin-left: .3rem;
+        }
+        .top {
+          margin-left: 3.6rem;
+          padding-right: .27rem;
+        }
+
+      }
+
     }
 
-
+    .foo-f {
+      height: 2.5rem;
+      line-height: 1.5rem;
+      background: #eee;
+      color: #666;
+      text-align: center;
+    }
   }
-
-
-}
-
 }

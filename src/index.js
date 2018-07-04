@@ -13,9 +13,9 @@ import Self from "./routes/Self";
 import Yoho from "./routes/Yoho";
 import BottomNav from "./component/BottomNav";
 import Details from "./routes/Details";
-import './static/css/reset.min.css'
+import Login from './routes/self/Login';
+import './static/css/reset.min.css';
 import "./static/css/common.less";
-
 
 
 render(<Provider store={store}>
@@ -23,7 +23,6 @@ render(<Provider store={store}>
         <LocaleProvider locale={zh_CH}>
             <div>
                 {/*公共插件*/}
-
                 <main className="container">
                     <Switch>
                         <Route path="/" exact component={Yoho}/>
@@ -33,13 +32,36 @@ render(<Provider store={store}>
                         <Route path="/cart" component={Cart}/>
                         <Route path="/self" component={Self}/>
                         <Route path="/details" component={Details}/>
+                        <Route path='/login' component={Login}/>
                         <Redirect to="/"/>
                     </Switch>
                 </main>
                 {/*公共插件*/}
-                <BottomNav/>
+                <BottomNav></BottomNav>
             </div>
         </LocaleProvider>
     </HashRouter>
-</Provider>,window.root);
+</Provider>, window.root);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

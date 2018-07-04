@@ -1,7 +1,11 @@
 import React from "react";
 import {connect} from "react-redux";
 import {Icon} from 'antd';
-import {NavLink} from 'react-router-dom';
+
+import {NavLink,withRouter} from 'react-router-dom';
+
+import '../static/css/common.less'
+
 
 class BottomNav extends React.Component {
     constructor(props, context) {
@@ -36,5 +40,5 @@ class BottomNav extends React.Component {
     }
 }
 
-export default connect()(BottomNav);
+export default withRouter(connect()(BottomNav));
 
