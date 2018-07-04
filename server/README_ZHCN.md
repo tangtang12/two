@@ -11,8 +11,9 @@
 - BANNER_SLIDE 小轮播图
 - HOT_BRANDS 热门品牌
 - HOT_SINGLE_GOODS 人气推荐
-- MAYBE_LIKE 可能喜欢
+- MAYBE_LINK 可能喜欢
 > 得到数据({code: 0, msg: "OK!", data: []代表成功)
+![image](https://note.youdao.com/yws/api/personal/file/6485DD8557454B8D8418454A88DB7CF7?method=download&shareKey=1987b4db48078095843274336d0387ca)
 - data 的具体说明(需要就获取)
 ```
 "id": x,
@@ -22,20 +23,4 @@
 "oldPrice":原先的价格
 "view":多少人在浏览,
 "state":"正在浏览",
-```
-
-## CLASSIFY
-- /classify/query
-- get
-- 问号传参lx=xxx 
-> xxx的值
-- manList
-- womenList
-- kidsList
-> 得到数据({code: 0, msg: "OK!", data: []代表成功)
-- data 的具体说明(需要就获取)
-```
-"id": x,
-"pic": 图片地址,
-"desc": 图片描述
 ```

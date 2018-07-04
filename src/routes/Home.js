@@ -6,6 +6,9 @@ import HomeTop from "./home/HomeTop";
 import HotCategory from "./home/HotCategory";
 import HotBrand from "./home/HotBrand";
 import HotSingle from "./home/HotSingle";
+import action from "../store/action";
+import MaybeLike from "./home/MaybeLike";
+import HomeFooter from "./home/HomeFooter";
 
 
 class Home extends React.Component {
@@ -13,18 +16,27 @@ class Home extends React.Component {
         super(props, context);
     }
 
+    async componentDidMount() {
+        if (this.props.homeData.n<8) {
+            this.props.queryData();
+        }
+    }
+
+
 
     render() {
-
+        let {homeData} = this.props;
+        if (homeData.n<8) return "";
         return <section className="homeBox">
-
-            <HomeTop/>
-            <HotCategory/>
-            <HotBrand/>
-            <HotSingle/>
+            <HomeTop homeData={homeData}/>
+            <HotCategory homeData={homeData}/>
+            <HotBrand homeData={homeData}/>
+            <HotSingle homeData={homeData}/>
+            <MaybeLike homeData={homeData}/>
+             <HomeFooter/>
         </section>
     }
 }
 
-export default connect()(Home);
+export default connect(state=>state.home,action.home)(Home);
 

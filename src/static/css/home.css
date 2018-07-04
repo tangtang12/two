@@ -1,12 +1,15 @@
 .homeBox {
+  padding-bottom: 2.5rem;
   background-color: #f4f4f4;
 }
 .homeBox .homeTopBox .Crevice {
   height: .3rem;
 }
-.homeBox .homeTopBox .homeSwipeOne {
-  height: 3.6rem;
-  background: lightblue;
+.homeBox .homeTopBox .homeSwipeOne .ant-carousel .slick-slide {
+  text-align: center;
+  height: 3.2rem;
+  line-height: 3.2rem;
+  overflow: hidden;
 }
 .homeBox .homeTopBox .toClassify {
   height: 1.5rem;
@@ -26,7 +29,11 @@
   margin: 0 auto;
   width: .8rem;
   height: .8rem;
-  background: lightgray;
+}
+.homeBox .homeTopBox .toClassify > ul li .ico img {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 .homeBox .homeTopBox .toClassify > ul li span {
   height: .4rem;
@@ -77,10 +84,11 @@
   width: 100%;
   height: 100%;
 }
-.homeBox .hotCateGoryBox .hot-swipe {
-  height: 3rem;
-  background: lightgreen;
-  margin-top: .3rem;
+.homeBox .hotCateGoryBox .hot-swipe .ant-carousel .slick-slide {
+  text-align: center;
+  height: 2.4rem;
+  line-height: 2.4rem;
+  overflow: hidden;
 }
 .homeBox .hotCategoryBox .hotBrand .brand-title {
   height: 1rem;
@@ -168,5 +176,138 @@
   top: 50%;
   margin-top: -0.4rem;
   font-size: .8rem;
+}
+.homeBox .hotSingleBox .singleTop a {
+  display: block;
+  height: 2.5rem;
+}
+.homeBox .hotSingleBox .singleTop a img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.homeBox .hotSingleBox .singleList {
+  background: #fff;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+.homeBox .hotSingleBox .singleList ul {
+  width: 500%;
+  height: 4rem;
+  padding: .4rem 0 .25rem .45rem;
+}
+.homeBox .hotSingleBox .singleList ul li {
+  display: inline-block;
+  width: 1.8rem;
+  height: 2.2rem;
+  vertical-align: center;
+  text-align: center;
+  margin-right: .45rem;
+}
+.homeBox .hotSingleBox .singleList ul li a {
+  display: block;
+  height: 100%;
+}
+.homeBox .hotSingleBox .singleList ul li a img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.homeBox .hotSingleBox .singleList ul li a .goods-info p {
+  margin: 0;
+  padding: 0;
+  height: .4rem;
+  line-height: .4rem;
+  color: #000;
+}
+.homeBox .hotSingleBox .singleList ul li a .goods-info p.view-status {
+  color: #666;
+  font-size: .25rem;
+}
+.homeBox .hotSingleBox .singleList ul li a .goods-info p.view-num {
+  color: #777;
+  font-size: .2rem;
+}
+.homeBox .maybeLikeBox {
+  margin-top: .3rem;
+  background: #fff;
+  padding: .3rem;
+  border-top: 1px solid #ccc;
+}
+.homeBox .maybeLikeBox .title {
+  height: 1.2rem;
+  font-size: .4rem;
+  line-height: 1.2rem;
+  text-align: center;
+  color: #dadada;
+}
+.homeBox .maybeLikeBox .title i {
+  margin-right: .2rem;
+}
+.homeBox .maybeLikeBox .goods-list .goods-info {
+  display: inline-block;
+  box-sizing: border-box;
+  padding-top: .5rem;
+  padding-right: .2rem;
+  width: 50%;
+}
+.homeBox .maybeLikeBox .goods-list .goods-info a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.homeBox .maybeLikeBox .goods-list .goods-info a img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.homeBox .maybeLikeBox .goods-list .goods-info .detail {
+  padding-left: .3rem;
+  position: relative;
+}
+.homeBox .maybeLikeBox .goods-list .goods-info .detail .name {
+  height: .8rem;
+  line-height: .4rem;
+  color: #000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.homeBox .maybeLikeBox .goods-list .goods-info .detail .price {
+  color: red;
+}
+.homeBox .maybeLikeBox .goods-list .goods-info .detail .price del {
+  color: #999;
+}
+.homeBox .maybeLikeBox .goods-list .goods-info .detail i {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  font-size: .6rem;
+}
+.homeBox .homeFooter {
+  height: 2rem;
+  line-height: 2rem;
+  background: #fff;
+}
+.homeBox .homeFooter .logreg {
+  border-top: 2px solid #eee;
+  padding-left: .5rem;
+}
+.homeBox .homeFooter .logreg a {
+  color: #333;
+  font-size: .3rem;
+}
+.homeBox .homeFooter .logreg span:nth-of-type(1) {
+  padding: 0 .2rem;
+  font-size: .1rem;
+  color: #999;
+}
+.homeBox .homeFooter .copyright {
+  height: 60px;
+  background: #eee;
+  color: #666;
+  text-align: center;
+  line-height: 60px;
+  font-size: .2rem;
 }
 /*# sourceMappingURL=home.css.map */
