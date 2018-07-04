@@ -8,6 +8,7 @@ import HotBrand from "./home/HotBrand";
 import HotSingle from "./home/HotSingle";
 import action from "../store/action";
 import MaybeLike from "./home/MaybeLike";
+import HomeFooter from "./home/HomeFooter";
 
 
 class Home extends React.Component {
@@ -32,6 +33,7 @@ class Home extends React.Component {
             <HotBrand homeData={homeData}/>
             <HotSingle homeData={homeData}/>
             <MaybeLike homeData={homeData}/>
+             <HomeFooter/>
         </section>
     }
 }
