@@ -201,9 +201,9 @@ class Self extends React.Component {
                         <b>|</b>
                         <span className='shop-1-1'>注册</span></Link>
 
-                    <Link to="self"> <span className='top'>回到顶部</span>
+                {/*    <Link to="self"> <span className='top'>回到顶部</span>
                         <b>^</b>
-                    </Link>
+                    </Link>*/}
                 </div>
                 <div className='foo-f'>
 

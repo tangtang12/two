@@ -65,7 +65,6 @@ route.get('/login', (req, res) => {
 });
 
 route.post('/register', (req, res) => {
-
     //先准备一套完成的新用户信息模型
     let personInfo = {
         id: req.personalDATA.length === 0 ? 1 : (parseFloat(req.personalDATA[req.personalDATA.length - 1].id) + 1), //用户的ID是在当前用户的最大ID基础上累加1

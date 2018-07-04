@@ -10,7 +10,7 @@ export default class GoTop extends React.Component {
     render() {
 
         return <div className="goTopBox">
-            <BackTop/>
+            <BackTop style={{bottom: "15%"}}/>
         </div>
     }
 }
