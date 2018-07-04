@@ -1,5 +1,4 @@
 import React from "react";
-import {Icon,BackTop} from "antd";
 
 export default class HomeFooter extends React.Component {
     constructor(props, context) {
@@ -14,7 +13,6 @@ export default class HomeFooter extends React.Component {
                 <a href="#" className="login">登录</a>
                 <span>|</span>
                 <a href="#" className="register">注册</a>
-                <BackTop/>
             </div>
             <address className="copyright">
 

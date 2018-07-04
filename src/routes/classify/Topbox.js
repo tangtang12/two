@@ -8,7 +8,8 @@ class Topbox extends React.Component {
     }
 
     render() {
-        return <div className='Topbox'>
+        return <div className="sss">
+        <div className='Topbox'>
             <ul className="clearfix">
                 <li><NavLink to='/classify/men'>Men</NavLink></li>
                 <span>|</span>
@@ -16,6 +17,7 @@ class Topbox extends React.Component {
                 <span>|</span>
                 <li><NavLink to='/classify/kids'>Kids</NavLink></li>
             </ul>
+        </div>
         </div>
     }
 }

@@ -12,11 +12,16 @@ import Cart from "./routes/Cart";
 import Self from "./routes/Self";
 import Yoho from "./routes/Yoho";
 import BottomNav from "./component/BottomNav";
+
+import Back from './routes/self/login/Back'
+import Other from './routes/self/login/Other'
+import './static/css/reset.min.css'
 import Details from "./routes/Details";
 import Login from './routes/self/Login';
 import Register from "./routes/self/Register";
 import './static/css/reset.min.css';
 import "./static/css/common.less";
+import GoTop from "./component/GoTop";
 
 
 
@@ -27,7 +32,7 @@ render(<Provider store={store}>
                 {/*公共插件*/}
                 <main className="container">
                     <Switch>
-                        <Route path="/" exact component={Yoho}/>
+                        <Route path="/" exact component={Home}/>
                         <Route path="/home" component={Home}/>
                         <Route path="/classify" component={Classify}/>
                         <Route path="/wander" component={Wander}/>
@@ -35,12 +40,15 @@ render(<Provider store={store}>
                         <Route path="/self" component={Self}/>
                         <Route path="/details" component={Details}/>
                         <Route path='/login' component={Login}/>
+                        <Route path='/back' component={Back}/>
+                        <Route path='/other' component={Other}/>
                         <Route path="/register" component={Register}/>
                         <Redirect to="/"/>
                     </Switch>
                 </main>
                 {/*公共插件*/}
                 <BottomNav></BottomNav>
+                <GoTop/>
             </div>
         </LocaleProvider>
     </HashRouter>

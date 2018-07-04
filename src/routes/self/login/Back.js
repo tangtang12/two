@@ -3,26 +3,12 @@ import {connect} from 'react-redux';
 import {Form, Icon, Input, Button, Row, Col, Modal, Select, Cascader} from 'antd';
 import {Link, Switch, Route} from 'react-router-dom';
 import md5 from 'blueimp-md5';
-import {query} from '../../api/home';
-import action from '../../store/action/index';
-import '../../static/css/login.less'
-import Other from './login/Other'
-import Back from './login/Back'
+import action from '../../../store/action/index';
+import {query} from '../../../api/home';
+
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-
-const residences = [{
-    value: '中国',
-    label: '中国',
-}, {
-    value: '美国',
-    label: '美国',
-}, {
-    value: '英国',
-    label: '英国',
-}];
-
 
 function loginFail() {
     const modal = Modal.error({
@@ -39,8 +25,8 @@ class Login extends React.Component {
         this.state = {
             enter: false,
             a: [],
-            dataF:false,
-            dataG:false
+            dataF: false,
+            dataG: false
         }
     }
 
@@ -48,8 +34,7 @@ class Login extends React.Component {
         let captchaAry = document.getElementById('captcha'),
             iphone = document.getElementById('phone');
 
-        this.setState({
-    })
+        this.setState({})
     }
 
     back = () => {
@@ -110,7 +95,7 @@ class Login extends React.Component {
                     <Button className='back-ceng' onClick={this.back}>
                         <Icon type='left'/>
                     </Button>
-                    <Link to='/register' className='register'>注册</Link>
+                    <Link to='/self/register' className='register'>注册</Link>
                 </div>
                 <div className='tip'>
                     Yoho!Family账号可登录Yoho!Buy有货
@@ -120,55 +105,18 @@ class Login extends React.Component {
 
             <Form onSubmit={this.handleSubmit} className="login-form">
 
-                <FormItem style={{
-                    width: '1.5rem', margin: ".5rem 0 .5rem .7rem",
-                    display: 'inline-block'
-                }} {...formItemLayout}>
-                    {getFieldDecorator('residence', {
-                        initialValue: ['中国'],
-                        rules: [{type: 'array', required: true, message: '请选择地区!'}],
-                    })(
-                        <Cascader options={residences}/>
-                    )}
+                {/*账号*/}
+                <FormItem style={{width: '4rem',marginTop:' .3rem',
+                    marginLeft: '1.7rem'}}>
+                    {getFieldDecorator('userName', {})(<Input prefix={<Icon type="user"/>} placeholder="用户名!"/>)}
                 </FormItem>
-                <FormItem style={{
-                    marginTop: '.46rem',
-                    display: 'inline-block',
-                    width: '4.5rem'
-                }}
-                          {...formItemLayout}
-                >{getFieldDecorator('phone', {
-                    rules: [{required: true, message: '请输入手机号'}],
-                })(
-                    <Input addonBefore={prefixSelector}
-
-                           style={{width: '100%'}}/>
-                )}
+                {/*密码*/}
+                <FormItem style={{width: '4rem',marginLeft: '1.7rem'}}>
+                    {getFieldDecorator('userPass', {})(
+                        <Input prefix={<Icon type="lock"/>} placeholder="密码!"
+                               type="password"/>)}
                 </FormItem>
 
-                <FormItem
-                    style={{
-                        marginLeft: '.7rem',
-                        width: '6rem',
-                        height: '2rem',
-                        marginBottom: '0'
-                    }}
-                    {...formItemLayout}
-                    extra="您是否在当前操作！"
-                >
-                    <Row gutter={8}>
-                        <Col span={12}>
-                            {getFieldDecorator('captcha', {
-                                rules: [{required: true, message: '请输入验证码!'}],
-                            })(
-                                <Input/>
-                            )}
-                        </Col>
-                        <Col span={12}>
-                            <Button onClick={this.captcha}>获取验证码</Button>
-                        </Col>
-                    </Row>
-                </FormItem>
 
                 {/*登录按钮*/}
                 <FormItem>
@@ -181,16 +129,11 @@ class Login extends React.Component {
                 </FormItem>
             </Form>
             <div className='login-f'>
-                <Link to='/other'> <span>海外账号登录</span></Link>
-                <Link to='/back'> <span>账号密码登录</span></Link>
+                <Link to='/login/other'> <span>海外账号登录</span></Link>
+                <Link to='/login/back'> <span>账号密码登录</span></Link>
                 <Link to='/sss'><span>忘记密码?</span></Link>
             </div>
-            <Switch>
 
-                <Route path='/other' exact component={Other}/>
-                <Route path='/back' component={Back}/>
-
-            </Switch>
         </div>
 
     }
