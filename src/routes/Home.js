@@ -10,6 +10,7 @@ import action from "../store/action";
 import MaybeLike from "./home/MaybeLike";
 import HomeFooter from "./home/HomeFooter";
 import {Icon} from "antd";
+import {isLogin} from "../api/person";
 
 
 class Home extends React.Component {
@@ -18,8 +19,19 @@ class Home extends React.Component {
         this.state = {
             left: "left",
             right: "right on",
-            mark: "mark"
+            mark: "mark",
+            isLogin: false
         };
+    }
+
+    async componentWillMount() {
+        if (this.state.isLogin) return;
+        let result = await isLogin();
+        if (parseFloat(result.code) === 0) {
+            this.setState({
+                isLogin: true
+            });
+        }
     }
 
     async componentDidMount() {
@@ -30,9 +42,13 @@ class Home extends React.Component {
 
 
     render() {
+
+        let {isLogin} = this.state;
+
         let {homeData} = this.props;
         if (homeData.n < 8) return "";
         let {left, right, mark} = this.state;
+
 
         return <section className="homeBox">
             <div className={right} ref="right">
@@ -46,7 +62,7 @@ class Home extends React.Component {
                 <HotBrand homeData={homeData}/>
                 <HotSingle homeData={homeData}/>
                 <MaybeLike homeData={homeData}/>
-                <HomeFooter/>
+                {isLogin ? "" : <HomeFooter/>}
                 <div className={mark} onClick={this.rightOff} ref="mask"></div>
             </div>
             <div className={left}>
@@ -87,7 +103,7 @@ class Home extends React.Component {
                     </li>
                 </ul>
             </div>
-        </section>
+        </section>;
     }
 
     rightOff = ev => {
@@ -108,5 +124,5 @@ class Home extends React.Component {
     };
 }
 
-export default connect(state => state.home, action.home)(Home);
+export default connect(state => ({...state.home, ...state.person}), action.home)(Home);
 
