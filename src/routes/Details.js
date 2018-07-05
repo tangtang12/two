@@ -1,42 +1,50 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Carousel} from "antd";
+import {Carousel, Modal, Button, Radio,Icon} from "antd";
 import "../static/css/details.less";
-import {Icon} from "antd";
 import Qs from 'qs';
 import queryCommodity from '../api/commodity';
+import Top from './wander/Top'
+import Box from '../component/Box';
+import {addCar}  from '../api/car';
+
+const RadioButton = Radio.Button;
+const RadioGroup = Radio.Group;
+
 
 class Details extends React.Component {
-    constructor(props,context) {
-        super(props,context);
-        this.state={
-            data:[],
-            id:''
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            data: [],
+            id: '',
+            visible: false,
+            car:false
         }
     }
 
-    async componentDidMount(){
-        let str =this.props.location.search.slice(1),
-        obj=Qs.parse(str);
-        let res=await queryCommodity(obj.id);
-        if (res.code===0){
+    async componentDidMount() {
+        let str = this.props.location.search.slice(1),
+            obj = Qs.parse(str);
+        let res = await queryCommodity(obj.id);
+        if (res.code === 0) {
             this.setState({
-                id:obj.id,
-                data:res.data
+                id: obj.id,
+                data: res.data
             })
         }
-
     }
+
     render() {
-        console.log(this.state.data);
-        let data=this.state.data;
-       if (data.length===0)return "";
-       let {pic,name,price,hot,shop,shopDesc} =data;
+        let data = this.state.data;
+        if (data.length === 0) return "";
+        let {pic, name, price, hot, shop, shopDesc} = data;
         return <section className="detailsBox">
+            <Top/>
             <div className="priceSwipe">
                 <Carousel autoplay>
-                    {pic.map((item,index)=>{
-                       return <div className={"imgBox"} key={index}><img src={item} alt=""/></div>
+                    {pic.map((item, index) => {
+                        return <div className={"imgBox"} key={index}><img src={item} alt=""/></div>
                     })}
                 </Carousel>
             </div>
@@ -52,7 +60,7 @@ class Details extends React.Component {
                     <span>促</span>
                     {hot}
                 </h2>
-                <Icon type="down" />
+                <Icon type="down"/>
             </div>
 
             <div className="evaluate">
@@ -90,21 +98,63 @@ class Details extends React.Component {
 
             <div className="cart-bar">
                 <a href="#" className="myCart">
-                    <Icon type="shopping-cart" />
+                    <Icon type="shopping-cart"/>
                     购物车
                 </a>
                 <a href="#" className="store">
-                    <Icon type="shop" />
+                    <Icon type="shop"/>
                     店铺
                 </a>
                 <a href="javascript:;" className="like">
                     <Icon type="heart" onClick={this.like}/>
                     收藏
                 </a>
-                <a href="#" className="addtoCart" >
-                    加入购物车
-                </a>
+                {/*<a href="javascript:;" className="addtoCart" onClick={this.click} >*/}
+                {/*加入购物车*/}
+                {/*</a>*/}
+                <Button type="" onClick={this.showModal} className='addtoCart'>加入购物车</Button>
+                <Modal
+                    title="登录提示"
+                    visible={this.state.visible}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                >
+                    <p>是否前去登录</p>
+                </Modal>
             </div>
+
+            {this.state.car?<div className='shopping'>
+                <div className='shopTop'>
+                    <div className='shopImg'>
+                        <img src={pic[0]} alt=""/>
+                    </div>
+                    <div className='shopFz'>
+                        <p>￥{price.toFixed(2)}</p>
+                        <p>请选择颜色、尺码</p>
+                    </div>
+                    <a href='javascript:;' className='click'>x</a>
+                </div>
+                <div className='title'>
+                    <div className='small'><span className='name'>颜色</span><RadioGroup defaultValue="a">
+                        <RadioButton value="a">白色</RadioButton>
+                        <RadioButton value="b">黑色</RadioButton>
+                        <RadioButton value="c">灰色</RadioButton>
+                    </RadioGroup></div>
+                    <div className='small'><span className='name'>尺码</span>
+                        <RadioGroup defaultValue="a">
+                            <RadioButton value="a">X</RadioButton>
+                            <RadioButton value="b">XLL</RadioButton>
+                            <RadioButton value="c">XLLL</RadioButton>
+                        </RadioGroup></div>
+                    <div className='small'><span className='name'>数量</span>
+                        <Box min='0' max='100' />
+                    </div>
+                </div>
+                <div className='bottom'>
+                    <a href="javascript:;">立即购买</a>
+                    <a href="javascript:;" onClick={this.addToCar}>加入购物车</a>
+                </div>
+            </div>:""}
 
         </section>
     }
@@ -118,7 +168,38 @@ class Details extends React.Component {
         ev.target.style.color = "#000";
     };
 
+    showModal = () => {
+        if (!this.props.isLogin) {
+            this.setState({
+                visible: true,
+            });
+            return;
+        }
+        this.setState({
+            car:true
+        })
+
+    };
+
+    handleOk = (e) => {
+        this.setState({
+            visible: false,
+        });
+        this.props.history.push('/login');
+    };
+
+    handleCancel = (e) => {
+        this.setState({
+            visible: false,
+        });
+    };
+
+     addToCar=async ev=>{
+       let a =await addCar(2);
+         console.log(a);
+     }
+
 }
 
-export default connect()(Details);
+export default connect(state => ({...state.person}))(Details);
 
