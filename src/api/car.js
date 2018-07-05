@@ -13,6 +13,8 @@ export function getCart(state) {
 	})
 }
 
+
 export function modify(obj) {
 	return axios.post('store/modify', obj)
 }
+

@@ -1,10 +1,7 @@
-import React, {
-    Component
-} from 'react';
-import {
-    Link,
-    withRouter
-} from "react-router-dom"
+import React, {Component} from 'react';
+import {Link, withRouter} from "react-router-dom"
+import {connect} from "react-redux";
+import action from "../../store/action";
 import "./CartLogin.less"
 import {
     Icon,
@@ -33,13 +30,24 @@ class CartLogin extends React.Component {
                 getInfo: getInfo.data
             })
         }
+
     }
+
 
     //修改商品数量
     modify = async obj => {
         let res = await modify(obj);
-        console.log(res);
     };
+
+
+
+    componentWillReceiveProps() {
+        this.setState({
+            collapsed: this.props.collapsed
+        })
+
+    }
+
 
 
     render() {
@@ -55,7 +63,9 @@ class CartLogin extends React.Component {
             {/*商品信息和价格*/}
 
             {this.state.getInfo.length === 0 ? "" : this.state.getInfo.map((item, index) => {
+
                 let {hot, pic, name, num, desc, price,id} = item;
+
                 return (<div key={index}>
                     <div className='tip-plus tip2'>
 
@@ -74,24 +84,19 @@ class CartLogin extends React.Component {
                         </div>
 
                         <img src={pic[0]}/>
-                        <a>
+
+                        <a herf="javascript:;">
                             {this.props.collapsed ? <ul className="desc-shop-f">
                                 <li className='tip-shop-1'>{name}</li>
                                 <li className='tip-shop-2'>x{num}</li>
                                 <li className='tip-shop-3'>{desc}</li>
                                 <li className='tip-shop-4'>￥{price}</li>
-                            </ul> :
-                                <div><Box id={id}  modify={this.modify} num={num} max={10} min={0} />
-
-                                    <div className='tip-shop-0'>￥{price}</div>
-
-                                </div>
-                                }
+                            </ul> : <div><Box id={id}  modify={this.modify} num={num} max={10} min={0} />
+                                </div>}
                         </a>
                     </div>
                 </div>)
             })}
-
 
             {this.state.collapsed ?
                 <div>
@@ -173,6 +178,13 @@ class CartLogin extends React.Component {
 
         </div>)
     }
+    numData=(num)=>{
+        this.setState({
+            getInfo:num
+        })
+    }
+
+
 }
 
-export default withRouter(CartLogin)
+export default withRouter (connect(...state=>state.cart,action.cart)(CartLogin));
