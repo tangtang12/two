@@ -62,7 +62,6 @@ class MySelf extends React.Component {
     render() {
         let baseInfo = this.props.baseInfo;
         let {isLogin} = this.state;
-        console.log(baseInfo);
         if (!baseInfo && isLogin) return "";
         let {data} = this.state;
         return <div>

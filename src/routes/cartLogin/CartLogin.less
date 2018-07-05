@@ -47,6 +47,43 @@
     position: relative;
     background: #fff;
     height: 2.6rem;
+    margin-bottom: .2rem;
+
+    .num{
+      position: absolute;
+      top: .2rem;
+      left: 3.3rem;
+      color: #000;
+      font-size: .4rem;
+      font-weight: bold;
+      .plus{
+        background: #fff;
+        width: .67rem;
+        height: .67rem;
+        border: .02rem solid #999;
+      }
+      .txt{
+        width: 1.3rem;
+        border: .02rem solid #999;
+      }
+      .unplus{
+        background: #fff;
+        width: .67rem;
+        height: .67rem;
+        border: .02rem solid #999;
+      }
+
+
+
+    }
+    .tip-shop-0{
+       position: absolute;
+       top: 1.5rem;
+       left: 3.3rem;
+       color: red;
+       margin-top: .2rem;
+       font-size: .38rem;
+     }
     .select-f {
       position: absolute;
       left: 0.3rem;
@@ -82,7 +119,12 @@
         left: 3.2rem;
         font-size: .38rem;
         .tip-shop-1 {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
           color: black;
+          width: 3.2rem;
+          height: .6rem;
         }
         .tip-shop-2 {
           display: inline;
@@ -93,6 +135,13 @@
         }
         .tip-shop-3 {
           color: #888;
+
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          height: .6rem;
+
+          width: 2.1rem;
         }
         .tip-shop-4 {
           color: rgba(209, 0, 0, 0.77);
@@ -106,7 +155,7 @@
     background: #fff;
     height: 1rem;
     line-height: 1rem;
-    margin: .2rem 0;
+    margin: 0 0 .2rem 0;
     font-size: .3rem;
     i {
 
@@ -136,15 +185,9 @@
     height: 1.3rem;
 
     i {
-      position: absolute;
-      top: .2rem;
-      left: .2rem;
-      width: .4rem;
-      height: .4rem;
       color: rgb(255, 255, 255);
-      background: rgb(68, 68, 68);
-      border-radius: 50%;
-      padding-top: .1rem;
+
+      padding-left: .05rem;
     }
     p {
       position: absolute;

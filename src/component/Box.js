@@ -24,9 +24,11 @@ export default class Box extends React.Component {
     render() {
         return (
             <div className='num'>
-                <input type="button" readOnly value='-' onClick={this.decrease.bind(this)}/>
-                <input type="text"  id='num' value={this.state.num} readOnly/>
-                <input type="button" readOnly value='+' onClick={this.increase.bind(this)}/>
+
+                <input type="button" className="plus" readOnly value='-' onClick={this.decrease.bind(this)}/>
+                <input type="text"  className='txt' value={this.state.num} readOnly/>
+                <input type="button" className="unplus" readOnly value='+' onClick={this.increase.bind(this)}/>
+
             </div>
         )
     }
