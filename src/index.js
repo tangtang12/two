@@ -12,6 +12,7 @@ import Cart from "./routes/Cart";
 import Self from "./routes/Self";
 import Yoho from "./routes/Yoho";
 import BottomNav from "./component/BottomNav";
+import md5 from "blueimp-md5";
 
 import Back from './routes/self/login/Back'
 import Other from './routes/self/login/Other'
@@ -21,6 +22,7 @@ import Login from './routes/self/Login';
 import Register from "./routes/self/Register";
 import './static/css/reset.min.css';
 import "./static/css/common.less";
+import GoTop from "./component/GoTop";
 
 
 
@@ -46,7 +48,8 @@ render(<Provider store={store}>
                     </Switch>
                 </main>
                 {/*公共插件*/}
-                <BottomNav/>
+                <BottomNav></BottomNav>
+                <GoTop/>
             </div>
         </LocaleProvider>
     </HashRouter>

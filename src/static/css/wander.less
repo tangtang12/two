@@ -1,5 +1,9 @@
 .wanderBox {
   width: 7.5rem;
+  img{
+    display: block;
+    width: 100%;
+  }
   .top {
     height: 1.05rem;
     width: 100%;
@@ -8,25 +12,46 @@
     top: 0;
     background: #414141;
     z-index: 999;
-    a {
-      display: inline-block;
-      &:first-child {
-        transform: translateX(50%);
+    .ant-row{
+      a {
+        display: inline-block;
+        &:first-child {
+          transform: translateX(50%);
+        }
+      }
+      i {
+        font-size: 25px;
+        line-height: 1.05rem;
+        text-align: center;
+        color: white;
+      }
+      h3 {
+        line-height: 1.05rem;
+        text-align: center;
+        color: white;
+        font-family: inherit;
+        font-size: 20px;
+        margin: 0;
       }
     }
-    i {
-      font-size: 25px;
-      line-height: 1.05rem;
+
+  }
+  .filterBox {
+    width: 2rem;
+    position: absolute;
+    z-index: 9999;
+    background: #414141;
+    right: 0;
+    li {
       text-align: center;
-      color: white;
-    }
-    h3 {
-      line-height: 1.05rem;
-      text-align: center;
-      color: white;
-      font-family: inherit;
-      font-size: 20px;
-      margin: 0;
+      color: #FFF;
+      font-size: .32rem;
+      line-height: .6rem;
+      width: 100%;
+      a{
+        display: block;
+        color: #FFFFFF;
+      }
     }
   }
   .wanderSlide {
@@ -35,6 +60,7 @@
     img {
       display: block;
       width: 100%;
+      padding:0;
     }
     .slick-dots {
       li {
@@ -49,12 +75,40 @@
   .tab {
     height: 3.2rem;
     background: yellow;
+    .certify{
+      width: 100%;
+      height: 100%;
+      li{
+        display: inline-block;
+        width: 20%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        img{
+          display: inline-block;
+          position: absolute;
+          width: 200px;
+          left: 50%;
+          margin-left: -100px;
+        }
+        span{
+          position: absolute;
+          color: #FFFFFF;
+          left: 50%;
+          top: 50%;
+          font-size:15px;
+          transform: translateX(-50%) translateY(-50%);
+        }
+      }
+    }
   }
   .main {
     background: #eaeaea;
     img {
       display: block;
       width: 100%;
+      box-sizing: border-box;
+      padding: .2rem;
     }
 
     .blockBox {
@@ -83,8 +137,8 @@
         p {
           text-align: center;
           &:nth-of-type(1) {
-            margin-top: .2rem;
             font-size: 12px;
+            line-height: .5rem;
           }
           &:nth-of-type(2) {
             font-size: 14px;
@@ -101,10 +155,6 @@
     line-height: 100%;
     background: #fff;
     overflow: hidden;
-    img {
-      margin: .2rem auto;
-      width: 75%;
-    }
   }
   .goodsList {
     .bigListBox {
