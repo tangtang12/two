@@ -37,20 +37,13 @@ class Login extends React.Component {
         super(props, context);
 
         this.state = {
+            f:[],
             enter: false,
-            a: [],
-            dataF:false,
-            dataG:false
+            a: []
         }
     }
 
-    componentDidMount() {
-        let captchaAry = document.getElementById('captcha'),
-            iphone = document.getElementById('phone');
 
-        this.setState({
-    })
-    }
 
     back = () => {
         let {history} = this.props;
@@ -62,23 +55,19 @@ class Login extends React.Component {
             if (!err) {
                 let {userName, userPass} = values;
                 userPass = md5(userPass);
-                let result = await query({
+                await query({
                     name: userName,
                     password: userPass
                 });
-                /*if (parseFloat(result.code) === 0) {
-                    this.props.queryBaseInfo();
-                    //登陆成功后 我们需要重新获取已购买的课程信息！（未登录下从服务获取的支付课程信息是获取不倒的 但是登陆后我们需要把购买信息同步到redus 这样我们才能在redux中展示信息）\
-                    this.props.queryPay();
-                    this.props.history.go(-1);
-                    return;
-                }*/
+
                 loginFail();
             }
         });
     };
 
     render() {
+
+
 
 
         const {getFieldDecorator} = this.props.form;
@@ -93,6 +82,7 @@ class Login extends React.Component {
             },
         };
 
+
         const prefixSelector = getFieldDecorator('prefix', {
             initialValue: '86',
         })(
@@ -105,7 +95,6 @@ class Login extends React.Component {
 
             {/*demo*/}
             <div className='demo-1'>
-
                 <div>
                     <Button className='back-ceng' onClick={this.back}>
                         <Icon type='left'/>
@@ -165,7 +154,7 @@ class Login extends React.Component {
                             )}
                         </Col>
                         <Col span={12}>
-                            <Button onClick={this.captcha}>获取验证码</Button>
+                            <Button onClick={this.captchaS}>获取验证码</Button>
                         </Col>
                     </Row>
                 </FormItem>
@@ -173,10 +162,8 @@ class Login extends React.Component {
                 {/*登录按钮*/}
                 <FormItem>
                     <Button
-
-                        id="button"
                         style={{width: "6.5rem", height: ".75rem", marginLeft: ".5rem"}} type="primary"
-                        htmlType="submit" className="login-form-button">登录</Button>
+                        htmlType="submit" className="login-form-button" >登录</Button>
 
                 </FormItem>
             </Form>
@@ -195,14 +182,10 @@ class Login extends React.Component {
 
     }
 
-
-    captcha = () => {
-
-
-
-        //
-        // console.log(!(captchaAry.getAttribute('value').length === 0 && iphone.getAttribute("value").length === 0) ? "" : button.innerHTML = button.setAttribute('disabled', "true"));
-
+    captchaS = (ev) => {
+        let a = document.getElementById('captcha');
+        let b = Math.floor(Math.random() * 10000 + 90000);
+        a.setAttribute("value", `${b}`);
     };
 
 

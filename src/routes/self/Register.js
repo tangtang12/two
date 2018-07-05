@@ -126,6 +126,8 @@ class Register extends React.Component {
     }
 
     getCode = ev => {
+
+
         let phone = this.refs.phone.value,
             reg = /[0-9]{11}/;
         if (reg.test(phone)) {
@@ -137,6 +139,7 @@ class Register extends React.Component {
             })
         }
 
+
     };
 
     register = async ev => {
@@ -147,19 +150,31 @@ class Register extends React.Component {
             message.error("正确输入信息才能注册哦");
             return;
         }
-            password = md5(password);
+        password = md5(password);
 
         let result = await register({phone, password, name: phone});
         if (result.code === 0) {
             message.success('恭喜您注册成功');
-           this.props.history.go(-1);
+            this.props.history.go(-1);
         }
-
     };
-
 }
 
+
 export default connect()(Register);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
