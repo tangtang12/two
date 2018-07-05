@@ -1,6 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {Icon} from "antd";
+import {Link} from "react-router-dom";
 
 class MaybeLike extends React.Component {
     constructor(props,context) {
@@ -18,7 +19,8 @@ class MaybeLike extends React.Component {
 
             <ul className="goods-list">
                 {maybeLike.map((item, index) => {
-                    return   <li className="goods-info" key={index}>
+                    return <li className="goods-info" key={index}>
+                        <Link to="/sort?">
                         <div className="imgBox">
                             <a href="#">
                                 <img src={item.pic} alt=""/>
@@ -27,10 +29,13 @@ class MaybeLike extends React.Component {
                         </div>
                         <div className="detail">
                             <p className="name">{item.desc}</p>
-                            <p className="price">¥{item.price} <del>{item.oldPrice}</del></p>
+                            <p className="price">¥{item.price}
+                                <del>{item.oldPrice}</del>
+                            </p>
                             <Icon className="similarIcon" type="ellipsis"></Icon>
                         </div>
-                    </li>
+                        </Link>
+                    </li>;
                 })}
             </ul>
         </div>;

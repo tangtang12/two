@@ -113,8 +113,8 @@ class MySelf extends React.Component {
                                 backgroundSize: "cover"
                             }}></div>
                             <div className="userInfo">
-                                <p>{baseInfo.username}</p>
-                                <p>{baseInfo.kouling}</p>
+                                <p>{baseInfo ? baseInfo.username : ""}</p>
+                                <p>{baseInfo ? baseInfo.kouling : ""}</p>
                             </div>
                             <Button type="danger" onClick={this.exitLogin} className="exit">退出</Button>
                         </div>
@@ -247,7 +247,7 @@ class MySelf extends React.Component {
                 </div>
 
             </header>
-        </div>
+        </div>;
     }
 
 

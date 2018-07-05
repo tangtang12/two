@@ -3,8 +3,7 @@ import {Link, withRouter} from "react-router-dom"
 import "./CartLogin.less"
 import {Icon, Button} from 'antd'
 import Box from "../../component/Box";
-import {getCart}from "../../api/car"
-
+import {getCart} from "../../api/car"
 
 
 class CartLogin extends React.Component {
@@ -12,13 +11,20 @@ class CartLogin extends React.Component {
         super(props);
         this.state = {
             selected: false,
-            collapsed: this.props.collapsed
+            collapsed: this.props.collapsed,
+            getInfo: []
         };
     }
-async componentWillMount(){
-      let getInfo=await getCart();
-    console.log(getInfo);
-}
+
+    async componentWillMount() {
+        let getInfo = await getCart();
+
+        if (getInfo.code === 0) {
+            this.setState({
+                getInfo: getInfo.data
+            })
+        }
+    }
 
 
     componentWillReceiveProps() {
@@ -38,40 +44,49 @@ async componentWillMount(){
                 <Link to='/classify'>去凑单 &gt; </Link>
             </div>
             {/*摆设*/}
-            <div className='tip-plus tip2'>
 
-                <Icon type="tag-o"/>
-                <span>再购￥<p>555</p>立享满减</span>
-                <Link to='/classify'>去凑单 &gt; </Link>
-            </div>
             {/*商品信息和价格*/}
-            <div className='shop_f'>
-                <div className="select-f" onClick={() => {
-                    this.setState({
-                        selected: !this.state.selected
-                    });
-                    let a = this.state.selected ? "check" : ""
 
-                    console.log(a);
-                }}>
-                    <Icon type={a}/>
-                </div>
+            {this.state.getInfo.length === 0 ? "" : this.state.getInfo.map((item, index) => {
+                let {hot, pic, name, num, desc, price} = item;
 
-                <img
-                    src="//img12.static.yhbimg.com/goodsimg/2018/05/22/10/0208ee25c776f2d557d9a360fd059becfd.jpg?imageMogr2/thumbnail/120x160/background/d2hpdGU=/position/center/quality/60/format/webp"
-                    alt=""/>
-                <Link to='/self'>
+                return (<div>
+                    <div className='tip-plus tip2'>
 
-                    {this.state.collapsed ? <ul className="desc-shop-f">
-                        <li className='tip-shop-1'>title</li>
-                        <li className='tip-shop-2'>x3</li>
-                        <li className='tip-shop-3'>desc</li>
-                        <li className='tip-shop-4'>￥123</li>
-                    </ul> : <Box/>}
+                        <Icon type="tag-o"/>
+                        <span>{hot}</span>
+                        <Link to='/classify'>去凑单 &gt; </Link>
+                    </div>
+                    <div className='shop_f'>
+                        <div className="select-f" onClick={() => {
+                            this.setState({
+                                selected: !this.state.selected
+                            });
+                            let a = this.state.selected ? "check" : "";
+                        }}>
+                            <Icon type={a}/>
+                        </div>
+
+                        <img src={pic[0]}/>
+                        <Link to='/self'>
+                            {this.state.collapsed ? <ul className="desc-shop-f">
+                                <li className='tip-shop-1'>{name}</li>
+                                <li className='tip-shop-2'>x{num}</li>
+                                <li className='tip-shop-3'>{desc}</li>
+                                <li className='tip-shop-4'>￥{price}</li>
+                            </ul> :
+                                <div><Box/>
+
+                                    <div className='tip-shop-0'>￥{price}</div>
+
+                                </div>
+                                }
 
 
-                </Link>
-            </div>
+                        </Link>
+                    </div>
+                </div>)
+            })}
 
 
             {this.state.collapsed ?
@@ -97,12 +112,19 @@ async componentWillMount(){
 
             {/*底部*/}
 
-            {this.state.collapsed ? <div className="login-all" style={{zIndex:"99999"}}>
+            {this.state.collapsed ? <div className="login-all" style={{zIndex: "99999"}}>
                 <div>
                     <a href="javascript:;" style={{
-                        color: '#fff',
-                        background: "#444",
-                        borderRadius: "50%"
+                        color: '#000',
+                        border: '.02rem solid',
+                        borderRadius: "50%",
+                        width: '.4rem',
+                        height: '.4rem',
+                        position: 'absolute',
+                        top: '.2rem',
+                        left: '.2rem',
+                        background: "#000",
+                        opacity: ".6"
 
                     }}><Icon type='check'/></a>
                     <p>全选</p>
@@ -110,16 +132,24 @@ async componentWillMount(){
                     <p style={{
                         left: '4rem',
                         fontSize: '.27rem',
-                        color: '#999'
+                        color: '#999',
+                        paddingLeft: ".1rem"
                     }}>不含运费</p>
                     <Button>结算</Button>
                 </div>
-            </div> : <div className="login-all" style={{zIndex:"99999"}}>
+            </div> : <div className="login-all" style={{zIndex: "99999"}}>
                 <div>
                     <a href="javascript:;" style={{
-                        color: '#fff',
-                        background: "#444",
-                        borderRadius: "50%"
+                        color: '#000',
+                        border: '.02rem solid',
+                        borderRadius: "50%",
+                        width: '.4rem',
+                        height: '.4rem',
+                        position: 'absolute',
+                        top: '.2rem',
+                        left: '.2rem',
+                        background: "#000",
+                        opacity: ".6"
 
                     }}><Icon type='check'/></a>
                     <p>全选</p>
@@ -136,9 +166,6 @@ async componentWillMount(){
 
             }
 
-            {/*编辑*/}
-
-            {/*完成*/}
 
         </div>)
     }
