@@ -6,6 +6,7 @@ import Transition from 'react-transition-group/Transition';
 import {withRouter, Link, Switch, Route} from 'react-router-dom'
 import action from "../store/action/index"
 import {query} from '../api/home'
+import {isLogin, exitLogin} from "../api/person";
 
 
 const duration = 300,
@@ -24,25 +25,47 @@ class Self extends React.Component {
         console.log(this.props);
         this.state = {
             in: false,
-            data: []
+            data: [],
+            isLogin: false
         };
-        let {...sss} = this.props;
+    }
 
 
+    async componentWillMount() {
+        console.log(this.props);
+        let {baseInfo, queryBaseInfo} = this.props;
+        !baseInfo ? queryBaseInfo() : null;
+
+        if (this.state.isLogin) return;
+        let result = await isLogin();
+        if (parseFloat(result.code) === 0) {
+            this.setState({
+                isLogin: true
+            });
+        }
     }
 
     async componentDidMount() {
         let result = await query("MAYBE_LINK");
-
         let {data} = result;
         this.setState({
-            data: data,
-        })
-
+            data,
+        });
     }
 
+ exitLogin =  async  () => {
+        let result = await exitLogin();
+        if (parseFloat(result.code) === 0) {
+            this.setState({
+                isLogin: false
+            });
+        }
+    };
 
     render() {
+        let baseInfo = this.props.baseInfo;
+        let {isLogin} = this.state;
+        if (!baseInfo && isLogin) return "";
 
         let {data} = this.state;
 
@@ -88,7 +111,17 @@ class Self extends React.Component {
                 </div>
                 {/*登录注册*/}
                 <div className='login-button'>
-                    <Button><Link to='/login'>登录/注册</Link></Button>
+                    {!isLogin ? <Button><Link to='/login'>登录/注册</Link></Button> :
+                        <div>
+                            <div className="userPic"></div>
+                            <div className="userInfo">
+                                <p>{baseInfo.phone}</p>
+                                <p>{baseInfo.name}</p>
+                            </div>
+                            <Button type="danger" onClick={this.exitLogin} className="exit">退出</Button>
+                        </div>
+                    }
+
                 </div>
                 {/*状态栏*/}
                 <div className="shop">
@@ -182,7 +215,8 @@ class Self extends React.Component {
                             let {pic, desc, price} = item;
                             return <li className='li_box' key={index}>
                                 <div className='none' style={{
-                                    background: `url(${pic}) no-repeat`
+                                    background: `url(${pic}) no-repeat`,
+                                    backgroundSize:"cover"
                                 }}>
                                     <div className='cover_f' id='link'>
                                         <span>找相似</span>
@@ -198,7 +232,7 @@ class Self extends React.Component {
 
                 </div>
                 {/*回到顶部*/}
-                <div className='shop2 clearfix'>
+                {!isLogin ? <div className='shop2 clearfix'>
                     <Link to='/login'>
                         <span className='shop-1'>登录</span>
                         <b>|</b></Link>
@@ -207,7 +241,7 @@ class Self extends React.Component {
                         className='top'>回到顶部</span>
                         <b>^</b>
                     </a>
-                </div>
+                </div> : ""}
                 <div className='foo-f'>
 
                     CopyRight©2007-2018 南京新与力文化传播有限公司
@@ -233,5 +267,5 @@ class Self extends React.Component {
     }
 }
 
-export default withRouter(connect(state => ({...state.homeData}), action.homeData)(Self));
+export default withRouter(connect(state => ({...state.person}), {...action.person, ...action.homeData})(Self));
 

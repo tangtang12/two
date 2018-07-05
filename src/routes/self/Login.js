@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Form, Icon, Input, Button, Row, Col, Modal, Select, Cascader} from 'antd';
 import {Link, Switch, Route} from 'react-router-dom';
 import md5 from 'blueimp-md5';
-import {query} from '../../api/home';
+import {login,isLogin} from '../../api/person';
 import action from '../../store/action/index';
 import '../../static/css/login.less'
 import Other from './login/Other'
@@ -37,12 +37,12 @@ class Login extends React.Component {
         super(props, context);
 
         this.state = {
-            f:[],
+            f: [],
             enter: false,
-            a: []
+            a: [],
+            isLogin: false
         }
     }
-
 
 
     back = () => {
@@ -53,21 +53,23 @@ class Login extends React.Component {
         ev.preventDefault();
         this.props.form.validateFields(async (err, values) => {
             if (!err) {
-                let {userName, userPass} = values;
-                userPass = md5(userPass);
-                await query({
-                    name: userName,
-                    password: userPass
+                let {phone} = values,
+                    password = md5(phone);
+                let result = await login({
+                    name:phone,
+                    password
                 });
-
+                if (result.code === 0) {
+                    this.props.isLogin(0);
+                    this.props.history.go(-1);
+                    return;
+                }
                 loginFail();
             }
         });
     };
 
     render() {
-
-
 
 
         const {getFieldDecorator} = this.props.form;
@@ -163,7 +165,7 @@ class Login extends React.Component {
                 <FormItem>
                     <Button
                         style={{width: "6.5rem", height: ".75rem", marginLeft: ".5rem"}} type="primary"
-                        htmlType="submit" className="login-form-button" >登录</Button>
+                        htmlType="submit" className="login-form-button">登录</Button>
 
                 </FormItem>
             </Form>
@@ -191,4 +193,4 @@ class Login extends React.Component {
 
 }
 
-export default Form.create()(connect(null, {...action.homeData, ...action.homeData})(Login));
+export default Form.create()(connect(null, {...action.person,...action.homeData})(Login));

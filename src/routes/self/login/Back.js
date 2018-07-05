@@ -51,6 +51,7 @@ class Login extends React.Component {
                 });
                 if (parseFloat(result.code)===0) {
                     this.props.isLogin(0);
+                    this.props.history.go(-1);
                     return;
                 }
                 /* if (parseFloat(result.code) === 0) {
