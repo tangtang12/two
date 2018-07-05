@@ -12,13 +12,11 @@ import {Link} from "react-router-dom";
 class Cart extends React.Component {
     constructor(props, context) {
         super(props, context);
-
         this.state = {
             data: null,
             collapsed: true,
             results:{}
         };
-        console.log(this.props);
     }
 
     async componentWillMount() {
@@ -37,8 +35,6 @@ class Cart extends React.Component {
     render() {
         let data = this.state.data;
         if (!data) return "";
-
-
         return <section className="cartBox">
             {/*头部*/}
             <div className='homeBox1'>
@@ -76,10 +72,6 @@ class Cart extends React.Component {
                     </div>
                 </div>
             </div>}
-
-
-
-
 
             <div className="forYou" style={{marginTop: '.2rem'}}>
                 <p className="title">为你优选商品</p>

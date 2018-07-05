@@ -1,9 +1,19 @@
-import React, {Component} from 'react';
-import {Link, withRouter} from "react-router-dom"
+import React, {
+    Component
+} from 'react';
+import {
+    Link,
+    withRouter
+} from "react-router-dom"
 import "./CartLogin.less"
-import {Icon, Button} from 'antd'
+import {
+    Icon,
+    Button
+} from 'antd'
 import Box from "../../component/Box";
-import {getCart} from "../../api/car"
+import {
+    getCart,modify
+} from "../../api/car"
 
 
 class CartLogin extends React.Component {
@@ -18,7 +28,6 @@ class CartLogin extends React.Component {
 
     async componentWillMount() {
         let getInfo = await getCart();
-
         if (getInfo.code === 0) {
             this.setState({
                 getInfo: getInfo.data
@@ -26,13 +35,11 @@ class CartLogin extends React.Component {
         }
     }
 
-
-    componentWillReceiveProps() {
-        this.setState({
-            collapsed: this.props.collapsed
-        })
-
-    }
+    //修改商品数量
+    modify = async obj => {
+        let res = await modify(obj);
+        console.log(res);
+    };
 
 
     render() {
@@ -48,9 +55,8 @@ class CartLogin extends React.Component {
             {/*商品信息和价格*/}
 
             {this.state.getInfo.length === 0 ? "" : this.state.getInfo.map((item, index) => {
-                let {hot, pic, name, num, desc, price} = item;
-
-                return (<div>
+                let {hot, pic, name, num, desc, price,id} = item;
+                return (<div key={index}>
                     <div className='tip-plus tip2'>
 
                         <Icon type="tag-o"/>
@@ -68,22 +74,20 @@ class CartLogin extends React.Component {
                         </div>
 
                         <img src={pic[0]}/>
-                        <Link to='/self'>
-                            {this.state.collapsed ? <ul className="desc-shop-f">
+                        <a>
+                            {this.props.collapsed ? <ul className="desc-shop-f">
                                 <li className='tip-shop-1'>{name}</li>
                                 <li className='tip-shop-2'>x{num}</li>
                                 <li className='tip-shop-3'>{desc}</li>
                                 <li className='tip-shop-4'>￥{price}</li>
                             </ul> :
-                                <div><Box/>
+                                <div><Box id={id}  modify={this.modify} num={num} max={10} min={0} />
 
                                     <div className='tip-shop-0'>￥{price}</div>
 
                                 </div>
                                 }
-
-
-                        </Link>
+                        </a>
                     </div>
                 </div>)
             })}

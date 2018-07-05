@@ -1,8 +1,15 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {Radio,message} from "antd";
+import {
+    connect
+} from 'react-redux';
+import {
+    Radio,
+    message
+} from "antd";
 import Box from './Box';
-import {addCar} from "../api/car";
+import {
+    addCar
+} from "../api/car";
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 
@@ -20,12 +27,17 @@ class CarTap extends React.Component {
             visible: false,
             car: false,
             color: null,
-            size:null
+            size: null
         };
     }
 
     render() {
-        let {pic,price,id,type} = this.props.data;
+        let {
+            pic,
+            price,
+            id,
+            type
+        } = this.props.data;
         return <div className='fix'>
             <div className='shopping'>
                 <div className='shopTop'>
@@ -66,8 +78,11 @@ class CarTap extends React.Component {
         </div>
     }
     addToCar = async id => {
-        let num = document.querySelector('#num').value;
-        let res = await addCar({id, num});
+        let num = document.querySelectorAll('.numBox')[0].value;
+        let res = await addCar({
+            id,
+            num
+        });
         if (res.code === 0) {
             message.success('成功加入购物车');
             this.props.data.open();
