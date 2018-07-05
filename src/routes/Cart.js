@@ -4,6 +4,7 @@ import {Icon, Button} from "antd";
 import "../static/css/cart.less";
 import {query} from "../api/home";
 import {isLogin} from "../api/person";
+import {getCart} from "../api/car";
 import CartLogin from "./cartLogin/CartLogin";
 import action from "../store/action";
 
@@ -15,7 +16,8 @@ class Cart extends React.Component {
         this.state = {
             data: null,
             collapsed: true,
-            results:{}
+            results:{},
+            CartData:{}
         };
         console.log(this.props);
     }
@@ -23,13 +25,14 @@ class Cart extends React.Component {
     async componentWillMount() {
         let result = await query("maybe_link");
         let results = await isLogin();
+        let CartData=await getCart();
         if (result.code === 0) {
             this.setState({
-                data: result.data
+                data: result.data,results,CartData
             });
         }
 
-        this.setState({results})
+        this.setState({})
 
     }
 

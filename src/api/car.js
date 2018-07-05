@@ -11,3 +11,10 @@ export function getCart(state){
     })
 }
 
+export function CartData(CartData){
+    return axios.get('store/DataFGG',{
+        params:{CartData}
+    })
+}
+
+

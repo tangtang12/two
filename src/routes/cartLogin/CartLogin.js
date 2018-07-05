@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from "react-router-dom"
+import {connect} from "react-redux"
+import action from "../../store/action"
 import "./CartLogin.less"
 import {Icon, Button} from 'antd'
 import Box from "../../component/Box";
@@ -24,6 +26,7 @@ class CartLogin extends React.Component {
                 getInfo: getInfo.data
             })
         }
+
     }
 
 
@@ -33,7 +36,11 @@ class CartLogin extends React.Component {
         })
 
     }
-
+componentWillUpdate(){
+       /* this.setState({
+            getInfo:
+        })*/
+}
 
     render() {
         let a = 'check';
@@ -50,7 +57,7 @@ class CartLogin extends React.Component {
             {this.state.getInfo.length === 0 ? "" : this.state.getInfo.map((item, index) => {
                 let {hot, pic, name, num, desc, price} = item;
 
-                return (<div>
+                return (<div key={index}>
                     <div className='tip-plus tip2'>
 
                         <Icon type="tag-o"/>
@@ -68,22 +75,23 @@ class CartLogin extends React.Component {
                         </div>
 
                         <img src={pic[0]}/>
-                        <Link to='/self'>
-                            {this.state.collapsed ? <ul className="desc-shop-f">
-                                <li className='tip-shop-1'>{name}</li>
-                                <li className='tip-shop-2'>x{num}</li>
-                                <li className='tip-shop-3'>{desc}</li>
-                                <li className='tip-shop-4'>￥{price}</li>
-                            </ul> :
-                                <div><Box/>
 
-                                    <div className='tip-shop-0'>￥{price}</div>
+                        {this.state.collapsed ? <Link to='/self'>
+                                <ul className="desc-shop-f">
+                                    <li className='tip-shop-1'>{name}</li>
+                                    <li className='tip-shop-2'>x{num}</li>
+                                    <li className='tip-shop-3'>{desc}</li>
+                                    <li className='tip-shop-4'>￥{price}</li>
+                                </ul>
+                            </Link> :
+                            <div><Box num={num} numData={this.numData.bind(this)}/>
 
-                                </div>
-                                }
+                                <div className='tip-shop-0'>￥{price}</div>
+
+                            </div>
+                        }
 
 
-                        </Link>
                     </div>
                 </div>)
             })}
@@ -169,6 +177,13 @@ class CartLogin extends React.Component {
 
         </div>)
     }
+    numData=(num)=>{
+        this.setState({
+            getInfo:num
+        })
+    }
+
+
 }
 
-export default withRouter(CartLogin)
+export default withRouter (connect(...state=>state.cart,action.cart)(CartLogin));
