@@ -8,23 +8,31 @@ route.get('/info', (req, res) => {
     let {
         id
     } = req.query; //get请求问号传参都在req.query上
-    id = parseFloat(id);
-    let item = req.courseDATA.find(item => {
-        return parseFloat(item.id) === id;
-    });
-    if (item) {
+    if (id){
+        id = parseFloat(id);
+        let item = req.courseDATA.find(item => {
+            return parseFloat(item.id) === id;
+        });
+        if (item) {
+            res.send({
+                code: 0,
+                msg: 'OK!',
+                data: item
+            });
+            return;
+        }
+        res.send({
+            code: 1,
+            msg: 'NO!',
+            data: null
+        });
+    } else {
         res.send({
             code: 0,
             msg: 'OK!',
-            data: item
+            data: req.courseDATA
         });
-        return;
     }
-    res.send({
-        code: 1,
-        msg: 'NO!',
-        data: null
-    });
 });
 
 route.get('/list', (req, res) => {
