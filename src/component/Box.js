@@ -4,7 +4,7 @@ export default class Box extends React.Component {
     constructor() {
         super();
         this.state = {
-            num: 10
+            num: 1
         }
     }
 
