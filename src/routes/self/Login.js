@@ -105,7 +105,6 @@ class Login extends React.Component {
 
             {/*demo*/}
             <div className='demo-1'>
-
                 <div>
                     <Button className='back-ceng' onClick={this.back}>
                         <Icon type='left'/>

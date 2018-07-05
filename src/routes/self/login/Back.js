@@ -4,7 +4,8 @@ import {Form, Icon, Input, Button, Row, Col, Modal, Select, Cascader} from 'antd
 import {Link, Switch, Route} from 'react-router-dom';
 import md5 from 'blueimp-md5';
 import action from '../../../store/action/index';
-import {query} from '../../../api/home';
+import {login,isLogin} from "../../../api/person";
+
 
 
 const FormItem = Form.Item;
@@ -31,10 +32,7 @@ class Login extends React.Component {
     }
 
     componentDidMount() {
-        let captchaAry = document.getElementById('captcha'),
-            iphone = document.getElementById('phone');
 
-        this.setState({})
     }
 
     back = () => {
@@ -47,24 +45,27 @@ class Login extends React.Component {
             if (!err) {
                 let {userName, userPass} = values;
                 userPass = md5(userPass);
-                let result = await query({
+                let result = await login({
                     name: userName,
                     password: userPass
                 });
-                /*if (parseFloat(result.code) === 0) {
-                    this.props.queryBaseInfo();
-                    //登陆成功后 我们需要重新获取已购买的课程信息！（未登录下从服务获取的支付课程信息是获取不倒的 但是登陆后我们需要把购买信息同步到redus 这样我们才能在redux中展示信息）\
-                    this.props.queryPay();
-                    this.props.history.go(-1);
+                if (parseFloat(result.code)===0) {
+                    this.props.isLogin(0);
                     return;
-                }*/
+                }
+                /* if (parseFloat(result.code) === 0) {
+                     this.props.queryBaseInfo();
+                     //登陆成功后 我们需要重新获取已购买的课程信息！（未登录下从服务获取的支付课程信息是获取不倒的 但是登陆后我们需要把购买信息同步到redus 这样我们才能在redux中展示信息）\
+                     this.props.queryPay();
+                     this.props.history.go(-1);
+                     return;
+                 }*/
                 loginFail();
             }
         });
     };
 
     render() {
-
 
         const {getFieldDecorator} = this.props.form;
         const formItemLayout = {
@@ -151,4 +152,4 @@ class Login extends React.Component {
 
 }
 
-export default Form.create()(connect(null, {...action.homeData, ...action.homeData})(Login));
+export default Form.create()(connect(null, {...action.homeData,...action.person})(Login));
