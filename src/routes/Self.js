@@ -55,7 +55,7 @@ class Self extends React.Component {
                         <Icon type='left' style={{
                             fontSize: '.6rem',
                             marginTop: '.23rem'
-                        }}/>
+                        }} onClick={this.back}/>
 
                         <span className='center'> 个人中心</span>
 
@@ -201,9 +201,9 @@ class Self extends React.Component {
                         <b>|</b>
                         <span className='shop-1-1'>注册</span></Link>
 
-                    <Link to="self"> <span className='top'>回到顶部</span>
+                {/*    <Link to="self"> <span className='top'>回到顶部</span>
                         <b>^</b>
-                    </Link>
+                    </Link>*/}
                 </div>
                 <div className='foo-f'>
 
@@ -223,6 +223,11 @@ class Self extends React.Component {
             this.setState({in: false});
         }
     };
+
+    back=()=>{
+        let {history}=this.props;
+        history.go(-1)
+    }
 }
 
 export default withRouter(connect(state => ({...state.homeData}), action.homeData)(Self));

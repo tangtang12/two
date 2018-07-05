@@ -6,6 +6,7 @@ class Right extends React.Component {
         super(props);
     }
 
+
     render() {
         let data=this.props.data;
         if (!data)return '';

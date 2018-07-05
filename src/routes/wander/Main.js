@@ -12,6 +12,7 @@ class Main extends React.Component {
     }
 
     async componentDidMount(){
+
         let res = await queryData('SHOW_IMG');
         if (res.code===0){
             this.setState({
