@@ -6,13 +6,9 @@ export function addCar(id) {
     });
 }
 
- function aa(state) {
+export function getCart(state){
     return axios.get('store/info',{
-        params:{
-            state
-        }
-
-    });
+        params:{state}
+    })
 }
-aa(0).then(res=>{
-    console.log(res);})
+
