@@ -1,0 +1,78 @@
+.sortBox .sortHeaderBox {
+  height: 1.05rem;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: #414141;
+  z-index: 999;
+}
+.sortBox .sortHeaderBox .ant-row a {
+  display: inline-block;
+}
+.sortBox .sortHeaderBox .ant-row a:first-child {
+  transform: translateX(50%);
+}
+.sortBox .sortHeaderBox .ant-row i {
+  font-size: 25px;
+  line-height: 1.05rem;
+  text-align: center;
+  color: white;
+}
+.sortBox .sortHeaderBox .ant-row h3 {
+  line-height: 1.05rem;
+  text-align: center;
+  color: white;
+  font-family: inherit;
+  font-size: 20px;
+  margin: 0;
+}
+.sortBox .sortListBox {
+  width: 100%;
+  height: 1rem;
+}
+.sortBox .sortListBox li {
+  padding: .2rem;
+  float: left;
+  height: 1rem;
+  width: 25%;
+  font-size: .3rem;
+  border-bottom: .01rem #999999 solid;
+}
+.sortBox .sortListBox li a:link {
+  color: #999999;
+}
+.sortBox .sortListBox li a:visited {
+  color: #0000FF;
+}
+.sortBox .sortListBox li a:hover {
+  color: red;
+}
+.sortBox .sortListBox li a:active {
+  color: #D200D2;
+}
+.sortBox .imgListBox {
+  width: 100%;
+  height: 900px;
+  overflow-y: scroll;
+}
+.sortBox .imgListBox .step {
+  position: relative;
+  padding: .3rem;
+  width: 50%;
+  float: left;
+}
+.sortBox .imgListBox .step img {
+  width: 100%;
+  height: 100%;
+}
+.sortBox .imgListBox .step p {
+  color: #000;
+  font-size: .25rem;
+}
+.sortBox .imgListBox .step span {
+  position: absolute;
+  bottom: -0.1rem;
+  color: #000;
+}
+/*# sourceMappingURL=sort.css.map */

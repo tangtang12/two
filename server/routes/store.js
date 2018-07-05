@@ -9,13 +9,14 @@ const express = require('express'),
 //增加购物车信息
 route.post('/add', (req, res) => {
     let personID = req.session.personID, //登录用户得ID
-        {id
+        {id,num
         } = req.body;
-   let shopId = parseFloat(id);
+   let shopId = parseFloat(id)
+       num=parseFloat(num);
 
     //=>已经登录状态下，把信息直接存储到JSON中即可(用户在其他平台上登录，也可以从JSON中获取数据，实现信息跨平台)
     if (personID) {
-        utils.ADD_STORE(req, res, shopId).then(() => {
+        utils.ADD_STORE(req, res, {shopId,num}).then(() => {
             res.send({
                 code: 0,
                 msg: 'OK!'
@@ -81,9 +82,11 @@ route.get('/info', (req, res) => {
         //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
         req.storeDATA.forEach(item => {
             if (parseFloat(item.personID) === personID && parseFloat(item.state) === state) {
+                console.log(item);
                 storeList.push({
                     id: parseFloat(item.id),
-                    storeID: parseFloat(item.id)
+                    storeID: parseFloat(item.shopId),
+                    num:parseFloat(item.num)
                 });
             }
         });
@@ -112,11 +115,12 @@ route.get('/info', (req, res) => {
     let data = [];
     storeList.forEach(({
         id,
-        storeID
+        storeID,
+        num
     } = {}) => {
-        let item = req.courseDATA.find(item => parseFloat(item.id) === id);
-        item.storeID = storeID;
-        data.push(item);
+        let item = req.courseDATA.find(item => parseFloat(item.id) === parseFloat(storeID));
+        /*item.id = storeID;*/
+        data.push({...item,num});
     });
     res.send({
         code: 0,

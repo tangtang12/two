@@ -1,0 +1,124 @@
+.registerBox {
+  background: #fff;
+  padding: 0 .8rem;
+  overflow-y: hidden;
+}
+.registerBox span {
+  display: inline;
+}
+.registerBox .top-bar {
+  margin-top: .5rem;
+  height: .5rem;
+  line-height: .5rem;
+}
+.registerBox .top-bar i {
+  font-size: .45rem;
+}
+.registerBox .top-bar span {
+  display: inline-block;
+  font-size: .35rem;
+  width: 5rem;
+  text-align: center;
+  color: #000;
+}
+.registerBox .reg-form {
+  margin-top: 1rem;
+  position: relative;
+}
+.registerBox .reg-form .form-group {
+  border-bottom: 1px solid  #e0e0e0;
+  height: .6rem;
+  margin-bottom: .5rem;
+  position: relative;
+}
+.registerBox .reg-form .mobile i.anticon-phone {
+  font-size: .3rem;
+  margin-right: .15rem;
+}
+.registerBox .reg-form .mobile .country {
+  width: 1.85rem;
+  border: none;
+}
+.registerBox .reg-form .mobile i.line {
+  font-style: normal;
+  padding: 0 .1rem;
+}
+.registerBox .reg-form .mobile .tel {
+  width: 3rem;
+  border: none;
+}
+.registerBox .reg-form .getCode i.anticon-safety {
+  font-size: .35rem;
+  margin-right: .15rem;
+}
+.registerBox .reg-form .getCode .code {
+  border: none;
+  width: 3rem;
+}
+.registerBox .reg-form .getCode button {
+  height: .6rem;
+  position: absolute;
+  top: -0.1rem;
+}
+.registerBox .reg-form .password {
+  position: relative;
+}
+.registerBox .reg-form .password i.anticon-lock {
+  font-size: .35rem;
+  margin-right: .2rem;
+}
+.registerBox .reg-form .password input {
+  border: none;
+  width: 4rem;
+}
+.registerBox .reg-form .password .eye i {
+  font-size: .35rem;
+}
+.registerBox .reg-form .invite i.anticon-share-alt {
+  font-size: .3rem;
+  margin-right: .2rem;
+}
+.registerBox .reg-form .invite input {
+  border: none;
+  width: 4.5rem;
+}
+.registerBox .reg-form .regBtn {
+  width: 100%;
+  height: .8rem;
+  background: #d0021b;
+  border: none;
+  color: #fff;
+  font-size: .35rem;
+}
+.registerBox .reg-form .protocol {
+  margin-top: 1.3rem;
+  position: relative;
+}
+.registerBox .reg-form .protocol i {
+  font-size: .3rem;
+  border: .02rem solid #cccccc;
+  border-radius: .3rem;
+  width: .3rem;
+  height: .3rem;
+  display: inline-block;
+  margin-right: .1rem;
+}
+.registerBox .reg-form .protocol a {
+  color: red;
+  text-decoration: underline;
+}
+.registerBox .phoneBox {
+  position: fixed;
+  left: 50%;
+  top: 20%;
+  transform: translateX(-50%);
+  width: 5rem;
+}
+.zhuce {
+  width: 80%;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+/*# sourceMappingURL=register.css.map */

@@ -44,7 +44,6 @@ class Login extends React.Component {
         }
     }
 
-
     back = () => {
         let {history} = this.props;
         history.go(-1)
@@ -61,7 +60,8 @@ class Login extends React.Component {
                 });
                 if (result.code === 0) {
                     this.props.isLogin(0);
-                    this.props.history.go(-1);
+                    this.props.queryBaseInfo();
+                    this.props.history.push("/self");
                     return;
                 }
                 loginFail();
@@ -150,7 +150,7 @@ class Login extends React.Component {
                     <Row gutter={8}>
                         <Col span={12}>
                             {getFieldDecorator('captcha', {
-                                rules: [{required: true, message: '请输入验证码!'}],
+                                rules: [{required: false, message: '请输入验证码!'}],
                             })(
                                 <Input/>
                             )}
@@ -175,10 +175,8 @@ class Login extends React.Component {
                 <Link to='/sss'><span>忘记密码?</span></Link>
             </div>
             <Switch>
-
                 <Route path='/other' exact component={Other}/>
                 <Route path='/back' component={Back}/>
-
             </Switch>
         </div>
 
@@ -187,7 +185,8 @@ class Login extends React.Component {
     captchaS = (ev) => {
         let a = document.getElementById('captcha');
         let b = Math.floor(Math.random() * 10000 + 90000);
-        a.setAttribute("value", `${b}`);
+        a.value = b;
+
     };
 
 
