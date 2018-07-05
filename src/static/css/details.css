@@ -1,0 +1,202 @@
+.detailsBox {
+  background: #f4f4f4;
+  padding-bottom: 3rem;
+}
+.detailsBox span {
+  display: inline;
+}
+.detailsBox .priceSwipe {
+  background: #fff;
+  padding: .2rem 1rem;
+}
+.detailsBox .priceSwipe .ant-carousel .slick-slide {
+  text-align: center;
+  height: 7.5rem;
+  line-height: 7.5rem;
+  overflow: hidden;
+}
+.detailsBox .priceSwipe .ant-carousel .slick-slide .imgBox img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.detailsBox .priceSwipe .slick-dots {
+  bottom: 10%;
+}
+.detailsBox .goods-name {
+  box-sizing: border-box;
+  padding: .2rem .3rem;
+  width: 100%;
+  background: #515150;
+  color: #fff;
+}
+.detailsBox .goods-name .name {
+  color: #fff;
+  font-size: .33rem;
+  line-height: .65rem;
+}
+.detailsBox .goods-price {
+  padding-left: .5rem;
+  height: 1rem;
+  width: 100%;
+  background: #fff;
+  color: #b0b0b0;
+  border-bottom: 1px solid #e0e0e0;
+  line-height: 1rem;
+}
+.detailsBox .goods-price .price {
+  font-size: .4rem;
+  color: #d0021b;
+}
+.detailsBox .goods-discount {
+  height: 1rem;
+  line-height: 1rem;
+  padding-left: .2rem;
+  background: #fff;
+  position: relative;
+}
+.detailsBox .goods-discount .first-item {
+  font-size: .3rem;
+}
+.detailsBox .goods-discount .first-item span {
+  background: #d0021b;
+  color: #fff;
+  padding: 0 .1rem;
+  border-radius: .1rem;
+  font-size: .25rem;
+}
+.detailsBox .goods-discount i {
+  position: absolute;
+  right: .2rem;
+  top: 50%;
+  font-size: .4rem;
+  margin-top: -0.2rem;
+  color: #999;
+}
+.detailsBox .evaluate .title {
+  height: 1rem;
+  line-height: 1rem;
+  border: 1px solid #e0e0e0;
+  margin-top: .3rem;
+  background: #fff;
+}
+.detailsBox .evaluate .title p {
+  font-size: .3rem;
+  text-align: center;
+  box-sizing: border-box;
+  width: 50%;
+  float: left;
+}
+.detailsBox .evaluate .title p.eveTitle {
+  border-right: 1px solid #e0e0e0;
+}
+.detailsBox .evaluate .title p.eveTitle span {
+  display: inline;
+}
+.detailsBox .evaluate .title p.buyTitle {
+  color: #000;
+}
+.detailsBox .evaluate .title p.buyTitle span {
+  display: inline;
+}
+.detailsBox .evaluate .content .consult {
+  padding: .2rem .3rem;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+}
+.detailsBox .evaluate .content .consult .question {
+  font-size: .2rem;
+  color: #444;
+}
+.detailsBox .evaluate .content .consult .question span.q {
+  display: block;
+  float: left;
+  background: #666;
+  padding: 0 .05rem;
+  color: #fff;
+  border-radius: 50%;
+}
+.detailsBox .evaluate .content .consult .question span.time {
+  color: #777;
+}
+.detailsBox .evaluate .content .consult .question p {
+  margin-left: .5rem;
+}
+.detailsBox .evaluate .content .consult .answer {
+  margin-top: .3rem;
+  font-size: .2rem;
+  color: #777;
+}
+.detailsBox .evaluate .content .consult .answer span.a {
+  display: block;
+  float: left;
+  background: #666;
+  padding: 0 .05rem;
+  color: #fff;
+  border-radius: 50%;
+}
+.detailsBox .evaluate .content .consult .answer p {
+  margin-left: .5rem;
+}
+.detailsBox .evaluate .more {
+  display: block;
+  height: 1rem;
+  text-align: center;
+  background: #fff;
+  font-size: .3rem;
+  color: #b0b0b0;
+  line-height: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+.detailsBox .evaluate .more i {
+  font-size: .3rem;
+}
+.detailsBox .enter-store {
+  height: 1rem;
+  line-height: 1rem;
+  background: #fff;
+  margin-top: .2rem;
+}
+.detailsBox .enter-store a.store-logo {
+  margin-left: .3rem;
+}
+.detailsBox .enter-store a.store-name {
+  color: #333;
+  font-size: .35rem;
+  margin-left: .2rem;
+}
+.detailsBox .enter-store a.store-link {
+  float: right;
+  font-size: .3rem;
+  color: #999;
+}
+.detailsBox .cart-bar {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  z-index: 999999;
+  background: #fff;
+  height: 1rem;
+}
+.detailsBox .cart-bar a {
+  width: 1.5rem;
+  display: inline-block;
+  text-align: center;
+  color: #000;
+}
+.detailsBox .cart-bar a i {
+  color: #000;
+  display: block;
+  font-size: .5rem;
+}
+.detailsBox .cart-bar a.addtoCart {
+  background: #d0021b;
+  color: #fff;
+  position: absolute;
+  height: 100%;
+  width: 3rem;
+  line-height: 1rem;
+  font-size: .35rem;
+  right: 0;
+}
+/*# sourceMappingURL=details.css.map */

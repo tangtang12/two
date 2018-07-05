@@ -10,6 +10,9 @@ html {
   max-width: 750px;
 }
 /*NAV-TOP*/
+.fgg_Box span {
+  display: inline;
+}
 .fgg_Box .headerNavBox {
   z-index: 9999;
   width: 100%;

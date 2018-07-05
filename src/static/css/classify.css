@@ -1,22 +1,47 @@
+.Topbox {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 7.5rem;
+  height: 1rem;
+  background: #FFFFFF;
+  z-index: 9999;
+}
 .Topbox ul {
   overflow: hidden;
-  border-bottom: .01rem lavender solid;
+  border-bottom: .01rem #797979 solid;
 }
 .Topbox ul li {
-  border-right: .01rem lavender solid;
   display: inline-block;
-  width: 33%;
+  width: 32%;
   text-align: center;
   font-size: .4rem;
   height: 1rem;
   line-height: 1rem;
 }
+.Topbox ul li a {
+  display: block;
+  color: #cccccc;
+}
+.Topbox ul li a.active {
+  color: #2A2A2A;
+}
 .Topbox ul li:last-child {
   border-right: .01rem #FFF solid;
 }
+.Topbox ul span {
+  display: inline-block;
+  line-height: .6rem;
+  font-size: 20px;
+  color: #cccccc;
+}
+.menListBox {
+  margin-top: 1rem;
+  background: #FFFFFF;
+}
 .menListBox ul {
   float: left;
-  width: 2rem;
+  width: 30%;
   height: 100%;
 }
 .menListBox ul li {
@@ -25,27 +50,47 @@
   height: 1.2rem;
   line-height: 1.2rem;
   font-size: .25rem;
-  background: #f5fffa;
   text-align: center;
+  background: #efefef;
 }
-span {
+.menListBox ul li.active {
+  background: white;
+  border-left: 5px solid #737370;
+}
+.menListBox ul li.active a {
+  color: #2A2A2A;
+}
+.menListBox ul li a {
   display: block;
-  text-align: center;
+  color: #807777;
+  font-size: 16px;
 }
-.menImgBox {
-  width: 73%;
+.menListBox .right {
+  width: 70%;
+  float: left;
+  background: white;
+  margin-bottom: 1rem;
+}
+.menListBox .right .step {
   height: 100%;
+}
+.menListBox .right .step h3 {
+  text-align: center;
+  line-height: 1rem;
+}
+.menListBox .right .step .imgBox {
+  margin-left: 4.0%;
+}
+.menListBox .right .step .imgBox .smallBox {
+  width: 30%;
+  margin-right: 2.5%;
   float: left;
 }
-.menImgBox .imgMenListBox {
-  padding: .01rem;
-  width: 33%;
-  text-align: center;
-  background: #f5fffa;
-}
-.menImgBox .imgMenListBox img {
+.menListBox .right .step .imgBox .smallBox img {
   display: block;
   width: 100%;
-  height: 100%;
+}
+.menListBox .right .step .imgBox .smallBox p {
+  text-align: center;
 }
 /*# sourceMappingURL=classify.css.map */
