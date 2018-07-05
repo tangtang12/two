@@ -5,3 +5,8 @@ export function addCar(id) {
         params:{id}
     });
 }
+export function getCart(state){
+    return axios.get('store/info',{
+        params:{state}
+    })
+}
