@@ -9,16 +9,23 @@ import TopNav from "../../component/TopNav";
 class Orders extends React.Component {
     constructor(props, context) {
         super(props, context);
+        this.state = {
+            all: [],
+            wait: [],
+            Deliver: [],
+            collect: []
+        };
+
     }
 
 
     render() {
 
         let orderNav = ["全部", "待付款", "待发货", "待收货"];
-
+        console.log(this.props);
         return <div className="ordersBox">
             <div className="topNavBox">
-                <Icon type="left" onClick={()=>{
+                <Icon type="left" onClick={() => {
                     this.props.history.go(-1);
                 }}/>
                 <span>我的订单</span>
@@ -42,8 +49,6 @@ class Orders extends React.Component {
                         <Link to={`/self/orders?type=${index}`}>{item}</Link>
                     </li>
                 })}
-
-
                 {/* <li className="active">
                     <Link to="/self/orders?type=1">全部</Link>
                 </li>
@@ -135,8 +140,6 @@ class Orders extends React.Component {
             </div>
         </div>;
     }
-
-
 
 
 }

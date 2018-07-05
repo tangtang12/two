@@ -7,6 +7,7 @@ import {isLogin} from "../api/person";
 import {getCart} from "../api/car";
 import CartLogin from "./cartLogin/CartLogin";
 import action from "../store/action";
+import {Link} from "react-router-dom";
 
 
 class Cart extends React.Component {
@@ -89,9 +90,9 @@ class Cart extends React.Component {
                     {data.map((item, index) => {
                         return <li className="goods-info" key={index}>
                             <div className="imgBox">
-                                <a href="#">
+                                <Link href="#" to={`/details?id=${item.id}`}>
                                     <img src={item.pic} alt={item.desc}/>
-                                </a>
+                                </Link>
                                 <div className="similar"></div>
                             </div>
                             <div className="detail">

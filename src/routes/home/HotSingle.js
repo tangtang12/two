@@ -1,6 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {Icon} from "antd";
+import {Link} from "react-router-dom";
 
 class HotSingle extends React.Component {
     constructor(props,context) {
@@ -29,17 +30,17 @@ class HotSingle extends React.Component {
                     width: hotSingleGoods.length * 2.5 + "rem"
                 }}>
                     {hotSingleGoods.map((item, index) => {
-
-                        return  <li key={index}>
-                            <a href="#">
+                        let id = item.id;
+                        return <li key={index}>
+                            <Link href="#" to={`/details?id=${id}`}>
                                 <img src={item.pic} alt={item.desc}/>
                                 <div className="goods-info">
                                     <h3 className="price">¥{item.price}</h3>
                                     <p className="view-num">{item.view}</p>
                                     <p className="view-status">{item.state}</p>
                                 </div>
-                            </a>
-                        </li>
+                            </Link>
+                        </li>;
                     })}
 
                 </ul>

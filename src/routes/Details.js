@@ -1,22 +1,17 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Carousel, Modal, Button, Radio, Icon, message} from "antd";
+import {Carousel, Modal, Button,  Icon, message} from "antd";
 import "../static/css/details.less";
 import Qs from 'qs';
 import queryCommodity from '../api/commodity';
 import Top from './wander/Top'
 import Box from '../component/Box';
+import CarTap from '../component/CarTap';
 import {addCar} from '../api/car';
 import action from '../store/action/index'
 import {isLogin} from '../api/person'
 
-const RadioButton = Radio.Button;
-const RadioGroup = Radio.Group;
 
-message.config({
-    top: 250,
-    duration: 1
-});
 
 class Details extends React.Component {
     constructor(props, context) {
@@ -25,7 +20,9 @@ class Details extends React.Component {
             data: [],
             id: '',
             visible: false,
-            car: false
+            car: false,
+            color: null,
+            size:null
         };
     }
 
@@ -136,40 +133,7 @@ class Details extends React.Component {
                 </Modal>
             </div>
 
-            {this.state.car ? <div className='fix'>
-                <div className='shopping'>
-                    <div className='shopTop'>
-                        <div className='shopImg'>
-                            <img src={pic[0]} alt=""/>
-                        </div>
-                        <div className='shopFz'>
-                            <p>￥{price.toFixed(2)}</p>
-                            <p>请选择颜色、尺码</p>
-                        </div>
-                        <a href='javascript:;' className='click' onClick={this.exit}>x</a>
-                    </div>
-                    <div className='title'>
-                        <div className='small'><span className='name'>颜色</span><RadioGroup defaultValue="a">
-                            <RadioButton value="a">白色</RadioButton>
-                            <RadioButton value="b">黑色</RadioButton>
-                            <RadioButton value="c">灰色</RadioButton>
-                        </RadioGroup></div>
-                        <div className='small'><span className='name'>尺码</span>
-                            <RadioGroup defaultValue="a">
-                                <RadioButton value="a">X</RadioButton>
-                                <RadioButton value="b">XLL</RadioButton>
-                                <RadioButton value="c">XLLL</RadioButton>
-                            </RadioGroup></div>
-                        <div className='small'><span className='name'>数量</span>
-                            <Box min='0' max='100'/>
-                        </div>
-                    </div>
-                    <div className='bottom'>
-                        <a href="javascript:;">立即购买</a>
-                        <a href="javascript:;" onClick={this.addToCar.bind(this, id)}>加入购物车</a>
-                    </div>
-                </div>
-            </div> : ""}
+            {this.state.car ?<CarTap data={{pic:pic[0],price,id,type:true,open:this.open}} /> : ""}
 
         </section>
     }
@@ -209,24 +173,10 @@ class Details extends React.Component {
         });
     };
 
-    addToCar = async id => {
-        let num = document.querySelector('#num').value;
-        let res = await addCar({id,num});
-
-        if (res.code === 0) {
-            message.success('成功加入购物车');
-            this.setState({
-                car: false
-            });
-            document.documentElement.style.overflow = '';
-        }
-    };
-
-    exit = ev => {
+    open=ev=>{
         this.setState({
             car: false
         });
-        document.documentElement.style.overflow = '';
     }
 
 }

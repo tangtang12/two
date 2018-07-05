@@ -18,8 +18,10 @@ export default function home(state = init_state, action) {
             payload = action.payload;
             parseFloat(payload.code) === 0 ? state.baseInfo = payload.data : null;
 
-            state.baseInfo.username = +new Date();
-            state.baseInfo.kouling = `#` + `${Math.floor(Math.random()*1000000000000+100000000000)}` + `#`;
+            if (state.baseInfo) {
+                state.baseInfo.username = +new Date();
+                state.baseInfo.kouling = `#` + `${Math.floor(Math.random()*1000000000000+100000000000)}` + `#`;
+            }
 
             break;
     }

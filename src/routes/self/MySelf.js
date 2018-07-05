@@ -113,8 +113,8 @@ class MySelf extends React.Component {
                                 backgroundSize: "cover"
                             }}></div>
                             <div className="userInfo">
-                                <p>{baseInfo.username}</p>
-                                <p>{baseInfo.kouling}</p>
+                                <p>{baseInfo ? baseInfo.username : ""}</p>
+                                <p>{baseInfo ? baseInfo.kouling : ""}</p>
                             </div>
                             <Button type="danger" onClick={this.exitLogin} className="exit">退出</Button>
                         </div>
@@ -210,17 +210,20 @@ class MySelf extends React.Component {
                     <ul className='bg_data clearfix'>
 
                         {data.length === 0 ? '' : data.map((item, index) => {
-                            let {pic, desc, price} = item;
+                            let {pic, desc, price,id} = item;
                             return <li className='li_box' key={index}>
+                                 <Link to={`details?id=${id}`}>
                                 <div className='none' style={{
                                     background: `url(${pic}) no-repeat`,
                                     backgroundSize: "cover"
                                 }}>
+                        
                                     <div className='cover_f' id='link'>
                                         <span>找相似</span>
                                         <i className='none-1'/>
                                     </div>
                                 </div>
+                                </Link>
                                 <a className='desc'>{desc}</a>
                                 <span className='price'>￥{price}</span>
                                 <p className='act'>...</p>
@@ -247,7 +250,7 @@ class MySelf extends React.Component {
                 </div>
 
             </header>
-        </div>
+        </div>;
     }
 
 
