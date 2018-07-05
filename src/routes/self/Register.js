@@ -69,6 +69,7 @@ class Register extends React.Component {
     getCode = ev => {
         this.refs.code.value = Math.floor(Math.random() * 900000 + 100000);
         ev.target.setAttribute("disabled", "");
+        
     };
 
 
