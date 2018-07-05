@@ -24,3 +24,28 @@
 "view":多少人在浏览,
 "state":"正在浏览",
 ```
+
+## 获取商品详情
+- 地址：/course/info
+- 方式：GET
+- 参数：courseID=xxx
+- 返回：{
+   code:0,
+   msg:'xxx',
+   data:{
+      ...
+   }
+ }
+ ```
+ "id": 1,
+	"pic":图片数组,
+	"desc": "Herschel Supply|男|女|双肩包|Herschel Supply x INDEPENDENT 收纳双肩包",
+	"price": 209,
+	"oldPrice": 298,
+	"name": "MADNESS CORDURA DAY PACK",//商品名称
+	"hot": ,//促
+	"shop": //店铺图片,
+	"shopDesc": ,//店铺名称
+	"data": "2018/07/05",//上架时间
+	"moods": 1000//人气
+ ```

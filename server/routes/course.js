@@ -6,11 +6,11 @@ const express = require('express'),
 route.get('/info', (req, res) => {
     //客户端会传一个课程id进来，我们在所有的课程当中找到ID相同的信息，返回
     let {
-        courseID
+        id
     } = req.query; //get请求问号传参都在req.query上
-    courseID = parseFloat(courseID);
+    id = parseFloat(id);
     let item = req.courseDATA.find(item => {
-        return parseFloat(item.id) === courseID;
+        return parseFloat(item.id) === id;
     });
     if (item) {
         res.send({
