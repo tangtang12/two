@@ -1,16 +1,22 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Carousel, Modal, Button, Radio,Icon} from "antd";
+import {Carousel, Modal, Button, Radio,Icon,message} from "antd";
 import "../static/css/details.less";
 import Qs from 'qs';
 import queryCommodity from '../api/commodity';
 import Top from './wander/Top'
 import Box from '../component/Box';
 import {addCar}  from '../api/car';
+import action from '../store/action/index'
+import {isLogin} from '../api/person'
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 
+message.config({
+    top:250,
+    duration:1
+});
 
 class Details extends React.Component {
     constructor(props, context) {
@@ -20,6 +26,13 @@ class Details extends React.Component {
             id: '',
             visible: false,
             car:false
+        };
+    }
+
+    async componentWillMount(){
+        let res = await isLogin();
+        if (res.code===0){
+            this.props.isLogin(0);
         }
     }
 
@@ -38,7 +51,7 @@ class Details extends React.Component {
     render() {
         let data = this.state.data;
         if (data.length === 0) return "";
-        let {pic, name, price, hot, shop, shopDesc} = data;
+        let {pic, name, price, hot, shop, shopDesc,id} = data;
         return <section className="detailsBox">
             <Top/>
             <div className="priceSwipe">
@@ -123,7 +136,7 @@ class Details extends React.Component {
                 </Modal>
             </div>
 
-            {this.state.car?<div className='shopping'>
+            {this.state.car?<div className='fix'><div className='shopping'>
                 <div className='shopTop'>
                     <div className='shopImg'>
                         <img src={pic[0]} alt=""/>
@@ -132,7 +145,7 @@ class Details extends React.Component {
                         <p>￥{price.toFixed(2)}</p>
                         <p>请选择颜色、尺码</p>
                     </div>
-                    <a href='javascript:;' className='click'>x</a>
+                    <a href='javascript:;' className='click' onClick={this.exit}>x</a>
                 </div>
                 <div className='title'>
                     <div className='small'><span className='name'>颜色</span><RadioGroup defaultValue="a">
@@ -152,9 +165,9 @@ class Details extends React.Component {
                 </div>
                 <div className='bottom'>
                     <a href="javascript:;">立即购买</a>
-                    <a href="javascript:;" onClick={this.addToCar}>加入购物车</a>
+                    <a href="javascript:;" onClick={this.addToCar.bind(this,id)}>加入购物车</a>
                 </div>
-            </div>:""}
+            </div></div>:""}
 
         </section>
     }
@@ -177,8 +190,8 @@ class Details extends React.Component {
         }
         this.setState({
             car:true
-        })
-
+        });
+        document.documentElement.style.overflow='hidden';
     };
 
     handleOk = (e) => {
@@ -194,12 +207,25 @@ class Details extends React.Component {
         });
     };
 
-     addToCar=async ev=>{
-       let a =await addCar(2);
-         console.log(a);
+     addToCar=async id=>{
+       let res =await addCar(id);
+         if (res.code===0){
+           message.success('成功加入购物车');
+           this.setState({
+               car:false
+           });
+           document.documentElement.style.overflow='';
+       }
+     };
+
+     exit=ev=>{
+        this.setState({
+            car:false
+        });
+        document.documentElement.style.overflow='';
      }
 
 }
 
-export default connect(state => ({...state.person}))(Details);
+export default connect(state => ({...state.person}),action.person)(Details);
 

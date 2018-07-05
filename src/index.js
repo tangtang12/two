@@ -10,6 +10,7 @@ import Classify from "./routes/Classify";
 import Wander from "./routes/Wander";
 import Cart from "./routes/Cart";
 import Self from "./routes/Self";
+import Sort from "./routes/Sort"
 import Yoho from "./routes/Yoho";
 import BottomNav from "./component/BottomNav";
 import md5 from "blueimp-md5";
@@ -44,6 +45,7 @@ render(<Provider store={store}>
                         <Route path='/back' component={Back}/>
                         <Route path='/other' component={Other}/>
                         <Route path="/register" component={Register}/>
+                        <Route path="/sort" component={Sort}/>
                         <Redirect to="/"/>
                     </Switch>
                 </main>

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Link, withRouter} from "react-router-dom"
 import "./CartLogin.less"
 import {Icon, Button} from 'antd'
+import Box from "../../component/Box";
+import {getCart}from "../../api/car"
 
 
 
@@ -13,6 +15,11 @@ class CartLogin extends React.Component {
             collapsed: this.props.collapsed
         };
     }
+async componentWillMount(){
+      let getInfo=await getCart();
+    console.log(getInfo);
+}
+
 
     componentWillReceiveProps() {
         this.setState({
@@ -60,12 +67,7 @@ class CartLogin extends React.Component {
                         <li className='tip-shop-2'>x3</li>
                         <li className='tip-shop-3'>desc</li>
                         <li className='tip-shop-4'>￥123</li>
-                    </ul> : <ul className="desc-shop-f">
-                        <li className='tip-shop-1'>title</li>
-                        <li className='tip-shop-2'>x3</li>
-                        <li className='tip-shop-3'>desc</li>
-                        <li className='tip-shop-4'>￥123</li>
-                    </ul>}
+                    </ul> : <Box/>}
 
 
                 </Link>
@@ -95,7 +97,7 @@ class CartLogin extends React.Component {
 
             {/*底部*/}
 
-            {this.state.collapsed ? <div className="login-all">
+            {this.state.collapsed ? <div className="login-all" style={{zIndex:"99999"}}>
                 <div>
                     <a href="javascript:;" style={{
                         color: '#fff',
@@ -112,7 +114,7 @@ class CartLogin extends React.Component {
                     }}>不含运费</p>
                     <Button>结算</Button>
                 </div>
-            </div> : <div className="login-all">
+            </div> : <div className="login-all" style={{zIndex:"99999"}}>
                 <div>
                     <a href="javascript:;" style={{
                         color: '#fff',

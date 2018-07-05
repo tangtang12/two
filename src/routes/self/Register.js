@@ -72,8 +72,9 @@ class Register extends React.Component {
                     <Icon type="share-alt"/>
                     <input type="text" placeholder="好友潮流口令（非必填）"/>
                 </div>
+
                 <Button type="primary" onClick={()=>{
-                    this.register();
+                    this.register()
                 }} disabled={this.state.reBtn} className='zhuce'>注册</Button>
                 <div className="protocol">
                     <Icon type={this.state.register ? "check-circle-o" : ""} onClick={() => {
