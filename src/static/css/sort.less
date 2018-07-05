@@ -1,0 +1,47 @@
+.sortBox {
+  .sortHeaderBox {
+    height: 1.05rem;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #414141;
+    z-index: 999;
+    .ant-row {
+      a {
+        display: inline-block;
+        &:first-child {
+          transform: translateX(50%);
+        }
+      }
+      i {
+        font-size: 25px;
+        line-height: 1.05rem;
+        text-align: center;
+        color: white;
+      }
+      h3 {
+        line-height: 1.05rem;
+        text-align: center;
+        color: white;
+        font-family: inherit;
+        font-size: 20px;
+        margin: 0;
+      }
+    }
+  }
+  .sortListBox {
+    width: 100%;
+    li {
+      padding: .2rem;
+      float: left;
+      height: 1.1rem;
+      width: 25%;
+       font-size: .3rem;
+      border-bottom: .01rem #999999 solid;
+      a{
+        color: #999999;
+      }
+    }
+  }
+}

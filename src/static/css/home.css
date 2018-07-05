@@ -1,61 +1,120 @@
 .homeBox {
   padding-bottom: 2.5rem;
   background-color: #f4f4f4;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
 }
 .homeBox span {
+  display: inline-block;
+}
+.homeBox .right {
+  position: relative;
+}
+.homeBox .right.off {
+  animation: off linear .5s forwards;
+}
+.homeBox .right.on {
+  animation: rightOn linear .5s forwards;
+}
+.homeBox .right .mark {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  display: none;
+}
+.homeBox .right .mark.dis {
+  display: block;
+}
+.homeBox .right span {
   display: inline;
 }
-.homeBox .homeTopBox .Crevice {
+.homeBox .right .homeLogoBox {
+  position: relative;
+  height: 1rem;
+  line-height: 1rem;
+  background-image: linear-gradient(#323232, #414141);
+}
+.homeBox .right .homeLogoBox i.anticon-menu-unfold {
+  color: #fff;
+  font-size: .5rem;
+  position: absolute;
+  left: .5rem;
+  top: 50%;
+  margin-top: -0.25rem;
+}
+.homeBox .right .homeLogoBox a {
+  position: absolute;
+  right: 0;
+  width: 1rem;
+  height: 1rem;
+  color: #fff;
+  font-size: .5rem;
+}
+.homeBox .right .homeLogoBox .logo {
+  font-size: .45rem;
+  color: #fff;
+  position: absolute;
+  left: 50%;
+  line-height: 1rem;
+  margin-left: -1rem;
+  font-family: "Calibri Light";
+}
+.homeBox .right .homeTopBox .Crevice {
   height: .3rem;
 }
-.homeBox .homeTopBox .homeSwipeOne .ant-carousel .slick-slide {
+.homeBox .right .homeTopBox .homeSwipeOne .ant-carousel .slick-slide {
   text-align: center;
   height: 3.2rem;
   line-height: 3.2rem;
   overflow: hidden;
 }
-.homeBox .homeTopBox .toClassify {
+.homeBox .right .homeTopBox .toClassify {
   height: 1.5rem;
   line-height: 1.5rem;
   background: #fff;
   padding-bottom: .5rem;
 }
-.homeBox .homeTopBox .toClassify > ul {
+.homeBox .right .homeTopBox .toClassify > ul {
   padding-top: .3rem;
 }
-.homeBox .homeTopBox .toClassify > ul li {
+.homeBox .right .homeTopBox .toClassify > ul li {
   width: 25%;
   text-align: center;
   float: left;
 }
-.homeBox .homeTopBox .toClassify > ul li .ico {
+.homeBox .right .homeTopBox .toClassify > ul li .ico {
   margin: 0 auto;
   width: .8rem;
   height: .8rem;
 }
-.homeBox .homeTopBox .toClassify > ul li .ico img {
+.homeBox .right .homeTopBox .toClassify > ul li .ico img {
   display: block;
   width: 100%;
   height: 100%;
 }
-.homeBox .homeTopBox .toClassify > ul li span {
+.homeBox .right .homeTopBox .toClassify > ul li span {
   height: .4rem;
   line-height: .4rem;
   display: block;
 }
-.homeBox .homeTopBox .off50 a {
+.homeBox .right .homeTopBox .off50 a {
   display: block;
   height: 2.3rem;
 }
-.homeBox .homeTopBox .off50 a img {
+.homeBox .right .homeTopBox .off50 a img {
   display: block;
   width: 100%;
   height: 100%;
 }
-.homeBox .hotCateGoryBox .hot-category {
+.homeBox .right .hotCateGoryBox .hot-category {
   border-bottom: 1px solid #e0e0e0;
 }
-.homeBox .hotCateGoryBox .hot-category .hot-title {
+.homeBox .right .hotCateGoryBox .hot-category .hot-title {
   height: 1rem;
   line-height: 1rem;
   font-size: .25rem;
@@ -63,10 +122,10 @@
   text-align: center;
   font-weight: 300;
 }
-.homeBox .hotCateGoryBox .hot-category .category-list {
+.homeBox .right .hotCateGoryBox .hot-category .category-list {
   background: #fff;
 }
-.homeBox .hotCateGoryBox .hot-category .category-list li {
+.homeBox .right .hotCateGoryBox .hot-category .category-list li {
   box-sizing: border-box;
   float: left;
   width: 25%;
@@ -74,7 +133,7 @@
   border-top: 1px solid #e0e0e0;
   border-left: 1px solid #e0e0e0;
 }
-.homeBox .hotCateGoryBox .hot-category .category-list li .img-box {
+.homeBox .right .hotCateGoryBox .hot-category .category-list li .img-box {
   width: 100%;
   height: 100%;
   line-height: 100%;
@@ -82,18 +141,18 @@
   overflow: hidden;
   font-size: 0;
 }
-.homeBox .hotCateGoryBox .hot-category .category-list li .img-box img {
+.homeBox .right .hotCateGoryBox .hot-category .category-list li .img-box img {
   vertical-align: middle;
   width: 100%;
   height: 100%;
 }
-.homeBox .hotCateGoryBox .hot-swipe .ant-carousel .slick-slide {
+.homeBox .right .hotCateGoryBox .hot-swipe .ant-carousel .slick-slide {
   text-align: center;
   height: 2.4rem;
   line-height: 2.4rem;
   overflow: hidden;
 }
-.homeBox .hotCategoryBox .hotBrand .brand-title {
+.homeBox .right .hotCategoryBox .hotBrand .brand-title {
   height: 1rem;
   line-height: 1rem;
   font-size: .25rem;
@@ -101,7 +160,7 @@
   text-align: center;
   font-weight: 300;
 }
-.homeBox .hotCategoryBox .hotBrand .brand {
+.homeBox .right .hotCategoryBox .hotBrand .brand {
   box-sizing: border-box;
   float: left;
   width: 25%;
@@ -109,22 +168,22 @@
   overflow: hidden;
   padding: 1px;
 }
-.homeBox .hotCategoryBox .hotBrand .brand a {
+.homeBox .right .hotCategoryBox .hotBrand .brand a {
   display: block;
 }
-.homeBox .hotCategoryBox .hotBrand .brand a .brand-logo {
+.homeBox .right .hotCategoryBox .hotBrand .brand a .brand-logo {
   width: 100%;
   height: 100%;
   text-align: center;
   font-size: 0;
   vertical-align: center;
 }
-.homeBox .hotCategoryBox .hotBrand .brand a .brand-logo img {
+.homeBox .right .hotCategoryBox .hotBrand .brand a .brand-logo img {
   display: block;
   width: 100%;
   height: 100%;
 }
-.homeBox .hotCategoryBox .hotBrand .last {
+.homeBox .right .hotCategoryBox .hotBrand .last {
   box-sizing: border-box;
   float: left;
   width: 25%;
@@ -133,73 +192,73 @@
   padding: 1px;
   width: 50%;
 }
-.homeBox .hotCategoryBox .hotBrand .last a {
+.homeBox .right .hotCategoryBox .hotBrand .last a {
   display: block;
 }
-.homeBox .hotCategoryBox .hotBrand .last a .brand-logo {
+.homeBox .right .hotCategoryBox .hotBrand .last a .brand-logo {
   width: 100%;
   height: 100%;
   text-align: center;
   font-size: 0;
   vertical-align: center;
 }
-.homeBox .hotCategoryBox .hotBrand .last a .brand-logo img {
+.homeBox .right .hotCategoryBox .hotBrand .last a .brand-logo img {
   display: block;
   width: 100%;
   height: 100%;
 }
-.homeBox .hotCategoryBox .newPeople {
+.homeBox .right .hotCategoryBox .newPeople {
   margin-top: .15rem;
 }
-.homeBox .hotCategoryBox .newPeople > a {
+.homeBox .right .hotCategoryBox .newPeople > a {
   display: block;
   height: 2.5rem;
 }
-.homeBox .hotCategoryBox .newPeople > a img {
+.homeBox .right .hotCategoryBox .newPeople > a img {
   display: block;
   width: 100%;
   height: 100%;
 }
-.homeBox .hotSingleBox {
+.homeBox .right .hotSingleBox {
   position: relative;
 }
-.homeBox .hotSingleBox .single-title {
+.homeBox .right .hotSingleBox .single-title {
   position: relative;
   height: 1rem;
   line-height: 1rem;
 }
-.homeBox .hotSingleBox .single-title h2 {
+.homeBox .right .hotSingleBox .single-title h2 {
   text-align: center;
   font-size: .25rem;
   font-weight: 300;
 }
-.homeBox .hotSingleBox .single-title i {
+.homeBox .right .hotSingleBox .single-title i {
   position: absolute;
   right: .2rem;
   top: 50%;
   margin-top: -0.4rem;
   font-size: .8rem;
 }
-.homeBox .hotSingleBox .singleTop a {
+.homeBox .right .hotSingleBox .singleTop a {
   display: block;
   height: 2.5rem;
 }
-.homeBox .hotSingleBox .singleTop a img {
+.homeBox .right .hotSingleBox .singleTop a img {
   display: block;
   width: 100%;
   height: 100%;
 }
-.homeBox .hotSingleBox .singleList {
+.homeBox .right .hotSingleBox .singleList {
   background: #fff;
   overflow-x: scroll;
   overflow-y: hidden;
 }
-.homeBox .hotSingleBox .singleList ul {
+.homeBox .right .hotSingleBox .singleList ul {
   width: 500%;
   height: 4rem;
   padding: .4rem 0 .25rem .45rem;
 }
-.homeBox .hotSingleBox .singleList ul li {
+.homeBox .right .hotSingleBox .singleList ul li {
   display: inline-block;
   width: 1.8rem;
   height: 2.2rem;
@@ -207,110 +266,189 @@
   text-align: center;
   margin-right: .45rem;
 }
-.homeBox .hotSingleBox .singleList ul li a {
+.homeBox .right .hotSingleBox .singleList ul li a {
   display: block;
   height: 100%;
 }
-.homeBox .hotSingleBox .singleList ul li a img {
+.homeBox .right .hotSingleBox .singleList ul li a img {
   display: block;
   width: 100%;
   height: 100%;
 }
-.homeBox .hotSingleBox .singleList ul li a .goods-info p {
+.homeBox .right .hotSingleBox .singleList ul li a .goods-info p {
   margin: 0;
   padding: 0;
   height: .4rem;
   line-height: .4rem;
   color: #000;
 }
-.homeBox .hotSingleBox .singleList ul li a .goods-info p.view-status {
+.homeBox .right .hotSingleBox .singleList ul li a .goods-info p.view-status {
   color: #666;
   font-size: .25rem;
 }
-.homeBox .hotSingleBox .singleList ul li a .goods-info p.view-num {
+.homeBox .right .hotSingleBox .singleList ul li a .goods-info p.view-num {
   color: #777;
   font-size: .2rem;
 }
-.homeBox .maybeLikeBox {
+.homeBox .right .maybeLikeBox {
   margin-top: .3rem;
   background: #fff;
   padding: .3rem;
   border-top: 1px solid #ccc;
 }
-.homeBox .maybeLikeBox .title {
+.homeBox .right .maybeLikeBox .title {
   height: 1.2rem;
   font-size: .4rem;
   line-height: 1.2rem;
   text-align: center;
   color: #dadada;
 }
-.homeBox .maybeLikeBox .title i {
+.homeBox .right .maybeLikeBox .title i {
   margin-right: .2rem;
 }
-.homeBox .maybeLikeBox .goods-list .goods-info {
+.homeBox .right .maybeLikeBox .goods-list .goods-info {
   display: inline-block;
   box-sizing: border-box;
   padding-top: .5rem;
   padding-right: .2rem;
   width: 50%;
 }
-.homeBox .maybeLikeBox .goods-list .goods-info a {
+.homeBox .right .maybeLikeBox .goods-list .goods-info a {
   display: block;
   width: 100%;
   height: 100%;
 }
-.homeBox .maybeLikeBox .goods-list .goods-info a img {
+.homeBox .right .maybeLikeBox .goods-list .goods-info a img {
   display: block;
   width: 100%;
   height: 100%;
 }
-.homeBox .maybeLikeBox .goods-list .goods-info .detail {
+.homeBox .right .maybeLikeBox .goods-list .goods-info .detail {
   padding-left: .3rem;
   position: relative;
 }
-.homeBox .maybeLikeBox .goods-list .goods-info .detail .name {
+.homeBox .right .maybeLikeBox .goods-list .goods-info .detail .name {
   height: .8rem;
   line-height: .4rem;
   color: #000;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.homeBox .maybeLikeBox .goods-list .goods-info .detail .price {
+.homeBox .right .maybeLikeBox .goods-list .goods-info .detail .price {
   color: red;
 }
-.homeBox .maybeLikeBox .goods-list .goods-info .detail .price del {
+.homeBox .right .maybeLikeBox .goods-list .goods-info .detail .price del {
   color: #999;
 }
-.homeBox .maybeLikeBox .goods-list .goods-info .detail i {
+.homeBox .right .maybeLikeBox .goods-list .goods-info .detail i {
   position: absolute;
   right: 0;
   top: 50%;
   font-size: .6rem;
 }
-.homeBox .homeFooter {
+.homeBox .right .homeFooter {
   height: 2rem;
   line-height: 2rem;
   background: #fff;
 }
-.homeBox .homeFooter .logreg {
+.homeBox .right .homeFooter .logreg {
   border-top: 2px solid #eee;
   padding-left: .5rem;
 }
-.homeBox .homeFooter .logreg a {
+.homeBox .right .homeFooter .logreg a {
   color: #333;
   font-size: .3rem;
 }
-.homeBox .homeFooter .logreg span:nth-of-type(1) {
+.homeBox .right .homeFooter .logreg span:nth-of-type(1) {
   padding: 0 .2rem;
   font-size: .1rem;
   color: #999;
 }
-.homeBox .homeFooter .copyright {
+.homeBox .right .homeFooter .copyright {
   height: 60px;
   background: #eee;
   color: #666;
   text-align: center;
   line-height: 60px;
   font-size: .2rem;
+}
+.homeBox .left {
+  opacity: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 5.5rem;
+  height: 11rem;
+  z-index: -1;
+}
+.homeBox .left.on {
+  animation: on linear 1s forwards;
+}
+.homeBox .left .first {
+  margin-bottom: .36rem;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  border-top: 1px solid #e0e0e0;
+}
+.homeBox .left .first li {
+  height: 1rem;
+  line-height: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  background: #fff;
+  position: relative;
+}
+.homeBox .left .first li a {
+  display: block;
+  height: 100%;
+  padding-left: 1.2rem;
+  color: #444;
+}
+.homeBox .left .first li a em {
+  font-style: normal;
+  font-size: .35rem;
+  font-weight: bold;
+}
+.homeBox .left .first li a .title {
+  display: inline-block;
+  font-size: .25rem;
+  padding-left: .2rem;
+  vertical-align: bottom;
+}
+.homeBox .left .first li a .nav-img {
+  position: absolute;
+  left: .25rem;
+  top: 50%;
+  margin-top: -0.25rem;
+  background: url("http://img12.static.yhbimg.com/yhb-img01/2015/09/28/10/02efef3ab9c5572af60a63a518f1bd3618.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: .5rem;
+  height: .5rem;
+}
+@keyframes off {
+  from {
+    transform: translateX(0rem);
+  }
+  to {
+    transform: translateX(5.5rem);
+  }
+}
+@keyframes rightOn {
+  from {
+    transform: translateX(5.5rem);
+  }
+  to {
+    transform: translateX(0rem);
+  }
+}
+@keyframes on {
+  from {
+    opacity: 0;
+    z-index: 0;
+  }
+  to {
+    opacity: 1;
+    z-index: 999;
+  }
 }
 /*# sourceMappingURL=home.css.map */

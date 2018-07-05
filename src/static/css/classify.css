@@ -1,3 +1,6 @@
+.classifyBox {
+  padding-bottom: 1rem;
+}
 .Topbox {
   position: fixed;
   left: 0;
@@ -42,7 +45,9 @@
 .menListBox ul {
   float: left;
   width: 30%;
-  height: 100%;
+  height: 85%;
+  position: fixed;
+  overflow-y: scroll;
 }
 .menListBox ul li {
   display: block;
@@ -67,7 +72,7 @@
 }
 .menListBox .right {
   width: 70%;
-  float: left;
+  float: right;
   background: white;
   margin-bottom: 1rem;
 }

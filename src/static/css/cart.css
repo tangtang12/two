@@ -1,6 +1,6 @@
 .cartBox {
   background: #f4f4f4;
-  padding-bottom: 3rem;
+  padding-bottom: 1.2rem;
 }
 .cartBox .cartLogin {
   height: .5rem;
@@ -42,6 +42,9 @@
   border-radius: 5px;
   color: #fff;
   background: #444;
+}
+.cartBox .forYou {
+  background: #fff;
 }
 .cartBox .forYou .title {
   height: 1rem;
