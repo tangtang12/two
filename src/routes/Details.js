@@ -3,15 +3,22 @@ import {connect} from "react-redux";
 import {Carousel} from "antd";
 import "../static/css/details.less";
 import {Icon} from "antd";
+import Qs from 'qs';
+import queryCommodity from '../api/commodity';
 
 class Details extends React.Component {
     constructor(props,context) {
         super(props,context);
     }
 
-
+    async  componentWillMount(){
+        let str =this.props.location.search.slice(1),
+        obj=Qs.parse(str);
+        this.data=await queryCommodity(obj.id);
+        console.log(this.data);
+    }
     render() {
-
+        console.log(this.data);
         return <section className="detailsBox">
             <div className="priceSwipe">
                 <Carousel autoplay>
