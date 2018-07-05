@@ -20,11 +20,6 @@ class Register extends React.Component {
 
 
     render() {
-
-        const success = () => {
-            message.success('恭喜您注册成功');
-        };
-
         return <div className="registerBox">
             <div className="top-bar">
                 <Icon type="left-circle-o" onClick={ev => {
@@ -77,7 +72,10 @@ class Register extends React.Component {
                     <Icon type="share-alt"/>
                     <input type="text" placeholder="好友潮流口令（非必填）"/>
                 </div>
-                <Button type="primary" onClick={this.register} disabled={this.state.reBtn} className='zhuce'>注册</Button>
+
+                <Button type="primary" onClick={()=>{
+                    this.register()
+                }} disabled={this.state.reBtn} className='zhuce'>注册</Button>
                 <div className="protocol">
                     <Icon type={this.state.register ? "check-circle-o" : ""} onClick={() => {
                         this.setState({
@@ -154,8 +152,10 @@ class Register extends React.Component {
 
         let result = await register({phone, password, name: phone});
         if (result.code === 0) {
+            console.log(1);
             message.success('恭喜您注册成功');
             this.props.history.go(-1);
+
         }
     };
 }

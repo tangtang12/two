@@ -38,8 +38,8 @@ class Orders extends React.Component {
 
                 {orderNav.map((item, index) => {
                     let type = parseFloat(this.props.location.search.slice(-1));
-                    return <li key={index} className={type - 1 === index ? "active" : ""}>
-                        <Link to={`/self/orders?type=${index + 1}`}>{item}</Link>
+                    return <li key={index} className={type === index ? "active" : ""}>
+                        <Link to={`/self/orders?type=${index}`}>{item}</Link>
                     </li>
                 })}
 
