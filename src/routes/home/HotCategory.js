@@ -1,6 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {Carousel} from "antd";
+import {Link} from "react-router-dom";
 
 class HotCategory extends React.Component {
     constructor(props,context) {
@@ -18,12 +19,11 @@ class HotCategory extends React.Component {
                     {hotCategory.map((item, index) => {
 
                         return <li key={index}>
-                            <a href="#">
+                            <Link href="#" to={`/sort`}>
                                 <div className="img-box">
-                                    <img
-                                        src={item.pic} alt={item.desc}/>
+                                    <img src={item.pic} alt={item.desc}/>
                                 </div>
-                            </a>
+                            </Link>
                         </li>
                     })}
                 </ul>

@@ -19,21 +19,22 @@ class MaybeLike extends React.Component {
 
             <ul className="goods-list">
                 {maybeLike.map((item, index) => {
+                    let {id} = item;
                     return <li className="goods-info" key={index}>
-                        <Link to="/sort?">
-                        <div className="imgBox">
-                            <a href="#">
-                                <img src={item.pic} alt=""/>
-                            </a>
-                            <div className="similar"></div>
-                        </div>
-                        <div className="detail">
-                            <p className="name">{item.desc}</p>
-                            <p className="price">¥{item.price}
-                                <del>{item.oldPrice}</del>
-                            </p>
-                            <Icon className="similarIcon" type="ellipsis"></Icon>
-                        </div>
+                        <Link to={`/details?id=${id}`}>
+                            <div className="imgBox">
+                                <div>
+                                    <img src={item.pic} alt=""/>
+                                </div>
+                                <div className="similar"></div>
+                            </div>
+                            <div className="detail">
+                                <p className="name">{item.desc}</p>
+                                <p className="price">¥{item.price}
+                                    <del>{item.oldPrice}</del>
+                                </p>
+                                <Icon className="similarIcon" type="ellipsis"></Icon>
+                            </div>
                         </Link>
                     </li>;
                 })}
