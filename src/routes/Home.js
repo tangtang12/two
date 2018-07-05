@@ -34,6 +34,8 @@ class Home extends React.Component {
         if (homeData.n < 8) return "";
         let {left, right, mark} = this.state;
 
+
+
         return <section className="homeBox">
             <div className={right} ref="right">
                 <div className="homeLogoBox">
@@ -108,5 +110,5 @@ class Home extends React.Component {
     };
 }
 
-export default connect(state => state.home, action.home)(Home);
+export default connect(state => ({...state.home,...state.person}), action.home)(Home);
 
