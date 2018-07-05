@@ -2,6 +2,8 @@ import React from "react";
 import {connect} from "react-redux";
 import {Icon, Button, message, Alert} from "antd";
 import "../../static/css/register.less";
+import {register} from "../../api/person";
+import md5 from "blueimp-md5";
 
 
 class Register extends React.Component {
@@ -13,6 +15,7 @@ class Register extends React.Component {
             register: false,//注册前对勾的状态
             reBtn: true//注册按钮的状态
         }
+
     }
 
 
@@ -21,7 +24,6 @@ class Register extends React.Component {
         const success = () => {
             message.success('恭喜您注册成功');
         };
-
 
         return <div className="registerBox">
             <div className="top-bar">
@@ -46,8 +48,7 @@ class Register extends React.Component {
                         <option value="+852">中国香港</option>
                     </select>
                     <i className="line">|</i>
-                    <input type="tel" placeholder="请输入手机号" className="tel" ref="phone"/>
-
+                    <input type="tel" placeholder="请输入手机号(11位)" className="tel" ref="phone"/>
                 </div>
                 <div className="form-group getCode">
                     <Icon type="safety"/>
@@ -58,7 +59,7 @@ class Register extends React.Component {
                     <Icon type="lock"/>
                     <input type={this.state.password} name="password" ref="password" placeholder="请输入密码"
                            onChange={() => {
-                               if (this.refs.code.value === '') {
+                               if (this.refs.phone.value === '') {
                                    this.setState({
                                        phone: 2
                                    })
@@ -76,7 +77,7 @@ class Register extends React.Component {
                     <Icon type="share-alt"/>
                     <input type="text" placeholder="好友潮流口令（非必填）"/>
                 </div>
-                <Button type="primary" onClick={success} disabled={this.state.reBtn}>注册</Button>
+                <Button type="primary" onClick={success} disabled={this.state.reBtn} className='zhuce'>注册</Button>
                 <div className="protocol">
                     <Icon type={this.state.register ? "check-circle-o" : ""} onClick={() => {
                         this.setState({
@@ -138,6 +139,23 @@ class Register extends React.Component {
 
     };
 
+    register = async ev => {
+        //message.success('恭喜您注册成功');
+        let phone = this.refs.phone.value,
+            password = this.refs.password.value;
+        if (phone.length !== 11 || password.length <= 6 || password.length >= 15) {
+            message.error("正确输入信息才能注册哦");
+            return;
+        }
+            password = md5(password);
+
+        let result = await register({phone, password, name: phone});
+        if (result.code === 0) {
+            message.success('恭喜您注册成功');
+           this.props.history.go(-1);
+        }
+
+    };
 
 }
 

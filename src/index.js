@@ -12,6 +12,7 @@ import Cart from "./routes/Cart";
 import Self from "./routes/Self";
 import Yoho from "./routes/Yoho";
 import BottomNav from "./component/BottomNav";
+import md5 from "blueimp-md5";
 
 import Back from './routes/self/login/Back'
 import Other from './routes/self/login/Other'
