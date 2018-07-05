@@ -8,7 +8,6 @@ import {query} from '../../api/home'
 import {isLogin, exitLogin} from "../../api/person";
 
 
-
 const duration = 300,
     defaultStyle = {
         transition: `opacity ${duration}ms`,
@@ -20,14 +19,15 @@ const duration = 300,
 
 
 class MySelf extends React.Component {
-    constructor(props,context) {
-        super(props,context);
+    constructor(props, context) {
+        super(props, context);
         this.state = {
             in: false,
             data: [],
             isLogin: false
         };
     }
+
     async componentWillMount() {
         let {baseInfo, queryBaseInfo} = this.props;
         !baseInfo ? queryBaseInfo() : null;
@@ -49,7 +49,7 @@ class MySelf extends React.Component {
         });
     }
 
-    exitLogin =  async  () => {
+    exitLogin = async () => {
         let result = await exitLogin();
         if (parseFloat(result.code) === 0) {
             this.setState({
@@ -63,7 +63,6 @@ class MySelf extends React.Component {
         let baseInfo = this.props.baseInfo;
         let {isLogin} = this.state;
         if (!baseInfo && isLogin) return "";
-
         let {data} = this.state;
         return <div>
             <header className='headerNavBox'>
@@ -109,10 +108,13 @@ class MySelf extends React.Component {
                 <div className='login-button'>
                     {!isLogin ? <Button><Link to='/login'>登录/注册</Link></Button> :
                         <div>
-                            <div className="userPic"></div>
+                            <div className="userPic" style={{
+                                backgroundImage: "url('//img12.static.yhbimg.com/goodsimg/2018/06/02/18/0268f8760b6f65eb41beb1224c7203dea9.jpg?imageMogr2/thumbnail/235x314/background/d2hpdGU=/position/center/quality/60')",
+                                backgroundSize: "cover"
+                            }}></div>
                             <div className="userInfo">
-                                <p>{baseInfo.phone}</p>
-                                <p>{baseInfo.name}</p>
+                                <p>{baseInfo.username}</p>
+                                <p>{baseInfo.kouling}</p>
                             </div>
                             <Button type="danger" onClick={this.exitLogin} className="exit">退出</Button>
                         </div>
@@ -138,8 +140,8 @@ class MySelf extends React.Component {
                     </div>
 
                     <ul className='address'>
-                     <li><Link to="/self/orders?type=1"><Icon type='pay-circle-o'/><span>待付款</span>
-                     </Link></li>
+                        <li><Link to="/self/orders?type=1"><Icon type='pay-circle-o'/><span>待付款</span>
+                        </Link></li>
                         <li><Link to="self/orders?type=2"><Icon type='shop'/><span>待发货</span>
                         </Link>
                         </li>
@@ -212,7 +214,7 @@ class MySelf extends React.Component {
                             return <li className='li_box' key={index}>
                                 <div className='none' style={{
                                     background: `url(${pic}) no-repeat`,
-                                    backgroundSize:"cover"
+                                    backgroundSize: "cover"
                                 }}>
                                     <div className='cover_f' id='link'>
                                         <span>找相似</span>

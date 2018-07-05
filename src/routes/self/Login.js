@@ -60,6 +60,7 @@ class Login extends React.Component {
                 });
                 if (result.code === 0) {
                     this.props.isLogin(0);
+                    this.props.queryBaseInfo();
                     this.props.history.push("/self");
                     return;
                 }
