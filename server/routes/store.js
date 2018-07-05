@@ -9,14 +9,13 @@ const express = require('express'),
 //增加购物车信息
 route.post('/add', (req, res) => {
     let personID = req.session.personID, //登录用户得ID
-        {
-            courseID
-        } = req.body; //传递的课程ID，我就是要把这个课程加入购物车
-    courseID = parseFloat(courseID);
+        {id
+        } = req.body;
+   let shopId = parseFloat(id);
 
     //=>已经登录状态下，把信息直接存储到JSON中即可(用户在其他平台上登录，也可以从JSON中获取数据，实现信息跨平台)
     if (personID) {
-        utils.ADD_STORE(req, res, courseID).then(() => {
+        utils.ADD_STORE(req, res, shopId).then(() => {
             res.send({
                 code: 0,
                 msg: 'OK!'
@@ -32,7 +31,7 @@ route.post('/add', (req, res) => {
 
     //=>未登录状态下，临时存储到SESSION中，等到下一次登录成功，直接把信息存储到文件中（并且清空SESSION中的信息）
     !req.session.storeList ? req.session.storeList = [] : null;
-    req.session.storeList.push(courseID);
+    req.session.storeList.push(id);
     res.send({
         code: 0,
         msg: 'OK!'
@@ -42,13 +41,13 @@ route.post('/add', (req, res) => {
 route.post('/remove', (req, res) => {
     let personID = req.session.personID,
         {
-            courseID = 0
+            id = 0
         } = req.body;
-    courseID = parseFloat(courseID);
+    id = parseFloat(id);
 
     if (personID) {
         req.storeDATA = req.storeDATA.filter(item => {
-            return !(parseFloat(item.courseID) === courseID && parseFloat(item.personID) === personID);
+            return !(parseFloat(item.id) === id && parseFloat(item.personID) === personID);
         });
         writeFile(STORE_PATH, req.storeDATA).then(() => {
             res.send({
@@ -66,7 +65,7 @@ route.post('/remove', (req, res) => {
 
     !req.session.storeList ? req.session.storeList = [] : null;
     req.session.storeList = req.session.storeList.filter(item => {
-        return parseFloat(item) !== courseID;
+        return parseFloat(item) !== id;
     });
     res.send({
         code: 0,
@@ -83,7 +82,7 @@ route.get('/info', (req, res) => {
         req.storeDATA.forEach(item => {
             if (parseFloat(item.personID) === personID && parseFloat(item.state) === state) {
                 storeList.push({
-                    courseID: parseFloat(item.courseID),
+                    id: parseFloat(item.id),
                     storeID: parseFloat(item.id)
                 });
             }
@@ -93,7 +92,7 @@ route.get('/info', (req, res) => {
             storeList = req.session.storeList || [];
             storeList = storeList.map(item => {
                 return {
-                    courseID: item,
+                    id: item,
                     storeID: 0
                 }
             })
@@ -112,10 +111,10 @@ route.get('/info', (req, res) => {
     //根据上面查找的课程ID(storeList)，
     let data = [];
     storeList.forEach(({
-        courseID,
+        id,
         storeID
     } = {}) => {
-        let item = req.courseDATA.find(item => parseFloat(item.id) === courseID);
+        let item = req.courseDATA.find(item => parseFloat(item.id) === id);
         item.storeID = storeID;
         data.push(item);
     });

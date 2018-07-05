@@ -14,7 +14,7 @@ html {
 /*NAV-TOP*/
 
 .fgg_Box {
-  span{
+  span {
     display: inline;
   }
   .headerNavBox {
@@ -92,16 +92,38 @@ html {
       }
     }
 
-
-
-
     .login-button {
-
+      position: relative;
       height: 2rem;
       background: url("../images/person-bg.png") no-repeat;
       background-size: cover;
       text-align: center;
       line-height: 2rem;
+      .userPic {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background: lightgray;
+        float: left;
+        margin-top: .5rem;
+        margin-left: .5rem;
+      }
+      .userInfo {
+        width: 3.5rem;
+        margin-left: 1.5rem;
+        padding-top: .5rem;
+        p {
+          height: .5rem;
+          line-height: .5rem;
+          font-size: .3rem;
+        }
+      }
+      button.exit {
+        position: absolute;
+        width: 1.5rem;
+        right: .2rem;
+        top: .5rem;
+      }
     }
     .shop {
       background: #f0f0f0;
@@ -159,7 +181,9 @@ html {
         li {
           text-align: center;
           flex: 1;
-
+          a {
+            color: #333
+          }
           i {
             display: block;
             font-size: .4rem;
@@ -354,4 +378,253 @@ html {
       text-align: center;
     }
   }
+}
+
+.ordersBox {
+  background: #f4f4f4;
+
+
+  .topNavBox{
+    height: 1rem;
+    line-height: 1rem;
+    background: linear-gradient(#323232,#414141);
+    width: 100%;
+    color: #fff;
+    i{
+      width: 20%;
+      font-size: .5rem;
+      text-align: center;
+    }
+    span{
+      font-size: .35rem;
+      font-weight: bold;
+      display: inline-block;
+      width: 50%;
+      box-sizing: border-box;
+      text-align: center;
+    }
+  }
+
+  .order-tip {
+    display: block;
+    width: 100%;
+    background: #fff;
+    position: relative;
+    color: #222;
+    padding: .2rem .5rem;
+    i {
+      position: absolute;
+      right: .2rem;
+      top: 50%;
+      margin-top: -.2rem;
+      color: #999;
+      font-size: .4rem;
+    }
+    .tipTitle {
+      display: block;
+      height: .5rem;
+      line-height: .5rem;
+      color: #000;
+    }
+    .tipContent {
+      display: block;
+      height: .5rem;
+      line-height: .5rem;
+      color: #777;
+    }
+
+  }
+
+  .order-nav {
+    height: 1rem;
+    line-height: 1rem;
+    background: #fff;
+    margin: .5rem 0 0 0;
+    border: 1px solid #e0e0e0;
+    li {
+      float: left;
+      display: block;
+      width: 25%;
+      text-align: center;
+      &.active {
+        a {
+          color: #000;
+        }
+      }
+      a {
+        color: #999;
+
+      }
+    }
+  }
+
+  .order-container {
+    padding-bottom: 1rem;
+    .no-order {
+      padding-top: .5rem;
+      padding-bottom: 1rem;
+      width: 100%;
+      text-align: center;
+      background: #fff;
+      .icon{
+        width: 100%;
+        text-align: center;
+        i{
+          font-size:2rem;
+          color: #999;
+        }
+      }
+      &>span{
+        display: block;
+        height: 1rem;
+        line-height: 1rem;
+        margin: .35rem 0 .9rem;
+      }
+      &>a{
+       margin: 0 auto;
+        display: block;
+        background: #444;
+        color: #fff;
+        height: 1rem;
+        width: 5rem;
+        line-height: 1rem;
+        font-size: .4rem;
+        border-radius: 10px;
+      }
+    }
+
+    .hasOrders{
+      .order{
+        position: relative;
+        display: block;
+        background: #fff;
+        margin: .35rem 0;
+        border: 1px solid #e0e0e0;
+        .header{
+          height: 1rem;
+          line-height: 1rem;
+          border-bottom: 1px solid #e0e0e0;
+          padding: 0 .35rem;
+          font-size: .3rem;
+          color: #333;
+          span{
+            position: absolute;
+            right: .3rem;
+            top: 0;
+            color: #333;
+          }
+        }
+
+        .order-goods{
+          .order-good{
+            position: relative;
+            margin: .3rem 0;
+            margin-left: .4rem;
+            height: 2rem;
+            .orderPic{
+              float: left;
+             height: 100%;
+              img{
+                display: block;
+                width: 100%;
+                height: 100%;
+              }
+            }
+
+            .deps{
+              margin-left: 1.6rem;
+              p{
+                height: .5rem;
+                line-height: .5rem;
+                &.name{
+                  max-width: 70%;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  font-size: .3rem;
+                  color: #000;
+                }
+                &:nth-of-type(2){
+                  width: 70%;
+                  font-size: .25rem;
+                  color: #999;
+                  span{
+                    margin-right: .3rem;
+                  }
+                }
+              }
+              .wrap{
+                font-size: .3rem;
+                position: absolute;
+                top: 0;
+                right: .3rem;
+                text-align: right;
+                span{
+                  display: block;
+                  &:nth-of-type(1){
+                    color: red;
+                  }
+                  &:nth-of-type(2){
+                    text-decoration: line-through;
+                  }
+                }
+
+              }
+
+            }
+
+          }
+        }
+
+        .footer{
+          height: 1rem;
+          border-top: 1px solid #e0e0e0;
+          text-align: right;
+          font-size: .35rem;
+          line-height: 1rem;
+          &>span{
+              color: #e01;
+            margin-right: .1rem;
+          }
+        }
+
+        .order-opt{
+          height: 1rem;
+          line-height: 1rem;
+          background: #fff;
+          width: 100%;
+          border-top: 1px solid #e0e0e0;
+          text-align: right;
+          padding-right: .5rem;
+          a{
+            display: inline-block;
+            line-height: .6rem;
+            width: 1.6rem;
+            height: .6rem;
+            border-radius: 3px;
+            box-sizing: border-box;
+            font-size: .3rem;
+            text-align: center;
+            margin-left: .2rem;
+            border: 1px solid #e0e0e0;
+            &:nth-of-type(1){
+              background: #fff;
+              border: #000 1px solid;
+              color: #000;
+            }
+            &:nth-of-type(2){
+              background: #d0021b;
+              color: #fff;
+              border: none;
+            }
+          }
+        }
+
+
+      }
+    }
+
+
+
+  }
+
 }

@@ -1,46 +1,79 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Carousel} from "antd";
+import {Carousel, Modal, Button, Radio,Icon,message} from "antd";
 import "../static/css/details.less";
-import {Icon} from "antd";
 import Qs from 'qs';
 import queryCommodity from '../api/commodity';
+import Top from './wander/Top'
+import Box from '../component/Box';
+import {addCar}  from '../api/car';
+import action from '../store/action/index'
+import {isLogin} from '../api/person'
+
+const RadioButton = Radio.Button;
+const RadioGroup = Radio.Group;
+
+message.config({
+    top:250,
+    duration:1
+});
 
 class Details extends React.Component {
-    constructor(props,context) {
-        super(props,context);
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            data: [],
+            id: '',
+            visible: false,
+            car:false
+        };
     }
 
-    async  componentWillMount(){
-        let str =this.props.location.search.slice(1),
-        obj=Qs.parse(str);
-        this.data=await queryCommodity(obj.id);
-        console.log(this.data);
+    async componentWillMount(){
+        let res = await isLogin();
+        if (res.code===0){
+            this.props.isLogin(0);
+        }
     }
+
+    async componentDidMount() {
+        let str = this.props.location.search.slice(1),
+            obj = Qs.parse(str);
+        let res = await queryCommodity(obj.id);
+        if (res.code === 0) {
+            this.setState({
+                id: obj.id,
+                data: res.data
+            })
+        }
+    }
+
     render() {
-        console.log(this.data);
+        let data = this.state.data;
+        if (data.length === 0) return "";
+        let {pic, name, price, hot, shop, shopDesc,id} = data;
         return <section className="detailsBox">
+            <Top/>
             <div className="priceSwipe">
                 <Carousel autoplay>
-                    <div className={"imgBox"}><img src="//img11.static.yhbimg.com/goodsimg/2017/10/16/13/019095f124f0be54825f5edf15b7d02e98.jpg?imageMogr2/thumbnail/450x600/background/d2hpdGU=/position/center/quality/60" alt=""/></div>
-                    <div className={"imgBox"}><img src="//img11.static.yhbimg.com/goodsimg/2017/10/16/13/019095f124f0be54825f5edf15b7d02e98.jpg?imageMogr2/thumbnail/450x600/background/d2hpdGU=/position/center/quality/60" alt=""/></div>
-                    <div className={"imgBox"}><img src="//img11.static.yhbimg.com/goodsimg/2017/10/16/13/019095f124f0be54825f5edf15b7d02e98.jpg?imageMogr2/thumbnail/450x600/background/d2hpdGU=/position/center/quality/60" alt=""/></div>
-                    <div className={"imgBox"}><img src="//img11.static.yhbimg.com/goodsimg/2017/10/16/13/019095f124f0be54825f5edf15b7d02e98.jpg?imageMogr2/thumbnail/450x600/background/d2hpdGU=/position/center/quality/60" alt=""/></div>
+                    {pic.map((item, index) => {
+                        return <div className={"imgBox"} key={index}><img src={item} alt=""/></div>
+                    })}
                 </Carousel>
             </div>
             <div className="goods-name">
-                <h1 className="name">I LOVE CHOC YOHO！GIRL联名款  织带拼接短款卫衣   粉色</h1>
+                <h1 className="name">{name}</h1>
             </div>
             <div className="goods-price">
-                <h2 className="price">¥999.00</h2>
+                <h2 className="price">¥{price}</h2>
             </div>
 
             <div className="goods-discount">
                 <h2 className="first-item">
                     <span>促</span>
-                    【嗨购一夏】满￥599享7.5折
+                    {hot}
                 </h2>
-                <Icon type="down" />
+                <Icon type="down"/>
             </div>
 
             <div className="evaluate">
@@ -71,28 +104,70 @@ class Details extends React.Component {
 
             <div className="enter-store">
                 <a href="#" className="store-logo"><img
-                    src="//img11.static.yhbimg.com/yhb-img01/2017/11/07/16/01328c3cc9ae18b7c5454144a378692e77.jpg?imageMogr2/thumbnail/47x47/extent/47x47/background/d2hpdGU=/position/center/quality/80" alt=""/></a>
-                <a href="#" className="store-name">I LOVE CHOC</a>
+                    src={shop} alt=""/></a>
+                <a href="#" className="store-name">{shopDesc}</a>
                 <a href="#" className="store-link">进入店铺<Icon type="right"/></a>
             </div>
 
             <div className="cart-bar">
                 <a href="#" className="myCart">
-                    <Icon type="shopping-cart" />
+                    <Icon type="shopping-cart"/>
                     购物车
                 </a>
                 <a href="#" className="store">
-                    <Icon type="shop" />
+                    <Icon type="shop"/>
                     店铺
                 </a>
                 <a href="javascript:;" className="like">
                     <Icon type="heart" onClick={this.like}/>
                     收藏
                 </a>
-                <a href="#" className="addtoCart" >
-                    加入购物车
-                </a>
+                {/*<a href="javascript:;" className="addtoCart" onClick={this.click} >*/}
+                {/*加入购物车*/}
+                {/*</a>*/}
+                <Button type="" onClick={this.showModal} className='addtoCart'>加入购物车</Button>
+                <Modal
+                    title="登录提示"
+                    visible={this.state.visible}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                >
+                    <p>是否前去登录</p>
+                </Modal>
             </div>
+
+            {this.state.car?<div className='fix'><div className='shopping'>
+                <div className='shopTop'>
+                    <div className='shopImg'>
+                        <img src={pic[0]} alt=""/>
+                    </div>
+                    <div className='shopFz'>
+                        <p>￥{price.toFixed(2)}</p>
+                        <p>请选择颜色、尺码</p>
+                    </div>
+                    <a href='javascript:;' className='click' onClick={this.exit}>x</a>
+                </div>
+                <div className='title'>
+                    <div className='small'><span className='name'>颜色</span><RadioGroup defaultValue="a">
+                        <RadioButton value="a">白色</RadioButton>
+                        <RadioButton value="b">黑色</RadioButton>
+                        <RadioButton value="c">灰色</RadioButton>
+                    </RadioGroup></div>
+                    <div className='small'><span className='name'>尺码</span>
+                        <RadioGroup defaultValue="a">
+                            <RadioButton value="a">X</RadioButton>
+                            <RadioButton value="b">XLL</RadioButton>
+                            <RadioButton value="c">XLLL</RadioButton>
+                        </RadioGroup></div>
+                    <div className='small'><span className='name'>数量</span>
+                        <Box min='0' max='100' />
+                    </div>
+                </div>
+                <div className='bottom'>
+                    <a href="javascript:;">立即购买</a>
+                    <a href="javascript:;" onClick={this.addToCar.bind(this,id)}>加入购物车</a>
+                </div>
+            </div></div>:""}
 
         </section>
     }
@@ -106,7 +181,51 @@ class Details extends React.Component {
         ev.target.style.color = "#000";
     };
 
+    showModal = () => {
+        if (!this.props.isLogin) {
+            this.setState({
+                visible: true,
+            });
+            return;
+        }
+        this.setState({
+            car:true
+        });
+        document.documentElement.style.overflow='hidden';
+    };
+
+    handleOk = (e) => {
+        this.setState({
+            visible: false,
+        });
+        this.props.history.push('/login');
+    };
+
+    handleCancel = (e) => {
+        this.setState({
+            visible: false,
+        });
+    };
+
+     addToCar=async id=>{
+       let res =await addCar(id);
+         if (res.code===0){
+           message.success('成功加入购物车');
+           this.setState({
+               car:false
+           });
+           document.documentElement.style.overflow='';
+       }
+     };
+
+     exit=ev=>{
+        this.setState({
+            car:false
+        });
+        document.documentElement.style.overflow='';
+     }
+
 }
 
-export default connect()(Details);
+export default connect(state => ({...state.person}),action.person)(Details);
 

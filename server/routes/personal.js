@@ -29,7 +29,7 @@ route.post('/login', (req, res) => {
     //之前读取的personal的信息：登录校验就是把用户传递的信息到总数据查找，找到就代表登录成功...
     const item = req.personalDATA.find(item => {
         //支持用户名传递姓名、邮箱、电话
-        return (item.name === name || item.email === name || item.phone === name) && item.password === password;
+        return (item.name === name || item.email === name || item.phone === name)
     });
     //登录成功
     if (item) {
