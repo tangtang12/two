@@ -1,17 +1,14 @@
 import React from 'react';
 import {Row, Col, Icon} from 'antd';
 import {withRouter} from 'react-router-dom';
-
+import Body from './Body'
 
 class Header extends React.Component {
     constructor(props, context) {
         super(props, context);
     }
-
-
     render() {
         return <div className='sortHeaderBox'>
-
                 <Row>
                     <Col span={4}>
                         <a onClick={() => {
@@ -24,18 +21,9 @@ class Header extends React.Component {
                         <h3>任你挑</h3>
                     </Col>
                 </Row>
-
-            <div className='sortListBox'>
-                <ul>
-                    <li><a href="javascript:;" >默认</a></li>
-                    <li><a href="javascript:;" >新品</a></li>
-                    <li><a href="javascript:;" >人气</a></li>
-                    <li><a href="javascript:;" >价格</a> <Icon type='caret-up'/><Icon type='caret-down'/></li>
-                </ul>
-            </div>
+            <Body/>
         </div>
 
     }
 }
-
 export default withRouter(Header)

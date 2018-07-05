@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import '../static/css/sort.less'
 import Hearder  from  './sort/Header'
+
 class Sort extends React.Component {
     constructor(props, context) {
         super(props, context)
@@ -10,6 +11,7 @@ class Sort extends React.Component {
     render() {
         return <section className='sortBox'>
          <Hearder/>
+
         </section>
     }
 }

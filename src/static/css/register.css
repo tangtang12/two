@@ -23,11 +23,13 @@
 }
 .registerBox .reg-form {
   margin-top: 1rem;
+  position: relative;
 }
 .registerBox .reg-form .form-group {
   border-bottom: 1px solid  #e0e0e0;
   height: .6rem;
   margin-bottom: .5rem;
+  position: relative;
 }
 .registerBox .reg-form .mobile i.anticon-phone {
   font-size: .3rem;
@@ -55,6 +57,8 @@
 }
 .registerBox .reg-form .getCode button {
   height: .6rem;
+  position: absolute;
+  top: -0.1rem;
 }
 .registerBox .reg-form .password {
   position: relative;
@@ -87,13 +91,34 @@
   font-size: .35rem;
 }
 .registerBox .reg-form .protocol {
-  margin-top: .15rem;
+  margin-top: 1.3rem;
+  position: relative;
 }
-.registerBox .reg-form .protocol i.anticon-check-circle-o {
+.registerBox .reg-form .protocol i {
   font-size: .3rem;
+  border: .02rem solid #cccccc;
+  border-radius: .3rem;
+  width: .3rem;
+  height: .3rem;
+  display: inline-block;
+  margin-right: .1rem;
 }
 .registerBox .reg-form .protocol a {
   color: red;
   text-decoration: underline;
+}
+.registerBox .phoneBox {
+  position: fixed;
+  left: 50%;
+  top: 20%;
+  transform: translateX(-50%);
+  width: 5rem;
+}
+.zhuce {
+  width: 80%;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 /*# sourceMappingURL=register.css.map */
