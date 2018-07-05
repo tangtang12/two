@@ -3,11 +3,9 @@ import {connect} from "react-redux";
 import {Icon, Button} from "antd"
 import '../static/css/self.less'
 import Transition from 'react-transition-group/Transition';
-import {withRouter, Link,Switch,Route} from 'react-router-dom'
+import {withRouter, Link, Switch, Route} from 'react-router-dom'
 import action from "../store/action/index"
 import {query} from '../api/home'
-
-
 
 
 const duration = 300,
@@ -23,6 +21,7 @@ const duration = 300,
 class Self extends React.Component {
     constructor(props, context) {
         super(props, context);
+        console.log(this.props);
         this.state = {
             in: false,
             data: []
@@ -75,10 +74,14 @@ class Self extends React.Component {
                                 ...transitionStyles[state],
                                 display: this.state.in ? 'block' : 'none'
                             }} onClick={this.handleClick}>
-                                <li type="header"><Icon type='home'/><span>首页</span></li>
-                                <li type="list"><Icon type='layout'/><span>分类</span></li>
-                                <li type="cart"><Icon type='shopping-cart'/><span>购物车</span></li>
-                                <li type="personal"><Icon type='user'/><span>我的</span></li>
+                                <li type="header" onClick={ev => this.props.history.push("/home")}><Icon
+                                    type='home'/><span>首页</span></li>
+                                <li type="list" onClick={ev => this.props.history.push("/classify")}><Icon
+                                    type='layout'/><span>分类</span></li>
+                                <li type="cart" onClick={ev => this.props.history.push("/cart")}><Icon
+                                    type='shopping-cart'/><span>购物车</span></li>
+                                <li type="personal" onClick={ev => this.props.history.push("/self")}><Icon type='user'/><span>我的</span>
+                                </li>
                             </ul>;
                         }}
                     </Transition>
@@ -198,12 +201,12 @@ class Self extends React.Component {
                 <div className='shop2 clearfix'>
                     <Link to='/login'>
                         <span className='shop-1'>登录</span>
-                        <b>|</b>
-                        <span className='shop-1-1'>注册</span></Link>
-
-                {/*    <Link to="self"> <span className='top'>回到顶部</span>
+                        <b>|</b></Link>
+                    <Link to='/register'> <span className='shop-1-1'>注册</span></Link>
+                    <a href="javascript:;" onClick={ev => document.documentElement.scrollTop = 0}> <span
+                        className='top'>回到顶部</span>
                         <b>^</b>
-                    </Link>*/}
+                    </a>
                 </div>
                 <div className='foo-f'>
 
@@ -224,8 +227,8 @@ class Self extends React.Component {
         }
     };
 
-    back=()=>{
-        let {history}=this.props;
+    back = () => {
+        let {history} = this.props;
         history.go(-1)
     }
 }
