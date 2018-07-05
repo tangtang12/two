@@ -62,6 +62,7 @@ class MySelf extends React.Component {
     render() {
         let baseInfo = this.props.baseInfo;
         let {isLogin} = this.state;
+        console.log(baseInfo);
         if (!baseInfo && isLogin) return "";
         let {data} = this.state;
         return <div>
@@ -113,8 +114,8 @@ class MySelf extends React.Component {
                                 backgroundSize: "cover"
                             }}></div>
                             <div className="userInfo">
-                                <p>{baseInfo.username}</p>
-                                <p>{baseInfo.kouling}</p>
+                                <p>{baseInfo ? baseInfo.username : ""}</p>
+                                <p>{baseInfo ? baseInfo.kouling : ""}</p>
                             </div>
                             <Button type="danger" onClick={this.exitLogin} className="exit">退出</Button>
                         </div>
@@ -247,7 +248,7 @@ class MySelf extends React.Component {
                 </div>
 
             </header>
-        </div>
+        </div>;
     }
 
 
