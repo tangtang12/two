@@ -53,13 +53,12 @@ class Orders extends React.Component {
         }
 
     render() {
-
         let orderNav = ["全部", "待付款", "待发货", "待收货"];
          let data = this.state.data;
         return <div className="ordersBox">
             <div className="topNavBox">
                 <Icon type="left" onClick={() => {
-                    this.props.history.go(-1);
+                    this.props.history.push("/self");
                 }}/>
                 <span>我的订单</span>
             </div>
@@ -100,30 +99,30 @@ class Orders extends React.Component {
                     <span>您还没有下订单</span>
                     <a href="#">随便逛逛</a>
                 </div>:   ( data.map((item,index)=>{
-                   let {data,pic,desc,hot,moods,price,shopDesc,shop,name} = item;
+                   let {data,pic,desc,hot,moods,price,shopDesc,shop,name,oldPrice,size,color} = item;
                     return  <div className="hasOrders" key={index}>
            
                     <div className="order">
                       <header className="header">
-                          订单编号:d645548788w544w
-                          <span className="order-status">待付款</span>
+                          订单编号:{shopDesc+"AdSwFE"+shopDesc}
+                          <span className="order-status">{this.type===1?"待付款":(this.type===2?"待发货":"待购买")}</span>
                       </header>
                       <section className="order-goods">
                           <div className="order-good">
                               <div className="orderPic">
                                   <img
-                                      src={shop}
+                                      src={pic[0]}
                                       alt={desc}/>
                               </div>
                               <div className="deps">
                                   <p className="name">{name}}</p>
                                   <p className="">
-                                      <span className="color">颜色:黑色</span>
-                                      <span className="size">尺码:M</span>
+                                      <span className="color">颜色:{color}}</span>
+                                      <span className="size">尺码:{size}</span>
                                   </p>
                                   <p className="wrap">
                                       <span className="price">¥{price}}</span>
-                                      <span className="del-price">¥581</span>
+                                      <span className="del-price">¥{oldPrice}}</span>
                                   </p>
                               </div>
                           </div>
@@ -131,10 +130,12 @@ class Orders extends React.Component {
                       <footer className="footer">
                           共一件商品&nbsp;实付: <span className="sum-cost">¥{price}}</span>
                       </footer>
-                      <div className="order-opt">
-                          <a href="javascript:;">取消订单</a>
-                          <a href="javascript:;">立即付款</a>
-                      </div>
+                      
+                      {this.type!==2 && this.type!==3?<div className="order-opt">
+                      <a href="javascript:;">取消订单</a>
+                          <a href="javascript:;">立即付款</a></div>:""}
+                          {/* <a href="javascript:;">取消订单</a>
+                          <a href="javascript:;">立即付款</a> */}
                   </div>
                   </div>
                 }))}

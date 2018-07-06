@@ -1,14 +1,18 @@
 import React from "react";
-import {getCart} from "../api/car";
+import {
+    getCart
+} from "../api/car";
 import action from "../store/action/index";
-import {connect} from "react-redux";
+import {
+    connect
+} from "react-redux";
 
 
 class Box extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            num: this.props.num?this.props.num:1
+            num: this.props.num ? this.props.num : 1
         }
 
     }
@@ -18,10 +22,13 @@ class Box extends React.Component {
             num: (this.state.num == this.props.max) ? this.props.max : (this.state.num + 1)
         });
     }
-    componentDidUpdate(){
-        if (this.num===this.state.num) return;
-        this.num=this.state.num;
-        this.props.modify?this.props.modify({id:this.props.id,num:this.state.num}):"";
+    componentDidUpdate() {
+        if (this.num === this.state.num) return;
+        this.num = this.state.num;
+        this.props.modify ? this.props.modify({
+            id: this.props.id,
+            num: this.state.num
+        }) : "";
         this.props.getNum(this.num)
     }
     decrease() {
@@ -44,5 +51,4 @@ class Box extends React.Component {
 }
 
 
-export default connect(state=>state.cart,action.cart)(Box)
-
+export default connect(state => state.cart, action.cart)(Box)
