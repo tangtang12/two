@@ -116,12 +116,14 @@ route.get('/info', (req, res) => {
                 let {shopId} =item;
                 shopId=parseFloat(shopId);
                 req.courseDATA.forEach(cur=>{
+
                     let {id,pic,name,price,oldPrice}=cur;
                     if (shopId===parseFloat(id)){
                         data.push({...item,pic:pic[0],name,price,oldPrice})
                     }
                 })
             });
+
             res.send({
                 code: 0,
                 msg: 'OK!',
@@ -176,22 +178,22 @@ route.post('/pay', (req, res) => {
     //支付把某个商品的state修改为1(改完后也是需要把原始JSON文件替换的)
     let personID = req.session.personID,
         isUpdate = false;
-        if (personID) {
-            req.storeDATA = req.storeDATA.map(item => {
-                if (item.isCheck) {
-                    return {
-                        ...item,
-                        state: 1
-                    };
-                }
-                return item;
-            });
-        } else {
-            res.send({
-                code: 1,
-                msg: 'NO LOGIN!'
-            });
-        }
+    if (personID) {
+        req.storeDATA = req.storeDATA.map(item => {
+            if (item.isCheck) {
+                return {
+                    ...item,
+                    state: 1
+                };
+            }
+            return item;
+        });
+    } else {
+        res.send({
+            code: 1,
+            msg: 'NO LOGIN!'
+        });
+    }
     isUpdate = true;
     if (isUpdate) {
         writeFile(STORE_PATH, req.storeDATA).then(() => {
