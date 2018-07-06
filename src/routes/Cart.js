@@ -15,7 +15,7 @@ class Cart extends React.Component {
         super(props, context);
         this.state = {
             data: null,
-            collapsed: true,
+            collapsed: [],
             results:{},
             CartData:{}
         };
@@ -30,9 +30,6 @@ class Cart extends React.Component {
                 data: result.data,results,CartData
             });
         }
-
-        this.setState({})
-
     }
 
     render() {
