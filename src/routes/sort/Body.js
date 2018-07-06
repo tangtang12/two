@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import {Icon} from 'antd';
-import queryCommodity from '../../api/commodity'
+import queryCommodity from '../../api/commodity';
+import {Link} from "react-router-dom";
 
 class Body extends React.Component {
     constructor(props, context) {
@@ -36,12 +37,14 @@ class Body extends React.Component {
             </div>
             <div className='imgListBox'>
                 {data.map((item, index) => {
-                    let {pic, desc, price, name, data, moods} = item;
-                    return <div className='step' key={index}><img
+                    let {pic, desc, price, name, data, moods,id} = item;
+                    return <div className='step' key={index}>
+                  <Link to={`details?id=${id}`}>  <img
                         src={pic[0]}
                         alt="desc"/>
                         <p>{name}</p>
                         <span>¥：{price}</span>
+                        </Link>
                     </div>
                 })}
             </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
-
+import {Link} from "react-router-dom";
+ 
 class HotBrand extends React.Component {
     constructor(props,context) {
         super(props,context);
@@ -19,27 +20,27 @@ class HotBrand extends React.Component {
                 {hotBrands.map((item, index) => {
                     if (index === hotBrands.length-1) return;
                     return  <li className="brand" key={index}>
-                        <a href="#">
+                        <Link href="#" to={"/sort"}>
                             <div className="brand-logo">
                                 <img src={item.pic} alt={item.desc}/>
                             </div>
-                        </a>
+                        </Link>
                     </li>
                 })}
                 <li className="last" >
-                    <a href="#">
+                    <Link href="#" to={"/sort"}>
                         <div className="brand-logo">
                             <img src={lastPic} alt={lastDesc}/>
                         </div>
-                    </a>
+                    </Link>
                 </li>
             </ul>
             <div className="newPeople">
-                <a href="#">
+                <Link href="#" to={"/sort"}>
                     <img
                         src="//img11.static.yhbimg.com/yhb-img01/2018/05/22/15/01e7fb2dece0d8b1d40653fbb1b3776648.jpg?imageView2/3/w/640/h/200/q/60"
                         alt="new people"/>
-                </a>
+                </Link>
             </div>
         </div>;
     }

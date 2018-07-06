@@ -132,7 +132,7 @@ class MySelf extends React.Component {
                     </div>
 
                     <div className='order'>
-                        <Link to='/self/orders'>
+                        <Link to='/self/orders?type=0'>
                             <span className='shop-1'>我的订单</span>
                             <span className='shop-1-1'>全部订单</span>
                             <Icon className='shop-1-T' type='right'/>

@@ -10,6 +10,7 @@ import CarTap from '../component/CarTap';
 import {addCar} from '../api/car';
 import action from '../store/action/index'
 import {isLogin} from '../api/person'
+import {Link} from "react-router-dom";
 
 
 class Details extends React.Component {
@@ -106,16 +107,16 @@ class Details extends React.Component {
             </div>
 
             <div className="cart-bar">
-                <a href="#" className="myCart">
+                <Link to={"/cart"} href="#" className="myCart">
                     <Icon type="shopping-cart"/>
                     购物车
-                </a>
+                </Link>
                 <a href="#" className="store">
                     <Icon type="shop"/>
                     店铺
                 </a>
                 <a href="javascript:;" className="like">
-                    <Icon type="heart" onClick={this.like}/>
+                    <Icon type="heart" onClick={this.like}/>    
                     收藏
                 </a>
                 {/*<a href="javascript:;" className="addtoCart" onClick={this.click} >*/}

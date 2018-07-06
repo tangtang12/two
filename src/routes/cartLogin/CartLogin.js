@@ -5,6 +5,9 @@ import action from "../../store/action";
 import "./CartLogin.less"
 import {Icon, Button} from 'antd'
 import Box from "../../component/Box";
+
+import Pay from "../../component/Pay"
+
 import {getCart, modify, selected} from "../../api/car";
 
 class Collapsed extends React.Component {
@@ -58,6 +61,7 @@ class Collapsed extends React.Component {
 }
 
 
+
 class CartLogin extends React.Component {
     constructor(props) {
         super(props);
@@ -99,6 +103,13 @@ class CartLogin extends React.Component {
                         <Link to='/classify'>去凑单 &gt; </Link>
                     </div>
                     <div className='shop_f'>
+                        <div className="select-f" onClick={() => {
+                            this.setState({
+                                selected: !this.state.selected
+                            });
+                        }}>
+                            <Icon type={this.state.selected ? "check" : ""}/>
+                        </div>
                         <img src={pic[0]}/>
                         <Collapsed num={num} name={name} desc={desc} price={price} id={id}
                                    collapsed={this.props.collapsed} size={size} color={color} isCheck={isCheck} />
@@ -152,7 +163,7 @@ class CartLogin extends React.Component {
                         color: '#999',
                         paddingLeft: ".1rem"
                     }}>不含运费</p>
-                    <Button>结算</Button>
+                   <Pay text="结算"/>
                 </div>
             </div> : <div className="login-all" style={{zIndex: "99999"}}>
                 <div>
