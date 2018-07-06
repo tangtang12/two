@@ -3,23 +3,72 @@ import {Link, withRouter} from "react-router-dom"
 import {connect} from "react-redux";
 import action from "../../store/action";
 import "./CartLogin.less"
-import {
-    Icon,
-    Button
-} from 'antd'
+import {Icon, Button} from 'antd'
 import Box from "../../component/Box";
-import {
-    getCart,modify
-} from "../../api/car"
+
 import Pay from "../../component/Pay"
+
+import {getCart, modify, selected} from "../../api/car";
+
+class Collapsed extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            num: this.props.num,
+            isCheck:this.props.isCheck
+        }
+        console.log(this.props.isCheck);
+    }
+
+    //修改商品数量
+    modify = async obj => {
+        let res = await modify(obj);
+    };
+
+    getNum = (num) => {
+        this.setState({
+            num
+        })
+    };
+    render() {
+        let {num, desc, name, price, id, size, color, isCheck} = this.props;
+        return <a href="javascript:;">
+
+            <div className="select-f" onClick={this.selectedOne.bind(this, {id, num, size, color})}>
+                {this.state.isCheck ? <Icon type='check'/> : ''}
+            </div>
+            <div className='tip-shop-2'>x{
+                this.state.num
+            }</div>
+            {this.props.collapsed ? <ul className="desc-shop-f">
+                    <li className='tip-shop-1'>{name}</li>
+                    <li className='tip-shop-3'>{desc}</li>
+                    <li className='tip-shop-4'>￥{price}</li>
+                </ul> :
+                <div><Box id={id} modify={this.modify} num={this.state.num} max={10} min={0} getNum={this.getNum} />
+
+                </div>}
+        </a>
+    }
+    selectedOne = async (obj) => {
+        let res = await selected(obj)
+        if (res.code===0){
+            this.setState({
+                isCheck:res.isCheck
+            })
+        }
+    }
+}
+
+
 
 class CartLogin extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             selected: false,
-            collapsed: this.props.collapsed,
-            getInfo: []
+            selectedTwo: [],
+            getInfo: [],
         };
     }
 
@@ -29,47 +78,26 @@ class CartLogin extends React.Component {
             this.setState({
                 getInfo: getInfo.data
             })
+
         }
 
     }
 
-
-    //修改商品数量
-    modify = async obj => {
-        let res = await modify(obj);
-        console.log(res);
-    };
-
-
-
-    componentWillReceiveProps() {
-        this.setState({
-            collapsed: this.props.collapsed
-        })
-
-    }
-
-
-
     render() {
-        let a = 'check';
+
         return (<div className='cartLogin-f'>
             {/*减运费*/}
             <div className='tip-plus'>
                 <span>再买￥<p>555</p>即可免运费</span>
                 <Link to='/classify'>去凑单 &gt; </Link>
             </div>
-            {/*摆设*/}
-
             {/*商品信息和价格*/}
-
             {this.state.getInfo.length === 0 ? "" : this.state.getInfo.map((item, index) => {
-
-                let {hot, pic=[], name, num, desc, price,id} = item;
+                console.log(item.isCheck);
+                let {hot, pic = [], name, num, desc, price, id, size, color, isCheck} = item;
 
                 return (<div key={index}>
                     <div className='tip-plus tip2'>
-
                         <Icon type="tag-o"/>
                         <span>{hot}</span>
                         <Link to='/classify'>去凑单 &gt; </Link>
@@ -82,23 +110,13 @@ class CartLogin extends React.Component {
                         }}>
                             <Icon type={this.state.selected ? "check" : ""}/>
                         </div>
-
                         <img src={pic[0]}/>
-
-                        <a herf="javascript:;">
-                            {this.props.collapsed ? <ul className="desc-shop-f">
-                                <li className='tip-shop-1'>{name}</li>
-                                <li className='tip-shop-2'>x{num}</li>
-                                <li className='tip-shop-3'>{desc}</li>
-                                <li className='tip-shop-4'>￥{price}</li>
-                            </ul> : <div><Box id={id}  modify={this.modify} num={num} max={10} min={0} />
-                                </div>}
-                        </a>
+                        <Collapsed num={num} name={name} desc={desc} price={price} id={id}
+                                   collapsed={this.props.collapsed} size={size} color={color} isCheck={isCheck} />
                     </div>
                 </div>)
             })}
-
-            {this.state.collapsed ?
+            {this.props.collapsed ?
                 <div>
                     <div className='message-f'>
                         <Icon type="pay-circle-o"/>
@@ -112,30 +130,31 @@ class CartLogin extends React.Component {
                         lineHeight: ".9rem",
                         background: "#fff"
                     }}>
-                <span style={{margin: ".2rem", fontSize: ".3rem"}}>
-                总计
+                        <span style={{margin: ".2rem", fontSize: ".3rem"}}>
+                            总计
                 </span>
                     </div>
                 </div> : ""}
 
-
             {/*底部*/}
 
-            {this.state.collapsed ? <div className="login-all" style={{zIndex: "99999"}}>
+            {this.props.collapsed ? <div className="login-all" style={{zIndex: "99999"}}>
                 <div>
                     <a href="javascript:;" style={{
                         color: '#000',
                         border: '.02rem solid',
-                        borderRadius: "50%",
                         width: '.4rem',
                         height: '.4rem',
                         position: 'absolute',
                         top: '.2rem',
                         left: '.2rem',
-                        background: "#000",
-                        opacity: ".6"
+                        borderRadius: '50%'
 
-                    }}><Icon type='check'/></a>
+                    }} onClick={this.selectedAll}>
+
+                        {this.state.selected ? <Icon type='check'/> : ''}
+
+                    </a>
                     <p>全选</p>
                     <span className='span-f'>总计：￥sss.00（n件）</span>
                     <p style={{
@@ -151,16 +170,16 @@ class CartLogin extends React.Component {
                     <a href="javascript:;" style={{
                         color: '#000',
                         border: '.02rem solid',
-                        borderRadius: "50%",
                         width: '.4rem',
                         height: '.4rem',
                         position: 'absolute',
                         top: '.2rem',
                         left: '.2rem',
-                        background: "#000",
-                        opacity: ".6"
+                        borderRadius: '50%'
+                    }} onClick={this.selectedAll}>
+                        {this.state.selected ? <Icon type='check'/> : ''}
 
-                    }}><Icon type='check'/></a>
+                    </a>
                     <p>全选</p>
                     <Button style={{
                         background: "#555",
@@ -178,13 +197,9 @@ class CartLogin extends React.Component {
 
         </div>)
     }
-    numData=(num)=>{
-        this.setState({
-            getInfo:num
-        })
-    }
+
 
 
 }
 
-export default withRouter (connect(...state=>state.cart,action.cart)(CartLogin));
+export default withRouter(connect(...state => state.cart, action.cart)(CartLogin));
