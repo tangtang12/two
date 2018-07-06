@@ -1,21 +1,35 @@
-import React, {Component} from 'react';
-import {Link, withRouter} from "react-router-dom"
-import {connect} from "react-redux";
+import React, {
+    Component
+} from 'react';
+import {
+    Link,
+    withRouter
+} from "react-router-dom"
+import {
+    connect
+} from "react-redux";
 import action from "../../store/action";
 import "./CartLogin.less"
-import {Icon, Button} from 'antd'
+import {
+    Icon,
+    Button
+} from 'antd'
 import Box from "../../component/Box";
 
 import Pay from "../../component/Pay"
 
-import {getCart, modify, selected} from "../../api/car";
+import {
+    getCart,
+    modify,
+    selected
+} from "../../api/car";
 
 class Collapsed extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             num: this.props.num,
-            isCheck:this.props.isCheck
+            isCheck: this.props.isCheck
         }
         console.log(this.props.isCheck);
     }
@@ -31,7 +45,16 @@ class Collapsed extends React.Component {
         })
     };
     render() {
-        let {num, desc, name, price, id, size, color, isCheck} = this.props;
+        let {
+            num,
+            desc,
+            name,
+            price,
+            id,
+            size,
+            color,
+            isCheck
+        } = this.props;
         return <a href="javascript:;">
 
             <div className="select-f" onClick={this.selectedOne.bind(this, {id, num, size, color})}>
@@ -45,17 +68,21 @@ class Collapsed extends React.Component {
                     <li className='tip-shop-3'>{desc}</li>
                     <li className='tip-shop-4'>￥{price}</li>
                 </ul> :
-                <div><Box id={id} modify={this.modify} num={this.state.num} max={10} min={0} getNum={this.getNum} />
-
+                <div>
+                <Box id={id} modify={this.modify} num={this.state.num} max={10} min={0} getNum={this.getNum||''} />
+                <span href="javascript:;" className='colorSize'>颜色：{color}&nbsp;&nbsp;尺码:{size}</span>
                 </div>}
+
+                
         </a>
     }
     selectedOne = async (obj) => {
         let res = await selected(obj)
-        if (res.code===0){
+        if (res.code === 0) {
             this.setState({
-                isCheck:res.isCheck
+                isCheck: res.isCheck
             })
+            console.log(res);
         }
     }
 }

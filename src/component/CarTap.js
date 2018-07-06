@@ -64,7 +64,7 @@ class CarTap extends React.Component {
                             <RadioButton value="XLLL">XLLL</RadioButton>
                         </RadioGroup></div>
                     <div className='small'><span className='name'>数量</span>
-                        <Box min='0' max='100'/>
+                        <Box min='0' max='10' getNum={this.getNum} />
                     </div>
                 </div>
                 {type?<div className='bottom'>
@@ -77,12 +77,19 @@ class CarTap extends React.Component {
             </div>
         </div>
     }
+
+    getNum = (num) => {
+        this.setState({
+            num
+        })
+    };
+
     addToCar = async id => {
-        if (!this.state.color||!this.state.size){
+        if (!this.state.color || !this.state.size) {
             message.config({
                 top: 300,
                 duration: 1,
-                getContainer:()=>document.querySelectorAll('.shopping')[0]
+                getContainer: () => document.querySelectorAll('.shopping')[0]
             });
             message.success('请选择样式和尺寸');
             return;
@@ -91,14 +98,14 @@ class CarTap extends React.Component {
         let res = await addCar({
             id,
             num,
-            color:this.state.color,
-            size:this.state.size
+            color: this.state.color,
+            size: this.state.size
         });
         if (res.code === 0) {
             message.config({
                 top: 250,
                 duration: 1,
-                getContainer:() => document.body
+                getContainer: () => document.body
             });
             message.success('成功加入购物车');
             this.props.data.open();
