@@ -11,7 +11,7 @@ import Box from "../../component/Box";
 import {
     getCart,modify
 } from "../../api/car"
-
+import Pay from "../../component/Pay"
 
 class CartLogin extends React.Component {
     constructor(props) {
@@ -79,9 +79,8 @@ class CartLogin extends React.Component {
                             this.setState({
                                 selected: !this.state.selected
                             });
-                            let a = this.state.selected ? "check" : "";
                         }}>
-                            <Icon type={a}/>
+                            <Icon type={this.state.selected ? "check" : ""}/>
                         </div>
 
                         <img src={pic[0]}/>
@@ -145,7 +144,7 @@ class CartLogin extends React.Component {
                         color: '#999',
                         paddingLeft: ".1rem"
                     }}>不含运费</p>
-                    <Button>结算</Button>
+                   <Pay text="结算"/>
                 </div>
             </div> : <div className="login-all" style={{zIndex: "99999"}}>
                 <div>

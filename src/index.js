@@ -34,7 +34,6 @@ render(<Provider store={store}>
                 {/*公共插件*/}
                 <main className="container">
                     <Switch>
-                        <Route path="/" exact component={Home}/>
                         <Route path="/home" component={Home}/>
                         <Route path="/classify" component={Classify}/>
                         <Route path="/wander" component={Wander}/>
@@ -46,7 +45,7 @@ render(<Provider store={store}>
                         <Route path='/other' component={Other}/>
                         <Route path="/register" component={Register}/>
                         <Route path="/sort" component={Sort}/>
-                        <Redirect to="/"/>
+                        <Redirect to="/home" />
                     </Switch>
                 </main>
                 {/*公共插件*/}
