@@ -5,13 +5,13 @@ import action from "../../store/action";
 import "./CartLogin.less"
 import {
     Icon,
-    Button
+    Button,
+    
 } from 'antd'
 import Box from "../../component/Box";
 import {
     getCart, modify
 } from "../../api/car"
-
 
 class CartLogin extends React.Component {
     constructor(props) {
@@ -82,6 +82,8 @@ class CartLogin extends React.Component {
                                 <li className='tip-shop-3'>{desc}</li>
                                 <li className='tip-shop-4'>￥{price}</li>
                             </ul> : <div><Box id={id} modify={this.modify} num={num}  max={10} min={0} getNum={this.getNum}/>
+                                        <input type='text' />
+
                             </div>}
                         </a>
                     </div>
