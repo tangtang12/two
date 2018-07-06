@@ -111,10 +111,22 @@ route.get('/info', (req, res) => {
     if (personID) {
         //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
         if (state === 3) {
+            let data=[];
+            req.storeDATA.forEach(item=>{
+                let {shopId} =item;
+                shopId=parseFloat(shopId);
+                req.courseDATA.forEach(cur=>{
+                    let {id,pic,}=cur;
+                    if (shopId===parseFloat(id)){
+                        data.push({...item,pic:pic[0]})
+                    }
+                })
+            });
+
             res.send({
                 code: 0,
                 msg: 'OK!',
-                data: req.storeDATA
+                data
             });
             return;
         }
@@ -125,7 +137,8 @@ route.get('/info', (req, res) => {
                     storeID: parseFloat(item.shopId),
                     num: parseFloat(item.num),
                     color:item.color,
-                    size:item.size
+                    size:item.size,
+                    isCheck:item.isCheck
                 });
             }
         });
@@ -142,14 +155,15 @@ route.get('/info', (req, res) => {
     }
     //根据上面查找的课程ID(storeList)，
     let data = [];
-    storeList.forEach(({id,storeID, num,size,color} = {}) => {
+    storeList.forEach(({id,storeID, num,size,color,isCheck} = {}) => {
         let item = req.courseDATA.find(item => parseFloat(item.id) === parseFloat(storeID));
         /*item.id = storeID;*/
         data.push({
             ...item,
             num,
             size,
-            color
+            color,
+            isCheck
         });
     });
     res.send({
@@ -163,22 +177,22 @@ route.post('/pay', (req, res) => {
     //支付把某个商品的state修改为1(改完后也是需要把原始JSON文件替换的)
     let personID = req.session.personID,
         isUpdate = false;
-        if (personID) {
-            req.storeDATA = req.storeDATA.map(item => {
-                if (item.isCheck) {
-                    return {
-                        ...item,
-                        state: 1
-                    };
-                }
-                return item;
-            });
-        } else {
-            res.send({
-                code: 1,
-                msg: 'NO LOGIN!'
-            });
-        }
+    if (personID) {
+        req.storeDATA = req.storeDATA.map(item => {
+            if (item.isCheck) {
+                return {
+                    ...item,
+                    state: 1
+                };
+            }
+            return item;
+        });
+    } else {
+        res.send({
+            code: 1,
+            msg: 'NO LOGIN!'
+        });
+    }
     isUpdate = true;
     if (isUpdate) {
         writeFile(STORE_PATH, req.storeDATA).then(() => {
@@ -246,12 +260,13 @@ route.post('/check', (req, res) => {
             return parseFloat(item.shopId)===shopId&&parseFloat(item.num)===parseFloat(num)&&personID===parseFloat(item.personID)&&item.color===color&&item.size===size
         });
         if (result){
-            result.isCheck = !result.isCheck;let allCheck = req.storeDATA.every(item => item.isCheck),
+            result.isCheck = !result.isCheck;
+            let allCheck = req.storeDATA.every(item => item.isCheck),
                 allPrice = 0,
                 nums = 0;
             req.storeDATA.forEach(item => {
                 if (item.isCheck) {
-                    num += parseFloat(item.num);
+                    nums += parseFloat(item.num);
                     allPrice += parseFloat(item.num) * parseFloat(item.price);
                 }
             });

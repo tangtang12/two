@@ -1,3 +1,1 @@
-
-[{"id":1,"shopId":1,"num":9,"size":"XLLL","color":"灰色","personID":13,"state":0,"time":1530866349694,"isCheck":false}]
-
+[{"id":1,"shopId":1,"num":1,"size":"XLLL","color":"黑色","personID":12,"state":0,"time":1530869417045,"isCheck":false},{"id":2,"shopId":1,"num":1,"size":"XLLL","color":"灰色","personID":12,"state":0,"time":1530869419632,"isCheck":false},{"id":3,"shopId":1,"num":2,"size":"XLLL","color":"灰色","personID":13,"state":0,"time":1530869629076,"isCheck":true},{"id":4,"shopId":2,"num":3,"size":"XLLL","color":"灰色","personID":13,"state":0,"time":1530870560556,"isCheck":true},{"id":5,"shopId":2,"num":1,"size":"XLL","color":"黑色","personID":12,"state":0,"time":1530871063105,"isCheck":false}]
