@@ -15,35 +15,36 @@ import {
     Button
 } from 'antd'
 import Box from "../../component/Box";
-
 import Pay from "../../component/Pay"
 
-import {
-    getCart,
-    modify,
-    selected
-} from "../../api/car";
+import {getCart, modify, selected, remove} from "../../api/car";
+
+
 
 class Collapsed extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             num: this.props.num,
-            isCheck: this.props.isCheck
+
+            isCheck: this.props.isCheck,
+
         }
-        console.log(this.props.isCheck);
     }
 
     //修改商品数量
     modify = async obj => {
         let res = await modify(obj);
+
     };
 
     getNum = (num) => {
         this.setState({
             num
         })
+
     };
+
     render() {
         let {
             num,
@@ -68,34 +69,46 @@ class Collapsed extends React.Component {
                     <li className='tip-shop-3'>{desc}</li>
                     <li className='tip-shop-4'>￥{price}</li>
                 </ul> :
+
                 <div>
                 <Box id={id} modify={this.modify} num={this.state.num} max={10} min={0} getNum={this.getNum||''} />
                 <span href="javascript:;" className='colorSize'>颜色：{color}&nbsp;&nbsp;尺码:{size}</span>
+
                 </div>}
 
                 
         </a>
     }
+
     selectedOne = async (obj) => {
-        let res = await selected(obj)
+
+        let res = await selected(obj);
+        console.log(res);
         if (res.code === 0) {
             this.setState({
-                isCheck: res.isCheck
+                isCheck: res.isCheck,
             })
-            console.log(res);
+            let {allPrice,nums,allCheck}=res
+            this.props.getCheckAll({allPrice,nums,allCheck})
+
         }
+
+
     }
 }
-
 
 
 class CartLogin extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: false,
+            selected: [],
             selectedTwo: [],
             getInfo: [],
+            checkAll: [],
+            price: 0,
+            num: 0,
+            checkAll:false
         };
     }
 
@@ -120,7 +133,6 @@ class CartLogin extends React.Component {
             </div>
             {/*商品信息和价格*/}
             {this.state.getInfo.length === 0 ? "" : this.state.getInfo.map((item, index) => {
-                console.log(item.isCheck);
                 let {hot, pic = [], name, num, desc, price, id, size, color, isCheck} = item;
 
                 return (<div key={index}>
@@ -139,7 +151,8 @@ class CartLogin extends React.Component {
                         </div>
                         <img src={pic[0]}/>
                         <Collapsed num={num} name={name} desc={desc} price={price} id={id}
-                                   collapsed={this.props.collapsed} size={size} color={color} isCheck={isCheck} />
+                                   collapsed={this.props.collapsed} size={size} color={color} isCheck={isCheck}
+                                   getCheckAll={this.getCheckAll}/>
                     </div>
                 </div>)
             })}
@@ -177,20 +190,20 @@ class CartLogin extends React.Component {
                         left: '.2rem',
                         borderRadius: '50%'
 
-                    }} onClick={this.selectedAll}>
+                    }} onClick={this.getcheckAll}>
 
-                        {this.state.selected ? <Icon type='check'/> : ''}
+                        {this.state.checkAll ? <Icon type='check'/> : ''}
 
                     </a>
                     <p>全选</p>
-                    <span className='span-f'>总计：￥sss.00（n件）</span>
+                    <span className='span-f'>总计：￥{parseFloat(this.state.price)}.00（{parseFloat(this.state.num)}件）</span>
                     <p style={{
                         left: '4rem',
                         fontSize: '.27rem',
                         color: '#999',
                         paddingLeft: ".1rem"
                     }}>不含运费</p>
-                   <Pay text="结算"/>
+                    <Pay text="结算"/>
                 </div>
             </div> : <div className="login-all" style={{zIndex: "99999"}}>
                 <div>
@@ -203,8 +216,8 @@ class CartLogin extends React.Component {
                         top: '.2rem',
                         left: '.2rem',
                         borderRadius: '50%'
-                    }} onClick={this.selectedAll}>
-                        {this.state.selected ? <Icon type='check'/> : ''}
+                    }} onClick={this.getCheckAll}>
+                        {this.state.checkAll ? <Icon type='check'/> : ''}
 
                     </a>
                     <p>全选</p>
@@ -214,7 +227,7 @@ class CartLogin extends React.Component {
                     }}>移入
                         <br/>
                         收藏夹</Button>
-                    <Button>删除</Button>
+                    <Button onClick={this.removes}>删除</Button>
                 </div>
             </div>
 
@@ -225,6 +238,20 @@ class CartLogin extends React.Component {
         </div>)
     }
 
+    removes = async () => {
+        let resul = await remove();
+        if (resul.code === 0) {
+            window.location.reload()
+        }
+    }
+
+    getCheckAll = ({allPrice,nums,allCheck}) => {
+        this.setState({
+            price: allPrice,
+            num: nums,
+            checkAll: allCheck
+        })
+    }
 
 
 }

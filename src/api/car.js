@@ -19,7 +19,7 @@ export function modify(obj) {
 
 //移除购物车的内容
 export function remove() {
-	return axios.get('/store/remove')
+	return axios.post('/store/remove')
 }
 
 //支付购物车的内容
