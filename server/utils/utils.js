@@ -18,7 +18,7 @@ function ADD_STORE(req, res, {shopId, num, size, color}) {
         size,
         color,
         personID,
-        state: 0, //默认是不支付的
+        state: -1, //默认是不支付的
         time: new Date().getTime(),
         isCheck:false
     };

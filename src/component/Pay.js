@@ -1,6 +1,7 @@
 import React from "react";
 import { Modal, Button } from 'antd';
 import {withRouter} from "react-router-dom"
+import {pay ,Unpay}from "../api/car.js"
 
 class App extends React.Component {
   state = {
@@ -21,20 +22,32 @@ class App extends React.Component {
       ModalText: '正在结算中...',
       confirmLoading: true,
     });
-    setTimeout(() => {
+    setTimeout(async () => {
       this.setState({
         visible: false,
         confirmLoading: false,
       });
-      this.props.history.push("/sort");
-    }, 2000);
+
+     let res=await pay();
+        if (res.code===0){
+            window.location.reload()
+        }
+
+
+
+    }, 1000);
   }
 
-  handleCancel = () => {
-    console.log('未结算');
+  handleCancel =async () => {
+
     this.setState({
       visible: false,
     });
+      let resu=await Unpay();
+      if (resu.code===0){
+          window.location.reload()
+      }
+
   }
 
   render() {

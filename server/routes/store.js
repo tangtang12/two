@@ -105,20 +105,21 @@ route.post('/remove', (req, res) => {
 });
 //获取加入购物车的商品或者支付成功的或者支付失败的 为3获取所有的购物信息
 route.get('/info', (req, res) => {
-    let state = parseFloat(req.query.state) || 0,
+    let state = parseFloat(req.query.state) || -1,
         personID = req.session.personID,
         storeList = [];
     if (personID) {
         //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
-        if (state === 3) {
+        if (state === 0) {
             let data=[];
             req.storeDATA.forEach(item=>{
                 let {shopId} =item;
                 shopId=parseFloat(shopId);
                 req.courseDATA.forEach(cur=>{
-                    let {id,pic,}=cur;
+
+                    let {id,pic,name,price,oldPrice}=cur;
                     if (shopId===parseFloat(id)){
-                        data.push({...item,pic:pic[0]})
+                        data.push({...item,pic:pic[0],name,price,oldPrice})
                     }
                 })
             });
@@ -174,7 +175,7 @@ route.get('/info', (req, res) => {
 });
 //支付
 route.post('/pay', (req, res) => {
-    //支付把某个商品的state修改为1(改完后也是需要把原始JSON文件替换的)
+    //支付把某个商品的state修改为2(改完后也是需要把原始JSON文件替换的)
     let personID = req.session.personID,
         isUpdate = false;
     if (personID) {
@@ -182,7 +183,8 @@ route.post('/pay', (req, res) => {
             if (item.isCheck) {
                 return {
                     ...item,
-                    state: 1
+                    state: 2,
+                    isCheck:false
                 };
             }
             return item;
@@ -218,7 +220,8 @@ route.post('/unpay', (req, res) => {
             if (item.isCheck) {
                 return {
                     ...item,
-                    state: 2
+                    state: 1,
+                    isCheck:false
                 };
             }
             return item;
@@ -244,7 +247,7 @@ route.post('/unpay', (req, res) => {
         });
     }
 });
-//点击选中，默认为不选，如果都选中，全选按钮为true，同时把价格返回去
+
 route.post('/check', (req, res) => {
     let personID = req.session.personID, //登录用户得ID
         {
