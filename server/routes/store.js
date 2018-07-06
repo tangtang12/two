@@ -11,7 +11,9 @@ route.post('/add', (req, res) => {
     let personID = req.session.personID, //登录用户得ID
         {
             id,
-            num
+            num,
+            size,
+            color
         } = req.body;
     let shopId = parseFloat(id);
     num = parseFloat(num);
@@ -20,7 +22,9 @@ route.post('/add', (req, res) => {
     if (personID) {
         utils.ADD_STORE(req, res, {
             shopId,
-            num
+            num,
+            size,
+            color
         }).then(() => {
             res.send({
                 code: 0,
@@ -43,7 +47,6 @@ route.post('/add', (req, res) => {
         msg: 'OK!'
     });
 });
-
 //修改添加到购物车的数量，state为0
 route.post('/modify', (req, res) => {
     let personID = req.session.personID, //登录用户得ID
@@ -55,7 +58,7 @@ route.post('/modify', (req, res) => {
     if (personID) {
         //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
         req.storeDATA.forEach(item => {
-            if (parseFloat(item.personID) === personID && parseFloat(item.state) === 0 && parseFloat(item.shopId)  === shopId) {
+            if (parseFloat(item.personID) === personID && parseFloat(item.state) === 0 && parseFloat(item.shopId) === shopId) {
                 item.num = parseFloat(num);
             }
         });
@@ -71,20 +74,31 @@ route.post('/modify', (req, res) => {
         });
     }
 });
-
-
-
+//移除购物车的商品
 route.post('/remove', (req, res) => {
     let personID = req.session.personID,
         {
-            id = 0
-        } = req.body;
-    id = parseFloat(id);
-
-    if (personID) {
-        req.storeDATA = req.storeDATA.filter(item => {
-            return !(parseFloat(item.id) === id && parseFloat(item.personID) === personID);
-        });
+            data
+        } = req.body,
+        isUpdate = false;//标识代表未完成
+    data = JSON.parse(data);
+    data.forEach(cur => {
+        let {id, num, size, color} = cur;
+        let shopId = parseFloat(id);
+        num = parseFloat(num);
+        if (personID) {
+            req.storeDATA = req.storeDATA.filter(item => {
+                return !(parseFloat(item.shopId) === shopId && parseFloat(item.personID) === personID && item.size === size && item.color === color && item.num === num);
+            });
+        } else {
+            res.send({
+                code: 1,
+                msg: '用户未登录!'
+            });
+        }
+    });
+    isUpdate = true;
+    if (isUpdate) {
         writeFile(STORE_PATH, req.storeDATA).then(() => {
             res.send({
                 code: 0,
@@ -96,25 +110,23 @@ route.post('/remove', (req, res) => {
                 msg: 'NO!'
             });
         });
-        return;
     }
-
-    !req.session.storeList ? req.session.storeList = [] : null;
-    req.session.storeList = req.session.storeList.filter(item => {
-        return parseFloat(item) !== id;
-    });
-    res.send({
-        code: 0,
-        msg: 'OK!'
-    });
 });
-
+//获取加入购物车的商品或者支付成功的或者支付失败的 为3获取所有的购物信息
 route.get('/info', (req, res) => {
     let state = parseFloat(req.query.state) || 0,
         personID = req.session.personID,
         storeList = [];
     if (personID) {
         //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
+        if (state===3){
+            res.send({
+                code: 0,
+                msg: 'OK!',
+                data:req.storeDATA
+            });
+            return;
+        }
         req.storeDATA.forEach(item => {
             if (parseFloat(item.personID) === personID && parseFloat(item.state) === state) {
                 storeList.push({
@@ -138,13 +150,14 @@ route.get('/info', (req, res) => {
     //根据上面查找的课程ID(storeList)，
     let data = [];
     storeList.forEach(({
-        id,
-        storeID,
-        num
-    } = {}) => {
+                           id,
+                           storeID,
+                           num
+                       } = {}) => {
         let item = req.courseDATA.find(item => parseFloat(item.id) === parseFloat(storeID));
         /*item.id = storeID;*/
-        data.push({ ...item,
+        data.push({
+            ...item,
             num
         });
     });
@@ -154,48 +167,138 @@ route.get('/info', (req, res) => {
         data
     });
 });
-
+//支付
 route.post('/pay', (req, res) => {
-    //支付把某个课程的state修改为1(改完后也是需要把原始JSON文件替换的)
+    //支付把某个商品的state修改为1(改完后也是需要把原始JSON文件替换的)
     let {
-        storeID
-    } = req.body,
+            data
+        } = req.body,
         personID = req.session.personID,
         isUpdate = false;
-    if (personID) {
-        req.storeDATA = req.storeDATA.map(item => {
-            if (parseFloat(item.id) === parseFloat(storeID) && parseFloat(item.personID) === parseFloat(personID)) {
-                isUpdate = true;
-                return { ...item,
-                    state: 1
-                };
-            }
-            return item;
-        });
-        if (isUpdate) {
-            writeFile(STORE_PATH, req.storeDATA).then(() => {
-                res.send({
-                    code: 0,
-                    msg: 'OK!'
-                });
-            }).catch(() => {
-                res.send({
-                    code: 1,
-                    msg: 'NO!'
-                });
+    data = JSON.parse(data);
+    data.forEach(cur => {
+        let {id, num, size, color} = cur,
+            shopId = parseFloat(id);
+        num = parseFloat(num);
+        if (personID) {
+            req.storeDATA = req.storeDATA.map(item => {
+                if (parseFloat(item.id) === shopId && parseFloat(item.personID) === parseFloat(personID) && item.num === num && item.color === color && item.size === size) {
+                    return {
+                        ...item,
+                        state: 1
+                    };
+                }
+                return item;
             });
         } else {
             res.send({
                 code: 1,
-                msg: 'NO!'
+                msg: 'NO LOGIN!'
             });
         }
-        return;
-    }
-    res.send({
-        code: 1,
-        msg: 'NO LOGIN!'
     });
+    isUpdate = true;
+    if (isUpdate) {
+        writeFile(STORE_PATH, req.storeDATA).then(() => {
+            res.send({
+                code: 0,
+                msg: 'OK!'
+            });
+        }).catch(() => {
+            res.send({
+                code: 1,
+                msg: 'NO!'
+            });
+        });
+    }
 });
+//未支付成功 state为2 进入待支付列表
+route.post('/unpay', (req, res) => {
+    //支付把某个商品的state修改为1(改完后也是需要把原始JSON文件替换的)
+    let {
+            data
+        } = req.body,
+        personID = req.session.personID,
+        isUpdate = false;
+    data = JSON.parse(data);
+    data.forEach(cur => {
+        let {id, num, size, color} = cur,
+            shopId = parseFloat(id);
+        num = parseFloat(num);
+        if (personID) {
+            req.storeDATA = req.storeDATA.map(item => {
+                if (parseFloat(item.id) === shopId && parseFloat(item.personID) === parseFloat(personID) && item.num === num && item.color === color && item.size === size) {
+                    return {
+                        ...item,
+                        state: 2
+                    };
+                }
+                return item;
+            });
+        } else {
+            res.send({
+                code: 1,
+                msg: 'NO LOGIN!'
+            });
+        }
+    });
+    isUpdate = true;
+    if (isUpdate) {
+        writeFile(STORE_PATH, req.storeDATA).then(() => {
+            res.send({
+                code: 0,
+                msg: 'OK!'
+            });
+        }).catch(() => {
+            res.send({
+                code: 1,
+                msg: 'NO!'
+            });
+        });
+    }
+});
+//点击选中，默认为不选，如果都选中，全选按钮为true，同时把价格返回去
+route.post('/check', (req, res) => {
+    let personID = req.session.personID, //登录用户得ID
+        {
+            id,
+            num,
+            color,
+            size
+        } = req.body;
+    let shopId = parseFloat(id);
+    if (personID) {
+        //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
+        let result = req.storeDATA.find(item => {
+            if (parseFloat(item.personID) === personID && parseFloat(item.state) === 0 && parseFloat(item.shopId) === shopId && item.num === num && item.color === color && item.size === size) {
+                item.num = parseFloat(num);
+            }
+        });
+        result.isCheck = !result.isCheck;
+        writeFile(STORE_PATH, req.storeDATA);
+        let allCheck = req.storeDATA.every(item => item.isCheck),
+            allPrice = 0,
+            nums=0;
+        req.storeDATA.forEach(item => {
+            if (item.isCheck){
+                num += parseFloat(item.num);
+                allPrice += parseFloat(item.num)*parseFloat(item.price);
+            }
+        });
 
+        res.send({
+            code: 0,
+            msg: 'OK!',
+            isChecked: result.isCheck,
+            allCheck,
+            allPrice,
+            nums
+        });
+    } else {
+        res.send({
+            code: 1,
+            msg: '未找到'
+        });
+    }
+});
 module.exports = route;

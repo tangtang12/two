@@ -12,7 +12,6 @@ import action from '../store/action/index'
 import {isLogin} from '../api/person'
 
 
-
 class Details extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -147,8 +146,9 @@ class Details extends React.Component {
         ev.target.style.color = "#000";
     };
 
-    showModal = () => {
-        if (!this.props.isLogin) {
+    showModal =async () => {
+        let res = await isLogin();
+        if (res.code!==0) {
             this.setState({
                 visible: true,
             });

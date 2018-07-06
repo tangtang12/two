@@ -38,6 +38,7 @@ class CartLogin extends React.Component {
     //修改商品数量
     modify = async obj => {
         let res = await modify(obj);
+        console.log(res);
     };
 
 
@@ -52,8 +53,7 @@ class CartLogin extends React.Component {
             {/*商品信息和价格*/}
 
             {this.state.getInfo.length === 0 ? "" : this.state.getInfo.map((item, index) => {
-
-                let {hot, pic, name, num, desc, price, id} = item;
+                let {hot, pic=[], name, num, desc, price,id} = item;
 
                 return (<div key={index}>
                     <div className='tip-plus tip2'>
