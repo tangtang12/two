@@ -79,7 +79,7 @@ class CartLogin extends React.Component {
 
             {this.state.getInfo.length === 0 ? "" : this.state.getInfo.map((item, index) => {
                 let { hot, pic = [], name, num, desc, price, id,size, color,isCheck} = item;
-                
+
                 return (<div key={index}>
                     <div className='tip-plus tip2'>
 
@@ -88,6 +88,7 @@ class CartLogin extends React.Component {
                         <Link to='/classify'>去凑单 &gt; </Link>
                     </div>
                     <div className='shop_f'>
+
                         <div className="select-f" onClick={this.selectedOne.bind(this,{id,num,size,color})}>
                             {isCheck? <Icon type='check' /> : ''}
                         </div>
@@ -181,33 +182,12 @@ class CartLogin extends React.Component {
         </div>)
     }
 
-    selectedAll = ev => {
-
-
-        if (ev.target.tagName === 'A' || "I") {
-            this.setState({
-                selected: !this.state.selected
-            });
-        }
-    };
 
 
     selectedOne = async (obj) => {
         let res = await selected(obj)
         console.log(res)
-
-
-        // if (ev.target.tagName === "DIV" || "I") {
-        //     this.setState({
-        //         selectedTwo: !this.state.selectedTwo
-        //     });
-
-        // }
-
-
-    };
-
-
+    }
 }
 
 export default withRouter(connect(...state => state.cart, action.cart)(CartLogin));
