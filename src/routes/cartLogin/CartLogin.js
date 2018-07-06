@@ -81,7 +81,7 @@ class CartLogin extends React.Component {
             {/*商品信息和价格*/}
 
             {this.state.getInfo.length === 0 ? "" : this.state.getInfo.map((item, index) => {
-                let {hot, pic = [], name, num, desc, price, id} = item;
+                let {hot, pic = [], name, num, desc, price, id,isCheck} = item;
 
                 return (<div key={index}>
                     <div className='tip-plus tip2'>
@@ -92,7 +92,7 @@ class CartLogin extends React.Component {
                     </div>
                     <div className='shop_f'>
                         <div className="select-f" onClick={this.selectedOne}>
-                            {this.state.selected || this.state.selectedTwo ? <Icon type='check'/> : ''}
+                            {isCheck?<Icon type='check'/> : ''}
                         </div>
 
                         <img src={pic[0]}/>
@@ -187,7 +187,6 @@ class CartLogin extends React.Component {
     }
 
     selectedAll = ev => {
-        console.log(ev.target.tagName);
 
         if (ev.target.tagName === 'A' || "I") {
             this.setState({
@@ -199,12 +198,12 @@ class CartLogin extends React.Component {
 
     selectedOne = ev => {
 
-        if (ev.target.tagName === "DIV" || "I") {
-            this.setState({
-                selectedTwo: !this.state.selectedTwo
-            });
-
-        }
+        // if (ev.target.tagName === "DIV" || "I") {
+        //     this.setState({
+        //         selectedTwo: !this.state.selectedTwo
+        //     });
+        //
+        // }
 
 
     };
