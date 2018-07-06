@@ -12,7 +12,6 @@ class Self extends React.Component {
         super(props, context);
     }
 
-    
     render() {
         return <div className='fgg_Box'>
             <Switch>
