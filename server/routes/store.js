@@ -77,26 +77,17 @@ route.post('/modify', (req, res) => {
 //移除购物车的商品
 route.post('/remove', (req, res) => {
     let personID = req.session.personID,
-        {
-            data
-        } = req.body,
         isUpdate = false;//标识代表未完成
-    data = JSON.parse(data);
-    data.forEach(cur => {
-        let {id, num, size, color} = cur;
-        let shopId = parseFloat(id);
-        num = parseFloat(num);
-        if (personID) {
-            req.storeDATA = req.storeDATA.filter(item => {
-                return !(parseFloat(item.shopId) === shopId && parseFloat(item.personID) === personID && item.size === size && item.color === color && item.num === num);
-            });
-        } else {
-            res.send({
-                code: 1,
-                msg: '用户未登录!'
-            });
-        }
-    });
+    if (personID) {
+        req.storeDATA = req.storeDATA.filter(item => {
+            return !item.isCheck;
+        });
+    } else {
+        res.send({
+            code: 1,
+            msg: '用户未登录!'
+        });
+    }
     isUpdate = true;
     if (isUpdate) {
         writeFile(STORE_PATH, req.storeDATA).then(() => {
@@ -119,11 +110,11 @@ route.get('/info', (req, res) => {
         storeList = [];
     if (personID) {
         //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
-        if (state===3){
+        if (state === 3) {
             res.send({
                 code: 0,
                 msg: 'OK!',
-                data:req.storeDATA
+                data: req.storeDATA
             });
             return;
         }
@@ -170,19 +161,11 @@ route.get('/info', (req, res) => {
 //支付
 route.post('/pay', (req, res) => {
     //支付把某个商品的state修改为1(改完后也是需要把原始JSON文件替换的)
-    let {
-            data
-        } = req.body,
-        personID = req.session.personID,
+    let personID = req.session.personID,
         isUpdate = false;
-    data = JSON.parse(data);
-    data.forEach(cur => {
-        let {id, num, size, color} = cur,
-            shopId = parseFloat(id);
-        num = parseFloat(num);
         if (personID) {
             req.storeDATA = req.storeDATA.map(item => {
-                if (parseFloat(item.id) === shopId && parseFloat(item.personID) === parseFloat(personID) && item.num === num && item.color === color && item.size === size) {
+                if (item.isCheck) {
                     return {
                         ...item,
                         state: 1
@@ -196,7 +179,6 @@ route.post('/pay', (req, res) => {
                 msg: 'NO LOGIN!'
             });
         }
-    });
     isUpdate = true;
     if (isUpdate) {
         writeFile(STORE_PATH, req.storeDATA).then(() => {
@@ -215,33 +197,24 @@ route.post('/pay', (req, res) => {
 //未支付成功 state为2 进入待支付列表
 route.post('/unpay', (req, res) => {
     //支付把某个商品的state修改为1(改完后也是需要把原始JSON文件替换的)
-    let {
-            data
-        } = req.body,
-        personID = req.session.personID,
+    let personID = req.session.personID,
         isUpdate = false;
-    data = JSON.parse(data);
-    data.forEach(cur => {
-        let {id, num, size, color} = cur,
-            shopId = parseFloat(id);
-        num = parseFloat(num);
-        if (personID) {
-            req.storeDATA = req.storeDATA.map(item => {
-                if (parseFloat(item.id) === shopId && parseFloat(item.personID) === parseFloat(personID) && item.num === num && item.color === color && item.size === size) {
-                    return {
-                        ...item,
-                        state: 2
-                    };
-                }
-                return item;
-            });
-        } else {
-            res.send({
-                code: 1,
-                msg: 'NO LOGIN!'
-            });
-        }
-    });
+    if (personID) {
+        req.storeDATA = req.storeDATA.map(item => {
+            if (item.isCheck) {
+                return {
+                    ...item,
+                    state: 2
+                };
+            }
+            return item;
+        });
+    } else {
+        res.send({
+            code: 1,
+            msg: 'NO LOGIN!'
+        });
+    }
     isUpdate = true;
     if (isUpdate) {
         writeFile(STORE_PATH, req.storeDATA).then(() => {
@@ -278,11 +251,11 @@ route.post('/check', (req, res) => {
         writeFile(STORE_PATH, req.storeDATA);
         let allCheck = req.storeDATA.every(item => item.isCheck),
             allPrice = 0,
-            nums=0;
+            nums = 0;
         req.storeDATA.forEach(item => {
-            if (item.isCheck){
+            if (item.isCheck) {
                 num += parseFloat(item.num);
-                allPrice += parseFloat(item.num)*parseFloat(item.price);
+                allPrice += parseFloat(item.num) * parseFloat(item.price);
             }
         });
 
