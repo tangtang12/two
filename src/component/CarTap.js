@@ -51,14 +51,14 @@ class CarTap extends React.Component {
                     <a href='javascript:;' className='click' onClick={this.exit}>x</a>
                 </div>
                 <div className='title'>
-                    <div className='small'><span className='name'>颜色</span><RadioGroup defaultValue=""
+                    <div className='small'><span className='name'>颜色</span><RadioGroup defaultValue={this.state.color?this.state.color:""}
                                                                                        onChange={this.changeColor}>
                         <RadioButton value="白色">白色</RadioButton>
                         <RadioButton value="黑色">黑色</RadioButton>
                         <RadioButton value="灰色">灰色</RadioButton>
                     </RadioGroup></div>
                     <div className='small'><span className='name'>尺码</span>
-                        <RadioGroup defaultValue="" onChange={this.changeSize}>
+                        <RadioGroup defaultValue={this.state.size?this.state.size:""} onChange={this.changeSize}>
                             <RadioButton value="X">X</RadioButton>
                             <RadioButton value="XLL">XLL</RadioButton>
                             <RadioButton value="XLLL">XLLL</RadioButton>
@@ -78,12 +78,28 @@ class CarTap extends React.Component {
         </div>
     }
     addToCar = async id => {
+        if (!this.state.color||!this.state.size){
+            message.config({
+                top: 300,
+                duration: 1,
+                getContainer:()=>document.querySelectorAll('.shopping')[0]
+            });
+            message.success('请选择样式和尺寸');
+            return;
+        }
         let num = document.querySelectorAll('.numBox')[0].value;
         let res = await addCar({
             id,
-            num
+            num,
+            color:this.state.color,
+            size:this.state.size
         });
         if (res.code === 0) {
+            message.config({
+                top: 250,
+                duration: 1,
+                getContainer:() => document.body
+            });
             message.success('成功加入购物车');
             this.props.data.open();
             document.documentElement.style.overflow = '';

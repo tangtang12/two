@@ -65,7 +65,7 @@ class CartLogin extends React.Component {
 
             {this.state.getInfo.length === 0 ? "" : this.state.getInfo.map((item, index) => {
 
-                let {hot, pic, name, num, desc, price,id} = item;
+                let {hot, pic=[], name, num, desc, price,id} = item;
 
                 return (<div key={index}>
                     <div className='tip-plus tip2'>
