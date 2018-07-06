@@ -10,7 +10,43 @@ import {
 import Box from "../../component/Box";
 import {
     getCart, modify
-} from "../../api/car"
+} from "../../api/car";
+
+class Collapsed extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            num: this.props.num
+        }
+    }
+
+    //修改商品数量
+    modify = async obj => {
+        let res = await modify(obj);
+    };
+
+    getNum = (num) => {
+        this.setState({
+            num
+        })
+    };
+
+    render() {
+        let {num, desc, name, price, id} = this.props;
+        return <a href="javascript:;">
+            <div className='tip-shop-2'>x{
+                this.state.num
+            }</div>
+            {this.props.collapsed ? <ul className="desc-shop-f">
+                    <li className='tip-shop-1'>{name}</li>
+                    <li className='tip-shop-3'>{desc}</li>
+                    <li className='tip-shop-4'>￥{price}</li>
+                </ul> :
+                <div><Box id={id} modify={this.modify} num={num} max={10} min={0} getNum={this.getNum}/>
+                </div>}
+        </a>
+    }
+}
 
 
 class CartLogin extends React.Component {
@@ -34,14 +70,6 @@ class CartLogin extends React.Component {
 
     }
 
-
-    //修改商品数量
-    modify = async obj => {
-        let res = await modify(obj);
-        console.log(res);
-    };
-
-
     render() {
         return (<div className='cartLogin-f'>
             {/*减运费*/}
@@ -53,7 +81,7 @@ class CartLogin extends React.Component {
             {/*商品信息和价格*/}
 
             {this.state.getInfo.length === 0 ? "" : this.state.getInfo.map((item, index) => {
-                let {hot, pic=[], name, num, desc, price,id} = item;
+                let {hot, pic = [], name, num, desc, price, id} = item;
 
                 return (<div key={index}>
                     <div className='tip-plus tip2'>
@@ -69,21 +97,8 @@ class CartLogin extends React.Component {
 
                         <img src={pic[0]}/>
 
-                        <a href="javascript:;">
-
-
-                            <div className='tip-shop-2'>x{
-                                this.state.num ?
-                                    this.state.num
-                                    : num
-                            }</div>
-                            {this.props.collapsed ? <ul className="desc-shop-f">
-                                <li className='tip-shop-1'>{name}</li>
-                                <li className='tip-shop-3'>{desc}</li>
-                                <li className='tip-shop-4'>￥{price}</li>
-                            </ul> : <div><Box id={id} modify={this.modify} num={num}  max={10} min={0} getNum={this.getNum}/>
-                            </div>}
-                        </a>
+                        <Collapsed num={num} name={name} desc={desc} price={price} id={id}
+                                   collapsed={this.props.collapsed}/>
                     </div>
                 </div>)
             })}
@@ -171,13 +186,6 @@ class CartLogin extends React.Component {
         </div>)
     }
 
-    getNum = (num) => {
-        this.setState({
-            num
-        })
-    }
-
-
     selectedAll = ev => {
         console.log(ev.target.tagName);
 
@@ -186,7 +194,7 @@ class CartLogin extends React.Component {
                 selected: !this.state.selected
             });
         }
-    }
+    };
 
 
     selectedOne = ev => {

@@ -13,15 +13,6 @@ class Box extends React.Component {
 
     }
 
-     // async componentWillMount(){
-     //    let numData=await getCart(getCart);
-     //     this.setState({
-     //         num:numData.data[0].num
-     //     });
-     //
-     // }
-
-
     increase() {
         this.setState({
             num: (this.state.num == this.props.max) ? this.props.max : (this.state.num + 1)
@@ -31,7 +22,7 @@ class Box extends React.Component {
         if (this.num===this.state.num) return;
         this.num=this.state.num;
         this.props.modify?this.props.modify({id:this.props.id,num:this.state.num}):"";
-
+        this.props.getNum(this.num)
     }
     decrease() {
         this.setState({
