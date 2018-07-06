@@ -242,35 +242,39 @@ route.post('/check', (req, res) => {
     let shopId = parseFloat(id);
     if (personID) {
         //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
-        let result = req.storeDATA.find(item => {
-            if (parseFloat(item.personID) === personID && parseFloat(item.state) === 0 && parseFloat(item.shopId) === shopId && item.num === num && item.color === color && item.size === size) {
-                item.num = parseFloat(num);
-            }
+        let result = req.storeDATA.find(item=>{
+            return parseFloat(item.shopId)===shopId&&parseFloat(item.num)===parseFloat(num)&&personID===parseFloat(item.personID)&&item.color===color&&item.size===size
         });
-        result.isCheck = !result.isCheck;
-        writeFile(STORE_PATH, req.storeDATA);
-        let allCheck = req.storeDATA.every(item => item.isCheck),
-            allPrice = 0,
-            nums = 0;
-        req.storeDATA.forEach(item => {
-            if (item.isCheck) {
-                num += parseFloat(item.num);
-                allPrice += parseFloat(item.num) * parseFloat(item.price);
-            }
-        });
-
-        res.send({
-            code: 0,
-            msg: 'OK!',
-            isChecked: result.isCheck,
-            allCheck,
-            allPrice,
-            nums
-        });
+        if (result){
+            result.isCheck = !result.isCheck;let allCheck = req.storeDATA.every(item => item.isCheck),
+                allPrice = 0,
+                nums = 0;
+            req.storeDATA.forEach(item => {
+                if (item.isCheck) {
+                    num += parseFloat(item.num);
+                    allPrice += parseFloat(item.num) * parseFloat(item.price);
+                }
+            });
+            writeFile(STORE_PATH, req.storeDATA).then(()=>{
+                res.send({
+                    code: 0,
+                    msg: 'OK!',
+                    isCheck: result.isCheck,
+                    allCheck,
+                    allPrice,
+                    nums
+                });
+            })
+        }else {
+            res.send({
+                code: 1,
+                msg: '未找到'
+            });
+        }
     } else {
         res.send({
             code: 1,
-            msg: '未找到'
+            msg: '未登录'
         });
     }
 });

@@ -28,3 +28,8 @@ export function pay() {
 }
 
 //点击选中 默认是不选的
+
+export function selected(obj){
+	return axios.post('/store/check',obj)
+}
+

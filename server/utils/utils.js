@@ -19,7 +19,8 @@ function ADD_STORE(req, res, {shopId, num, size, color}) {
         color,
         personID,
         state: 0, //默认是不支付的
-        time: new Date().getTime()
+        time: new Date().getTime(),
+        isCheck:false
     };
     //把数据存放到原始数组中，最后把原始数组存放到JSON中    
     req.storeDATA.push(storeInfo);

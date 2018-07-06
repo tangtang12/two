@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {Link, withRouter} from "react-router-dom"
-import {connect} from "react-redux";
+import React, { Component } from 'react';
+import { Link, withRouter } from "react-router-dom"
+import { connect } from "react-redux";
 import action from "../../store/action";
 import "./CartLogin.less"
 import {
@@ -9,7 +9,7 @@ import {
 } from 'antd'
 import Box from "../../component/Box";
 import {
-    getCart, modify
+    getCart, modify, selected
 } from "../../api/car";
 
 class Collapsed extends React.Component {
@@ -32,17 +32,19 @@ class Collapsed extends React.Component {
     };
 
     render() {
-        let {num, desc, name, price, id} = this.props;
+        let { num, desc, name, price, id } = this.props;
         return <a href="javascript:;">
             <div className='tip-shop-2'>x{
                 this.state.num
             }</div>
             {this.props.collapsed ? <ul className="desc-shop-f">
+
                     <li className='tip-shop-1'>{name}</li>
                     <li className='tip-shop-3'>{desc}</li>
                     <li className='tip-shop-4'>￥{price}</li>
                 </ul> :
                 <div><Box id={id} modify={this.modify} num={this.state.num} max={10} min={0} getNum={this.getNum}/>
+
                 </div>}
         </a>
     }
@@ -81,22 +83,21 @@ class CartLogin extends React.Component {
             {/*商品信息和价格*/}
 
             {this.state.getInfo.length === 0 ? "" : this.state.getInfo.map((item, index) => {
-                let {hot, pic = [], name, num, desc, price, id,isCheck} = item;
+                let { hot, pic = [], name, num, desc, price, id,size, color,isCheck} = item;
 
                 return (<div key={index}>
                     <div className='tip-plus tip2'>
 
-                        <Icon type="tag-o"/>
+                        <Icon type="tag-o" />
                         <span>{hot}</span>
                         <Link to='/classify'>去凑单 &gt; </Link>
                     </div>
                     <div className='shop_f'>
-                        <div className="select-f" onClick={this.selectedOne}>
-                            {isCheck?<Icon type='check'/> : ''}
+
+                        <div className="select-f" onClick={this.selectedOne.bind(this,{id,num,size,color})}>
+                            {isCheck? <Icon type='check' /> : ''}
                         </div>
-
-                        <img src={pic[0]}/>
-
+                        <img src={pic[0]} />
                         <Collapsed num={num} name={name} desc={desc} price={price} id={id}
                                    collapsed={this.props.collapsed}/>
                     </div>
@@ -106,9 +107,9 @@ class CartLogin extends React.Component {
             {this.props.collapsed ?
                 <div>
                     <div className='message-f'>
-                        <Icon type="pay-circle-o"/>
+                        <Icon type="pay-circle-o" />
                         <span>全场加价购</span>
-                        <a href="#">去换购 <p style={{color: "#bfbfbf"}}>&gt;</p></a>
+                        <a href="#">去换购 <p style={{ color: "#bfbfbf" }}>&gt;</p></a>
 
                     </div>
                     <div className='price-all' style={{
@@ -117,8 +118,8 @@ class CartLogin extends React.Component {
                         lineHeight: ".9rem",
                         background: "#fff"
                     }}>
-                <span style={{margin: ".2rem", fontSize: ".3rem"}}>
-                总计
+                        <span style={{ margin: ".2rem", fontSize: ".3rem" }}>
+                            总计
                 </span>
                     </div>
                 </div> : ""}
@@ -126,7 +127,7 @@ class CartLogin extends React.Component {
 
             {/*底部*/}
 
-            {this.props.collapsed ? <div className="login-all" style={{zIndex: "99999"}}>
+            {this.props.collapsed ? <div className="login-all" style={{ zIndex: "99999" }}>
                 <div>
                     <a href="javascript:;" style={{
                         color: '#000',
@@ -140,7 +141,7 @@ class CartLogin extends React.Component {
 
                     }} onClick={this.selectedAll}>
 
-                        {this.state.selected ? <Icon type='check'/> : ''}
+                        {this.state.selected ? <Icon type='check' /> : ''}
 
                     </a>
                     <p>全选</p>
@@ -153,31 +154,31 @@ class CartLogin extends React.Component {
                     }}>不含运费</p>
                     <Button>结算</Button>
                 </div>
-            </div> : <div className="login-all" style={{zIndex: "99999"}}>
-                <div>
-                    <a href="javascript:;" style={{
-                        color: '#000',
-                        border: '.02rem solid',
-                        width: '.4rem',
-                        height: '.4rem',
-                        position: 'absolute',
-                        top: '.2rem',
-                        left: '.2rem',
-                        borderRadius: '50%'
-                    }} onClick={this.selectedAll}>
-                        {this.state.selected ? <Icon type='check'/> : ''}
+            </div> : <div className="login-all" style={{ zIndex: "99999" }}>
+                    <div>
+                        <a href="javascript:;" style={{
+                            color: '#000',
+                            border: '.02rem solid',
+                            width: '.4rem',
+                            height: '.4rem',
+                            position: 'absolute',
+                            top: '.2rem',
+                            left: '.2rem',
+                            borderRadius: '50%'
+                        }} onClick={this.selectedAll}>
+                            {this.state.selected ? <Icon type='check' /> : ''}
 
-                    </a>
-                    <p>全选</p>
-                    <Button style={{
-                        background: "#555",
-                        right: "2.4rem"
-                    }}>移入
-                        <br/>
-                        收藏夹</Button>
-                    <Button>删除</Button>
+                        </a>
+                        <p>全选</p>
+                        <Button style={{
+                            background: "#555",
+                            right: "2.4rem"
+                        }}>移入
+                        <br />
+                            收藏夹</Button>
+                        <Button>删除</Button>
+                    </div>
                 </div>
-            </div>
 
 
             }
@@ -186,29 +187,12 @@ class CartLogin extends React.Component {
         </div>)
     }
 
-    selectedAll = ev => {
-
-        if (ev.target.tagName === 'A' || "I") {
-            this.setState({
-                selected: !this.state.selected
-            });
-        }
-    };
 
 
-    selectedOne = ev => {
-
-        // if (ev.target.tagName === "DIV" || "I") {
-        //     this.setState({
-        //         selectedTwo: !this.state.selectedTwo
-        //     });
-        //
-        // }
-
-
-    };
-
-
+    selectedOne = async (obj) => {
+        let res = await selected(obj)
+        console.log(res)
+    }
 }
 
 export default withRouter(connect(...state => state.cart, action.cart)(CartLogin));
