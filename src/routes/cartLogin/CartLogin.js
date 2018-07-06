@@ -5,8 +5,7 @@ import action from "../../store/action";
 import "./CartLogin.less"
 import {
     Icon,
-    Button,
-    
+    Button
 } from 'antd'
 import Box from "../../component/Box";
 import {
@@ -43,11 +42,12 @@ class Collapsed extends React.Component {
                     <li className='tip-shop-3'>{desc}</li>
                     <li className='tip-shop-4'>￥{price}</li>
                 </ul> :
-                <div><Box id={id} modify={this.modify} num={num} max={10} min={0} getNum={this.getNum}/>
+                <div><Box id={id} modify={this.modify} num={this.state.num} max={10} min={0} getNum={this.getNum}/>
                 </div>}
         </a>
     }
 }
+
 
 class CartLogin extends React.Component {
     constructor(props) {
@@ -97,25 +97,9 @@ class CartLogin extends React.Component {
 
                         <img src={pic[0]}/>
 
-                        <a href="javascript:;">
-
-
-                            <div className='tip-shop-2'>x{
-                                this.state.num ?
-                                    this.state.num
-                                    : num
-                            }</div>
-                            {this.props.collapsed ? <ul className="desc-shop-f">
-                                <li className='tip-shop-1'>{name}</li>
-                                <li className='tip-shop-3'>{desc}</li>
-                                <li className='tip-shop-4'>￥{price}</li>
-                            </ul> : <div><Box id={id} modify={this.modify} num={num}  max={10} min={0} getNum={this.getNum}/>
-                            <input type='text' />  
-
-                            </div>}
-                        </a>   
-                         <Collapsed num={num} name={name} desc={desc} price={price} id={id}
-                                   collapsed={this.props.collapsed}/>                    </div>
+                        <Collapsed num={num} name={name} desc={desc} price={price} id={id}
+                                   collapsed={this.props.collapsed}/>
+                    </div>
                 </div>)
             })}
 

@@ -123,7 +123,9 @@ route.get('/info', (req, res) => {
                 storeList.push({
                     id: parseFloat(item.id),
                     storeID: parseFloat(item.shopId),
-                    num: parseFloat(item.num)
+                    num: parseFloat(item.num),
+                    color:item.color,
+                    size:item.size
                 });
             }
         });
@@ -140,16 +142,14 @@ route.get('/info', (req, res) => {
     }
     //根据上面查找的课程ID(storeList)，
     let data = [];
-    storeList.forEach(({
-                           id,
-                           storeID,
-                           num
-                       } = {}) => {
+    storeList.forEach(({id,storeID, num,size,color} = {}) => {
         let item = req.courseDATA.find(item => parseFloat(item.id) === parseFloat(storeID));
         /*item.id = storeID;*/
         data.push({
             ...item,
-            num
+            num,
+            size,
+            color
         });
     });
     res.send({
