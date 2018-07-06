@@ -1,12 +1,12 @@
 import axios from './index'
 
 export function addCar(obj) {
-	return axios.post('store/add', obj);
+	return axios.post('/store/add', obj);
 }
 
 //state不传或者是0都是加入购物车的信息，为1代表支付成功，为2代表支付失败
 export function getCart(state) {
-	return axios.get('store/info', {
+	return axios.get('/store/info', {
 		params: {
 			state
 		}
@@ -14,7 +14,7 @@ export function getCart(state) {
 }
 
 export function modify(obj) {
-	return axios.post('store/modify', obj)
+	return axios.post('/store/modify', obj)
 }
 
 //移除购物车的内容

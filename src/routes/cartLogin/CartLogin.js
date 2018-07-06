@@ -3,14 +3,9 @@ import { Link, withRouter } from "react-router-dom"
 import { connect } from "react-redux";
 import action from "../../store/action";
 import "./CartLogin.less"
-import {
-    Icon,
-    Button
-} from 'antd'
+import {Icon, Button} from 'antd'
 import Box from "../../component/Box";
-import {
-    getCart, modify, selected
-} from "../../api/car";
+import {getCart, modify, selected} from "../../api/car";
 
 class Collapsed extends React.Component {
     constructor(props) {
