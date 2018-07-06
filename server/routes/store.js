@@ -58,11 +58,11 @@ route.post('/modify', (req, res) => {
     if (personID) {
         //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
         req.storeDATA.forEach(item => {
-            if (parseFloat(item.personID) === personID && parseFloat(item.state) === 0 && parseFloat(item.shopId) === shopId) {
+            if (parseFloat(item.personID) === personID && parseFloat(item.shopId) === shopId) {
                 item.num = parseFloat(num);
             }
         });
-        writeFile(STORE_PATH, req.storeDATA).then(() = {
+        writeFile(STORE_PATH, req.storeDATA).then(() => {
             res.send({
                 code: 0,
                 msg: 'OK!'
