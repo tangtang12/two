@@ -24,7 +24,11 @@ export function remove() {
 
 //支付购物车的内容
 export function pay() {
-	return axios.get('/store/pay')
+	return axios.post('/store/pay')
+}
+
+export function Unpay() {
+	return axios.post('/store/unpay')
 }
 
 //点击选中 默认是不选的

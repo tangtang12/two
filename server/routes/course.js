@@ -10,7 +10,7 @@ route.get('/info', (req, res) => {
     } = req.query; //get请求问号传参都在req.query上
     if (id){
         id = parseFloat(id);
-        let item = req.find(item => {
+        let item = req.courseDATA.find(item => {
             return parseFloat(item.id) === id;
         });
         if (item) {
