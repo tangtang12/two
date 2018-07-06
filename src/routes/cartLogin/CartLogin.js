@@ -83,8 +83,8 @@ class CartLogin extends React.Component {
             {/*商品信息和价格*/}
 
             {this.state.getInfo.length === 0 ? "" : this.state.getInfo.map((item, index) => {
-                let { hot, pic = [], name, num, desc, price, id,size, color} = item;
-
+                let { hot, pic = [], name, num, desc, price, id,size, color,isCheck} = item;
+                
                 return (<div key={index}>
                     <div className='tip-plus tip2'>
 
@@ -94,7 +94,7 @@ class CartLogin extends React.Component {
                     </div>
                     <div className='shop_f'>
                         <div className="select-f" onClick={this.selectedOne.bind(this,{id,num,size,color})}>
-                            {this.state.selected || this.state.selectedTwo ? <Icon type='check' /> : ''}
+                            {isCheck? <Icon type='check' /> : ''}
                         </div>
                         <img src={pic[0]} />
                         <Collapsed num={num} name={name} desc={desc} price={price} id={id}
