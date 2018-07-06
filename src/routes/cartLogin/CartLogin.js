@@ -37,6 +37,7 @@ class CartLogin extends React.Component {
     //修改商品数量
     modify = async obj => {
         let res = await modify(obj);
+        console.log(res);
     };
 
 
