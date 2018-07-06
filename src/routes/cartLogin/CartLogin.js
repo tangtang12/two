@@ -9,7 +9,7 @@ import {
 } from 'antd'
 import Box from "../../component/Box";
 import {
-    getCart,modify
+    getCart, modify
 } from "../../api/car"
 
 
@@ -18,8 +18,9 @@ class CartLogin extends React.Component {
         super(props);
         this.state = {
             selected: false,
-            collapsed: this.props.collapsed,
-            getInfo: []
+            selectedTwo: [],
+            getInfo: [],
+
         };
     }
 
@@ -41,30 +42,17 @@ class CartLogin extends React.Component {
     };
 
 
-
-    componentWillReceiveProps() {
-        this.setState({
-            collapsed: this.props.collapsed
-        })
-
-    }
-
-
-
     render() {
-        let a = 'check';
         return (<div className='cartLogin-f'>
             {/*减运费*/}
             <div className='tip-plus'>
                 <span>再买￥<p>555</p>即可免运费</span>
                 <Link to='/classify'>去凑单 &gt; </Link>
             </div>
-            {/*摆设*/}
 
             {/*商品信息和价格*/}
 
             {this.state.getInfo.length === 0 ? "" : this.state.getInfo.map((item, index) => {
-
                 let {hot, pic=[], name, num, desc, price,id} = item;
 
                 return (<div key={index}>
@@ -75,31 +63,32 @@ class CartLogin extends React.Component {
                         <Link to='/classify'>去凑单 &gt; </Link>
                     </div>
                     <div className='shop_f'>
-                        <div className="select-f" onClick={() => {
-                            this.setState({
-                                selected: !this.state.selected
-                            });
-                            let a = this.state.selected ? "check" : "";
-                        }}>
-                            <Icon type={a}/>
+                        <div className="select-f" onClick={this.selectedOne}>
+                            {this.state.selected || this.state.selectedTwo ? <Icon type='check'/> : ''}
                         </div>
 
                         <img src={pic[0]}/>
 
-                        <a herf="javascript:;">
+                        <a href="javascript:;">
+
+
+                            <div className='tip-shop-2'>x{
+                                this.state.num ?
+                                    this.state.num
+                                    : num
+                            }</div>
                             {this.props.collapsed ? <ul className="desc-shop-f">
                                 <li className='tip-shop-1'>{name}</li>
-                                <li className='tip-shop-2'>x{num}</li>
                                 <li className='tip-shop-3'>{desc}</li>
                                 <li className='tip-shop-4'>￥{price}</li>
-                            </ul> : <div><Box id={id}  modify={this.modify} num={num} max={10} min={0} />
-                                </div>}
+                            </ul> : <div><Box id={id} modify={this.modify} num={num}  max={10} min={0} getNum={this.getNum}/>
+                            </div>}
                         </a>
                     </div>
                 </div>)
             })}
 
-            {this.state.collapsed ?
+            {this.props.collapsed ?
                 <div>
                     <div className='message-f'>
                         <Icon type="pay-circle-o"/>
@@ -122,21 +111,23 @@ class CartLogin extends React.Component {
 
             {/*底部*/}
 
-            {this.state.collapsed ? <div className="login-all" style={{zIndex: "99999"}}>
+            {this.props.collapsed ? <div className="login-all" style={{zIndex: "99999"}}>
                 <div>
                     <a href="javascript:;" style={{
                         color: '#000',
                         border: '.02rem solid',
-                        borderRadius: "50%",
                         width: '.4rem',
                         height: '.4rem',
                         position: 'absolute',
                         top: '.2rem',
                         left: '.2rem',
-                        background: "#000",
-                        opacity: ".6"
+                        borderRadius: '50%'
 
-                    }}><Icon type='check'/></a>
+                    }} onClick={this.selectedAll}>
+
+                        {this.state.selected ? <Icon type='check'/> : ''}
+
+                    </a>
                     <p>全选</p>
                     <span className='span-f'>总计：￥sss.00（n件）</span>
                     <p style={{
@@ -152,16 +143,16 @@ class CartLogin extends React.Component {
                     <a href="javascript:;" style={{
                         color: '#000',
                         border: '.02rem solid',
-                        borderRadius: "50%",
                         width: '.4rem',
                         height: '.4rem',
                         position: 'absolute',
                         top: '.2rem',
                         left: '.2rem',
-                        background: "#000",
-                        opacity: ".6"
+                        borderRadius: '50%'
+                    }} onClick={this.selectedAll}>
+                        {this.state.selected ? <Icon type='check'/> : ''}
 
-                    }}><Icon type='check'/></a>
+                    </a>
                     <p>全选</p>
                     <Button style={{
                         background: "#555",
@@ -179,13 +170,38 @@ class CartLogin extends React.Component {
 
         </div>)
     }
-    numData=(num)=>{
+
+    getNum = (num) => {
         this.setState({
-            getInfo:num
+            num
         })
     }
 
 
+    selectedAll = ev => {
+        console.log(ev.target.tagName);
+
+        if (ev.target.tagName === 'A' || "I") {
+            this.setState({
+                selected: !this.state.selected
+            });
+        }
+    }
+
+
+    selectedOne = ev => {
+
+        if (ev.target.tagName === "DIV" || "I") {
+            this.setState({
+                selectedTwo: !this.state.selectedTwo
+            });
+
+        }
+
+
+    };
+
+
 }
 
-export default withRouter (connect(...state=>state.cart,action.cart)(CartLogin));
+export default withRouter(connect(...state => state.cart, action.cart)(CartLogin));
