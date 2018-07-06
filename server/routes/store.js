@@ -62,11 +62,13 @@ route.post('/modify', (req, res) => {
                 item.num = parseFloat(num);
             }
         });
-        writeFile(STORE_PATH, req.storeDATA);
-        res.send({
-            code: 0,
-            msg: 'OK!'
-        });
+        writeFile(STORE_PATH, req.storeDATA).then(() = {
+            res.send({
+                code: 0,
+                msg: 'OK!'
+            });
+        })
+
     } else {
         res.send({
             code: 1,
@@ -77,7 +79,7 @@ route.post('/modify', (req, res) => {
 //移除购物车的商品
 route.post('/remove', (req, res) => {
     let personID = req.session.personID,
-        isUpdate = false;//标识代表未完成
+        isUpdate = false; //标识代表未完成
     if (personID) {
         req.storeDATA = req.storeDATA.filter(item => {
             return !item.isCheck;
@@ -111,15 +113,28 @@ route.get('/info', (req, res) => {
     if (personID) {
         //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
         if (state === 0) {
-            let data=[];
-            req.storeDATA.forEach(item=>{
-                let {shopId} =item;
-                shopId=parseFloat(shopId);
-                req.courseDATA.forEach(cur=>{
+            let data = [];
+            req.storeDATA.forEach(item => {
+                let {
+                    shopId
+                } = item;
+                shopId = parseFloat(shopId);
+                req.courseDATA.forEach(cur => {
 
-                    let {id,pic,name,price,oldPrice}=cur;
-                    if (shopId===parseFloat(id)){
-                        data.push({...item,pic:pic[0],name,price,oldPrice})
+                    let {
+                        id,
+                        pic,
+                        name,
+                        price,
+                        oldPrice
+                    } = cur;
+                    if (shopId === parseFloat(id)) {
+                        data.push({ ...item,
+                            pic: pic[0],
+                            name,
+                            price,
+                            oldPrice
+                        })
                     }
                 })
             });
@@ -137,9 +152,9 @@ route.get('/info', (req, res) => {
                     id: parseFloat(item.id),
                     storeID: parseFloat(item.shopId),
                     num: parseFloat(item.num),
-                    color:item.color,
-                    size:item.size,
-                    isCheck:item.isCheck
+                    color: item.color,
+                    size: item.size,
+                    isCheck: item.isCheck
                 });
             }
         });
@@ -156,7 +171,14 @@ route.get('/info', (req, res) => {
     }
     //根据上面查找的课程ID(storeList)，
     let data = [];
-    storeList.forEach(({id,storeID, num,size,color,isCheck} = {}) => {
+    storeList.forEach(({
+        id,
+        storeID,
+        num,
+        size,
+        color,
+        isCheck
+    } = {}) => {
         let item = req.courseDATA.find(item => parseFloat(item.id) === parseFloat(storeID));
         /*item.id = storeID;*/
         data.push({
@@ -184,7 +206,7 @@ route.post('/pay', (req, res) => {
                 return {
                     ...item,
                     state: 2,
-                    isCheck:false
+                    isCheck: false
                 };
             }
             return item;
@@ -221,7 +243,7 @@ route.post('/unpay', (req, res) => {
                 return {
                     ...item,
                     state: 1,
-                    isCheck:false
+                    isCheck: false
                 };
             }
             return item;
@@ -259,10 +281,10 @@ route.post('/check', (req, res) => {
     let shopId = parseFloat(id);
     if (personID) {
         //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
-        let result = req.storeDATA.find(item=>{
-            return parseFloat(item.shopId)===shopId&&parseFloat(item.num)===parseFloat(num)&&personID===parseFloat(item.personID)&&item.color===color&&item.size===size
+        let result = req.storeDATA.find(item => {
+            return parseFloat(item.shopId) === shopId && parseFloat(item.num) === parseFloat(num) && personID === parseFloat(item.personID) && item.color === color && item.size === size
         });
-        if (result){
+        if (result) {
             result.isCheck = !result.isCheck;
             let allCheck = req.storeDATA.every(item => item.isCheck),
                 allPrice = 0,
@@ -273,7 +295,7 @@ route.post('/check', (req, res) => {
                     allPrice += parseFloat(item.num) * parseFloat(item.price);
                 }
             });
-            writeFile(STORE_PATH, req.storeDATA).then(()=>{
+            writeFile(STORE_PATH, req.storeDATA).then(() => {
                 res.send({
                     code: 0,
                     msg: 'OK!',
@@ -283,7 +305,7 @@ route.post('/check', (req, res) => {
                     nums
                 });
             })
-        }else {
+        } else {
             res.send({
                 code: 1,
                 msg: '未找到'
