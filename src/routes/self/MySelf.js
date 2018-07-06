@@ -6,6 +6,8 @@ import {withRouter, Link, Switch, Route} from 'react-router-dom'
 import action from "../../store/action/index"
 import {query} from '../../api/home'
 import {isLogin, exitLogin} from "../../api/person";
+import {getCart} from "../../api/car"
+import { get } from "https";
 
 
 const duration = 300,
@@ -24,7 +26,10 @@ class MySelf extends React.Component {
         this.state = {
             in: false,
             data: [],
-            isLogin: false
+            isLogin: false,
+            len1:0,
+            len2:0,
+            len3:0
         };
     }
 
@@ -43,9 +48,15 @@ class MySelf extends React.Component {
 
     async componentDidMount() {
         let result = await query("MAYBE_LINK");
+        let res = await getCart();
+        let res2 = await getCart(1);
+        let res3 = await getCart(2);
         let {data} = result;
         this.setState({
             data,
+            len1:res.data.length||null,
+            len2:res2.data.length||null,
+            len3:res3.data.length||null
         });
     }
 
@@ -61,7 +72,7 @@ class MySelf extends React.Component {
 
     render() {
         let baseInfo = this.props.baseInfo;
-        let {isLogin} = this.state;
+        let {isLogin,len1,len2,len3} = this.state;
         if (!baseInfo && isLogin) return "";
         let {data} = this.state;
         return <div>
@@ -141,11 +152,15 @@ class MySelf extends React.Component {
 
                     <ul className='address'>
                         <li><Link to="/self/orders?type=1"><Icon type='pay-circle-o'/><span>待付款</span>
-                        </Link></li>
+                        </Link>
+                        {!len2?"":<span className="icon">{len2}</span>}
+                        </li>
                         <li><Link to="self/orders?type=2"><Icon type='shop'/><span>待发货</span>
                         </Link>
+                        {!len3?"":<span className="icon">{len3}</span>}
                         </li>
                         <li><Link to="self/orders?type=3"><Icon type='car'/><span>待收货</span></Link>
+                      
                         </li>
                     </ul>
                     <ul className='address1'>
