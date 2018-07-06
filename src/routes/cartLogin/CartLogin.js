@@ -88,8 +88,8 @@ class Collapsed extends React.Component {
             this.setState({
                 isCheck: res.isCheck,
             })
-            let {price,num,checkAll}=res
-            this.props.getCheckAll({price,num,checkAll})
+            let {allPrice,nums,allCheck}=res
+            this.props.getCheckAll({allPrice,nums,allCheck})
 
         }
 
@@ -245,11 +245,11 @@ class CartLogin extends React.Component {
         }
     }
 
-    getCheckAll = ({prices, nums, checkAlls}) => {
+    getCheckAll = ({allPrice,nums,allCheck}) => {
         this.setState({
-            price: prices,
+            price: allPrice,
             num: nums,
-            checkAll: checkAlls
+            checkAll: allCheck
         })
     }
 
