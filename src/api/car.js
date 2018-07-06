@@ -32,3 +32,5 @@ export function pay(ary) {
         data:ary
     })
 }
+
+//点击选中 默认是不选的

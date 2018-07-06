@@ -80,25 +80,25 @@ route.post('/remove', (req, res) => {
         {
             data
         } = req.body,
-        isUpdate=false;//标识代表未完成
+        isUpdate = false;//标识代表未完成
     data = JSON.parse(data);
-    data.forEach(cur=>{
-        let {id,num,size,color} =cur;
+    data.forEach(cur => {
+        let {id, num, size, color} = cur;
         let shopId = parseFloat(id);
         num = parseFloat(num);
         if (personID) {
             req.storeDATA = req.storeDATA.filter(item => {
                 return !(parseFloat(item.shopId) === shopId && parseFloat(item.personID) === personID && item.size === size && item.color === color && item.num === num);
             });
-        }else {
+        } else {
             res.send({
                 code: 1,
                 msg: '用户未登录!'
             });
         }
     });
-    isUpdate=true;
-    if (isUpdate){
+    isUpdate = true;
+    if (isUpdate) {
         writeFile(STORE_PATH, req.storeDATA).then(() => {
             res.send({
                 code: 0,
@@ -112,13 +112,21 @@ route.post('/remove', (req, res) => {
         });
     }
 });
-//获取加入购物车的商品或者支付成功的或者支付失败的
+//获取加入购物车的商品或者支付成功的或者支付失败的 为3获取所有的购物信息
 route.get('/info', (req, res) => {
     let state = parseFloat(req.query.state) || 0,
         personID = req.session.personID,
         storeList = [];
     if (personID) {
         //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
+        if (state===3){
+            res.send({
+                code: 0,
+                msg: 'OK!',
+                data:req.storeDATA
+            });
+            return;
+        }
         req.storeDATA.forEach(item => {
             if (parseFloat(item.personID) === personID && parseFloat(item.state) === state) {
                 storeList.push({
@@ -163,18 +171,18 @@ route.get('/info', (req, res) => {
 route.post('/pay', (req, res) => {
     //支付把某个商品的state修改为1(改完后也是需要把原始JSON文件替换的)
     let {
-          data
+            data
         } = req.body,
         personID = req.session.personID,
         isUpdate = false;
-    data=JSON.parse(data);
-    data.forEach(cur=>{
-        let {id,num,size,color} =cur,
-        shopId = parseFloat(id);
+    data = JSON.parse(data);
+    data.forEach(cur => {
+        let {id, num, size, color} = cur,
+            shopId = parseFloat(id);
         num = parseFloat(num);
         if (personID) {
             req.storeDATA = req.storeDATA.map(item => {
-                if (parseFloat(item.id) === shopId && parseFloat(item.personID) === parseFloat(personID)&&item.num===num&&item.color===color&&item.size===size) {
+                if (parseFloat(item.id) === shopId && parseFloat(item.personID) === parseFloat(personID) && item.num === num && item.color === color && item.size === size) {
                     return {
                         ...item,
                         state: 1
@@ -182,14 +190,14 @@ route.post('/pay', (req, res) => {
                 }
                 return item;
             });
-        }else {
+        } else {
             res.send({
                 code: 1,
                 msg: 'NO LOGIN!'
             });
         }
     });
-    isUpdate=true;
+    isUpdate = true;
     if (isUpdate) {
         writeFile(STORE_PATH, req.storeDATA).then(() => {
             res.send({
@@ -212,14 +220,14 @@ route.post('/unpay', (req, res) => {
         } = req.body,
         personID = req.session.personID,
         isUpdate = false;
-    data=JSON.parse(data);
-    data.forEach(cur=>{
-        let {id,num,size,color} =cur,
+    data = JSON.parse(data);
+    data.forEach(cur => {
+        let {id, num, size, color} = cur,
             shopId = parseFloat(id);
         num = parseFloat(num);
         if (personID) {
             req.storeDATA = req.storeDATA.map(item => {
-                if (parseFloat(item.id) === shopId && parseFloat(item.personID) === parseFloat(personID)&&item.num===num&&item.color===color&&item.size===size) {
+                if (parseFloat(item.id) === shopId && parseFloat(item.personID) === parseFloat(personID) && item.num === num && item.color === color && item.size === size) {
                     return {
                         ...item,
                         state: 2
@@ -227,14 +235,14 @@ route.post('/unpay', (req, res) => {
                 }
                 return item;
             });
-        }else {
+        } else {
             res.send({
                 code: 1,
                 msg: 'NO LOGIN!'
             });
         }
     });
-    isUpdate=true;
+    isUpdate = true;
     if (isUpdate) {
         writeFile(STORE_PATH, req.storeDATA).then(() => {
             res.send({
@@ -249,5 +257,48 @@ route.post('/unpay', (req, res) => {
         });
     }
 });
+//点击选中，默认为不选，如果都选中，全选按钮为true，同时把价格返回去
+route.post('/check', (req, res) => {
+    let personID = req.session.personID, //登录用户得ID
+        {
+            id,
+            num,
+            color,
+            size
+        } = req.body;
+    let shopId = parseFloat(id);
+    if (personID) {
+        //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
+        let result = req.storeDATA.find(item => {
+            if (parseFloat(item.personID) === personID && parseFloat(item.state) === 0 && parseFloat(item.shopId) === shopId && item.num === num && item.color === color && item.size === size) {
+                item.num = parseFloat(num);
+            }
+        });
+        result.isCheck = !result.isCheck;
+        writeFile(STORE_PATH, req.storeDATA);
+        let allCheck = req.storeDATA.every(item => item.isCheck),
+            allPrice = 0,
+            nums=0;
+        req.storeDATA.forEach(item => {
+            if (item.isCheck){
+                num += parseFloat(item.num);
+                allPrice += parseFloat(item.num)*parseFloat(item.price);
+            }
+        });
 
+        res.send({
+            code: 0,
+            msg: 'OK!',
+            isChecked: result.isCheck,
+            allCheck,
+            allPrice,
+            nums
+        });
+    } else {
+        res.send({
+            code: 1,
+            msg: '未找到'
+        });
+    }
+});
 module.exports = route;
