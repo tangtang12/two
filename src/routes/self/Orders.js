@@ -54,6 +54,11 @@ class Orders extends React.Component {
 
     render() {
 
+        getCart(0).then(res=>{
+            console.log(res)
+        })
+
+
         let orderNav = ["全部", "待付款", "待发货", "待收货"];
          let data = this.state.data;
         return <div className="ordersBox">
