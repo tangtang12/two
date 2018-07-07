@@ -34,27 +34,24 @@
     width: 100%;
     height: 1rem;
     li {
-      padding: .2rem;
+      padding: 0.2rem;
       float: left;
       height: 1rem;
       width: 25%;
-      font-size: .3rem;
-      border-bottom: .01rem #999999 solid;
+      font-size: 0.3rem;
+      border-bottom: 0.01rem #999999 solid;
       a:link {
         color: #999999;
       }
       a:visited {
-        color: #0000FF;
-
+        color: #0000ff;
       }
       a:hover {
         color: red;
-
       }
       a:active {
-        color: #D200D2;
+        color: #d200d2;
       }
-
     }
   }
   .imgListBox {
@@ -63,22 +60,73 @@
     overflow-y: scroll;
     .step {
       position: relative;
-      padding: .3rem;
+      padding: 0.3rem;
       width: 50%;
       float: left;
-      img {
-        width: 100%;
-        height: 100%;
+      z-index: 2;
+      a {
+        display: block;
       }
+      .imgBox {
+        position: relative;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
       p {
         color: #000;
-        font-size: .25rem;
+        font-size: 0.25rem;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
-      span {
+      span.price {
         position: absolute;
-        bottom: -.1rem;
-        color: #000;
-
+        bottom: -0.1rem;
+        color: red;
+      }
+      span.oldPrice {
+        position: absolute;
+        bottom: -0.1rem;
+        left: 1.1rem;
+        color: #c1a9a9;
+        text-decoration: line-through;
+      }
+      span.click {
+        position: absolute;
+        bottom: -0.1rem;
+        right: 0.8rem;
+        z-index: 10;
+        width: 0.3rem;
+        height: 0.5rem;
+        letter-spacing: 3px;
+        line-height: 0.45rem;
+        color: #414141;
+        font-weight: bold;
+      }
+      .displayBox {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #45454ab0;
+        .likeBox {
+          width: 1.5rem;
+          height: 1.5rem;
+          background: #f93e3e;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          border-radius: 50%;
+          text-align: center;
+          line-height: 1.5rem;
+          font-size: 18px;
+          color: white;
+        }
       }
     }
   }
