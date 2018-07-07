@@ -26,9 +26,7 @@ class Collapsed extends React.Component {
         super(props);
         this.state = {
             num: this.props.num,
-
             isCheck: this.props.isCheck,
-
         }
     }
 
@@ -72,8 +70,8 @@ class Collapsed extends React.Component {
 
                 <div>
                 <Box id={id} modify={this.modify} num={this.state.num} max={10} min={0} getNum={this.getNum||''} />
-                <span href="javascript:;" className='colorSize'>颜色：{color}&nbsp;&nbsp;尺码:{size}</span>
-
+                <span className='colorSize'>颜色：{color}&nbsp;&nbsp;尺码:{size}</span>
+<p className="colorPrice">￥{price}</p>
                 </div>}
 
                 
@@ -180,20 +178,8 @@ class CartLogin extends React.Component {
 
             {this.props.collapsed ? <div className="login-all" style={{zIndex: "99999"}}>
                 <div>
-                    <a href="javascript:;" style={{
-                        color: '#000',
-                        border: '.02rem solid',
-                        width: '.4rem',
-                        height: '.4rem',
-                        position: 'absolute',
-                        top: '.2rem',
-                        left: '.2rem',
-                        borderRadius: '50%'
-
-                    }} onClick={this.getcheckAll}>
-
+                    <a className='login-all-a' href="javascript:;" onClick={this.getcheckAll}>
                         {this.state.checkAll ? <Icon type='check'/> : ''}
-
                     </a>
                     <p>全选</p>
                     <span className='span-f'>总计：￥{parseFloat(this.state.price)}.00（{parseFloat(this.state.num)}件）</span>
@@ -203,20 +189,11 @@ class CartLogin extends React.Component {
                         color: '#999',
                         paddingLeft: ".1rem"
                     }}>不含运费</p>
-                    <Pay text="结算"/>
+                    <Pay text="结算" num={this.state.num}/>
                 </div>
             </div> : <div className="login-all" style={{zIndex: "99999"}}>
                 <div>
-                    <a href="javascript:;" style={{
-                        color: '#000',
-                        border: '.02rem solid',
-                        width: '.4rem',
-                        height: '.4rem',
-                        position: 'absolute',
-                        top: '.2rem',
-                        left: '.2rem',
-                        borderRadius: '50%'
-                    }} onClick={this.getCheckAll}>
+                    <a className='login-all-a' href="javascript:;"  onClick={this.getCheckAll}>
                         {this.state.checkAll ? <Icon type='check'/> : ''}
 
                     </a>
