@@ -35,7 +35,6 @@ class Collapsed extends React.Component {
     //修改商品数量
     modify = async obj => {
         let res = await modify(obj);
-
     };
 
     getNum = (num) => {
@@ -58,7 +57,7 @@ class Collapsed extends React.Component {
         } = this.props;
         return <a href="javascript:;">
 
-            <div className="select-f" onClick={this.selectedOne.bind(this, {id, num, size, color})}>
+            <div className="select-f" onClick={this.selectedOne.bind(this, {id, size,num:this.state.num,color})}>
                 {this.state.isCheck ? <Icon type='check'/> : ''}
             </div>
             <div className='tip-shop-2'>x{
@@ -81,14 +80,12 @@ class Collapsed extends React.Component {
     }
 
     selectedOne = async (obj) => {
-
         let res = await selected(obj);
-        console.log(res);
         if (res.code === 0) {
             this.setState({
                 isCheck: res.isCheck,
-            })
-            let {allPrice,nums,allCheck}=res
+            });
+            let {allPrice,nums,allCheck}=res;
             this.props.getCheckAll({allPrice,nums,allCheck})
 
         }
