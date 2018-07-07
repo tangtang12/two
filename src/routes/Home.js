@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import "../static/css/home.less";
-import {Switch, Route} from "react-router-dom";
+import {Switch, Route,Link} from "react-router-dom";
 import HomeTop from "./home/HomeTop";
 import HotCategory from "./home/HotCategory";
 import HotBrand from "./home/HotBrand";
@@ -68,38 +68,38 @@ class Home extends React.Component {
             <div className={left}>
                 <ul className="first">
                     <li>
-                        <a href="#">
+                        <Link to="/classify/man">
                             <span className="nav-img"></span>
                             <em>男生</em>
                             <span className="title">GIRLS</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#">
+                        <Link to="/classify/women">
                             <span className="nav-img" style={{
                                 backgroundImage: "url('//img11.static.yhbimg.com/yhb-img01/2015/09/28/10/01399a2fd752e0d334f57be11d4dbf41c5.png')"
                             }}></span>
                             <em>女生</em>
                             <span className="title">boys</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#">
+                        <Link to="/classify/kids">
                             <span className="nav-img" style={{
                                 backgroundImage: "url('//img11.static.yhbimg.com/yhb-img01/2015/10/19/07/01263e3f813116cc9b61010b8ca580c742.png')"
                             }}></span>
                             <em>童装</em>
                             <span className="title">KIDS</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#">
+                        <Link to="/wander">
                             <span className="nav-img" style={{
                                 backgroundImage: "url('//img12.static.yhbimg.com/yhb-img01/2015/10/19/07/026df1f974add11e823d1912d920176b6c.png')"
                             }}></span>
                             <em>创意生活</em>
                             <span className="title">LIFE STYLE</span>
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>
