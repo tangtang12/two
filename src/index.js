@@ -49,7 +49,6 @@ render(<Provider store={store}>
                     </Switch>
                 </main>
                 {/*公共插件*/}
-                <BottomNav></BottomNav>
                 <GoTop/>
             </div>
         </LocaleProvider>
