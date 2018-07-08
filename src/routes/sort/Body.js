@@ -14,7 +14,7 @@ class Catalogue extends React.Component {
   render() {
     let { index, id, pic, name, price, oldPrice } = this.props;
     return (
-      <div className="step" key={index}>
+      <div className="step" >
         <Link to={`details?id=${id}`}>
           <div className="imgBox">
             <img src={pic[0]} alt="desc" />
@@ -97,6 +97,7 @@ class Body extends React.Component {
                 id={id}
                 oldPrice={oldPrice}
                 index={index}
+                key={index}
               />
             );
           })}
