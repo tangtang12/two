@@ -123,7 +123,7 @@ class Orders extends React.Component {
                 <div className="hasOrders" key={index}>
                   <div className="order">
                     <header className="header">
-                      订单编号:{shopDesc + "AdSwFE" + shopDesc}
+                      订单编号:{time + "" + price}
                       <span className="order-status">
                         {state === 1
                           ? "待付款"
