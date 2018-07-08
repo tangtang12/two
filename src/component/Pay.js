@@ -16,18 +16,27 @@ class App extends React.Component {
         console.log(this.state);
         if (this.props.num === 0) {
             this.setState({
-                ModalText: '选个东西在结算吧！', visible: true,
+                ModalText: '选个东西在结算吧！！', visible: true,
             })
-
+            return
         }
+        this.setState({
+            ModalText: '有钱吗?有钱吗？', visible: true,
+        })
     }
 
     handleOk = () => {
-        if(this.props.num===0){this.setState({ModalText: '正在退出...',
-            confirmLoading: true,})}else{this.setState({
-            ModalText: '正在结算中...',
-            confirmLoading: true,
-        });}
+        if (this.props.num === 0) {
+            this.setState({
+                ModalText: '正在退出...',
+                confirmLoading: true,
+            })
+        } else {
+            this.setState({
+                ModalText: '正在结算中...',
+                confirmLoading: true,
+            });
+        }
 
         setTimeout(async () => {
             this.setState({
