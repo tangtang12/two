@@ -151,6 +151,17 @@ class CartLogin extends React.Component {
                     </div>
                 </div>)
             })}
+
+
+
+
+
+
+
+
+
+
+
             {this.props.collapsed ?
                 <div>
                     <div className='message-f'>
@@ -206,9 +217,9 @@ class CartLogin extends React.Component {
             </div>
 
 
+
+
             }
-
-
         </div>)
     }
 

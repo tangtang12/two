@@ -104,9 +104,13 @@ route.post("/remove", (req, res) => {
 });
 //获取加入购物车的商品或者支付成功的或者支付失败的 为3获取所有的购物信息
 route.get("/info", (req, res) => {
-  let state = parseFloat(req.query.state) || -1,
+  let state = req.query.state,
     personID = req.session.personID,
     storeList = [];
+
+  state = typeof state === "undefined" ? -1 : state;
+  state = parseFloat(state);
+
   if (personID) {
     //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
     if (state === 0) {
@@ -127,7 +131,6 @@ route.get("/info", (req, res) => {
           }
         });
       });
-
       res.send({
         code: 0,
         msg: "OK!",
@@ -146,7 +149,9 @@ route.get("/info", (req, res) => {
           num: parseFloat(item.num),
           color: item.color,
           size: item.size,
-          isCheck: item.isCheck
+          isCheck: item.isCheck,
+          time: item.time,
+          state: item.state
         });
       }
     });
@@ -163,7 +168,7 @@ route.get("/info", (req, res) => {
   }
   //根据上面查找的课程ID(storeList)，
   let data = [];
-  storeList.forEach(({ id, storeID, num, size, color, isCheck } = {}) => {
+  storeList.forEach(({ id, storeID, num, size, color, isCheck, time ,state} = {}) => {
     let item = req.courseDATA.find(
       item => parseFloat(item.id) === parseFloat(storeID)
     );
@@ -173,7 +178,9 @@ route.get("/info", (req, res) => {
       num,
       size,
       color,
-      isCheck
+      isCheck,
+      time,
+      state
     });
   });
   res.send({
@@ -198,13 +205,13 @@ route.post("/pay", (req, res) => {
       }
       return item;
     });
+    isUpdate = true;
   } else {
     res.send({
       code: 1,
       msg: "NO LOGIN!"
     });
   }
-  isUpdate = true;
   if (isUpdate) {
     writeFile(STORE_PATH, req.storeDATA)
       .then(() => {
@@ -314,18 +321,9 @@ route.post("/check", (req, res) => {
 route.post("/cancel", (req, res) => {
   let personID = req.session.personID;
   if (personID) {
-    let { id, num, color, size, state } = req.body,
-      shopId = parseFloat(id);
-    num = parseFloat(num);
-    state = parseFloat(state);
+    let { time } = req.body;
     req.storeDATA = req.storeDATA.filter(item => {
-      return (
-        item.shopId !== shopId &&
-        item.num !== num &&
-        item.color !== color &&
-        item.size !== size &&
-        item.state !== state
-      );
+      return parseFloat(item.time) !== parseFloat(time);
     });
     writeFile(STORE_PATH, req.storeDATA).then(() => {
       res.send({
@@ -344,17 +342,9 @@ route.post("/cancel", (req, res) => {
 route.post("/singlepay", (req, res) => {
   let personID = req.session.personID;
   if (personID) {
-    let { id, num, color, size } = req.body,
-      shopId = parseFloat(id);
-    num = parseFloat(num);
+    let { time } = req.body;
     let result = req.storeDATA.find(item => {
-      return (
-        item.shopId !== shopId &&
-        item.num !== num &&
-        item.color !== color &&
-        item.size !== size &&
-        item.state !== -1
-      );
+      return parseFloat(item.time) === parseFloat(time);
     });
     if (result) {
       result.state = 2;
