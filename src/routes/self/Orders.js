@@ -88,7 +88,7 @@ class Orders extends React.Component {
                     <a href="#">随便逛逛</a>
                 </div>:   ( data.map((item,index)=>{
                    let {data,pic,desc,hot,moods,price,shopDesc,shop,name,oldPrice,size,color,id,num,state} = item;
-                   console.log(item)
+                
                     return  <div className="hasOrders" key={index}>
            
                     <div className="order">
