@@ -3,7 +3,7 @@ import {Modal, Button} from 'antd';
 import {withRouter} from "react-router-dom"
 import {pay, Unpay} from "../api/car.js"
 
-class App extends React.Component {
+class Pay extends React.Component {
     state = {
         ModalText: '有钱吗?有钱吗？',
 
@@ -29,36 +29,40 @@ class App extends React.Component {
         if (this.props.num === 0) {
             this.setState({
                 ModalText: '正在退出...',
-                confirmLoading: true,
+                visible: false,
+
             })
         } else {
             this.setState({
                 ModalText: '正在结算中...',
                 confirmLoading: true,
             });
+
+            setTimeout(async () => {
+                this.setState({
+                    visible: false,
+                    confirmLoading: false,
+                });
+
+                let res = await pay();
+                if (res.code === 0) {
+                    window.location.reload()
+                }
+
+
+            }, 1000);
         }
 
-        setTimeout(async () => {
-            this.setState({
-                visible: false,
-                confirmLoading: false,
-            });
 
-            let res = await pay();
-            if (res.code === 0) {
-                window.location.reload()
-            }
-
-
-        }, 1000);
     }
 
     handleCancel = async () => {
-
-        this.setState({
+        if(this.props.num===0)return this.setState({
             visible: false,
-        });
+        })
+
         let resu = await Unpay();
+
         if (resu.code === 0) {
             window.location.reload()
         }
@@ -83,4 +87,4 @@ class App extends React.Component {
     }
 }
 
-export default withRouter(App);
+export default withRouter(Pay);
