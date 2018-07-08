@@ -1,48 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Icon } from "antd";
 import queryCommodity from "../../api/commodity";
 import { Link } from "react-router-dom";
+import Catalogue from "../../component/Catalogue";
 
-class Catalogue extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      display: false
-    };
-  }
-  render() {
-    let { index, id, pic, name, price, oldPrice } = this.props;
-    return (
-      <div className="step" >
-        <Link to={`details?id=${id}`}>
-          <div className="imgBox">
-            <img src={pic[0]} alt="desc" />
-            {this.state.display ? (
-              <div className="displayBox">
-                <span className="likeBox">找相似</span>
-              </div>
-            ) : (
-              ""
-            )}
-          </div>
-          <p>{name}</p>
-          <span className="price">¥{price}</span>
-          {oldPrice ? <span className="oldPrice">￥{oldPrice}</span> : ""}
-          <span
-            className="click"
-            onClick={ev => {
-              this.setState({ display: !this.state.display });
-              ev.preventDefault();
-            }}
-          >
-            ...
-          </span>
-        </Link>
-      </div>
-    );
-  }
-}
+
 
 class Body extends React.Component {
   constructor(props, context) {
@@ -67,6 +29,7 @@ class Body extends React.Component {
     if (data.length === 0) return "";
     return (
       <div>
+
         <div className="sortListBox">
           <ul className="productBox" onClick={this.handleClick}>
             <li>
@@ -87,18 +50,18 @@ class Body extends React.Component {
           {data.map((item, index) => {
             let { pic, desc, price, name, data, moods, id, oldPrice } = item;
             return (
-              <Catalogue
-                pic={pic}
-                desc={desc}
-                price={price}
-                name={name}
-                data={data}
-                moods={moods}
-                id={id}
-                oldPrice={oldPrice}
-                index={index}
-                key={index}
-              />
+                <Catalogue
+                    pic={pic}
+                    desc={desc}
+                    price={price}
+                    name={name}
+                    data={data}
+                    moods={moods}
+                    id={id}
+                    oldPrice={oldPrice}
+                    index={index}
+                    key={index}
+                />
             );
           })}
         </div>

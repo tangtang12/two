@@ -19,6 +19,7 @@ class MaybeLike extends React.Component {
 
             <ul className="goods-list">
                 {maybeLike.map((item, index) => {
+                    
                     let {id} = item;
                     return <li className="goods-info" key={index}>
                         <Link to={`/details?id=${id}`}>
