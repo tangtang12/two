@@ -168,7 +168,7 @@ route.get("/info", (req, res) => {
   }
   //根据上面查找的课程ID(storeList)，
   let data = [];
-  storeList.forEach(({ id, storeID, num, size, color, isCheck, time } = {}) => {
+  storeList.forEach(({ id, storeID, num, size, color, isCheck, time ,state} = {}) => {
     let item = req.courseDATA.find(
       item => parseFloat(item.id) === parseFloat(storeID)
     );
@@ -179,7 +179,8 @@ route.get("/info", (req, res) => {
       size,
       color,
       isCheck,
-      time
+      time,
+      state
     });
   });
   res.send({

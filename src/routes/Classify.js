@@ -6,6 +6,8 @@ import Men from './classify/Men';
 import Women from './classify/Women';
 import Kids from './classify/Kids';
 import '../static/css/classify.less'
+import BottomNav from "../component/BottomNav";
+
 
 class Classify extends React.Component {
     constructor(props,context) {
@@ -20,6 +22,7 @@ class Classify extends React.Component {
                 <Redirect from='/classify' to='/classify/men'></Redirect>
             <Topbox/>
             </Switch>
+            <BottomNav></BottomNav>
         </section>
     }
 }

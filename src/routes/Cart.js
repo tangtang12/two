@@ -8,7 +8,7 @@ import {getCart} from "../api/car";
 import CartLogin from "./cartLogin/CartLogin";
 import action from "../store/action";
 import {Link} from "react-router-dom";
-
+import BottomNav from "../component/BottomNav";
 
 class Cart extends React.Component {
     constructor(props, context) {
@@ -96,7 +96,7 @@ class Cart extends React.Component {
                 </ul>
             </div>
 
-
+                    <BottomNav></BottomNav>
         </section>;
     }
 

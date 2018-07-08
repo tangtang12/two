@@ -50,6 +50,7 @@ class Body extends React.Component {
           {data.map((item, index) => {
             let { pic, desc, price, name, data, moods, id, oldPrice } = item;
             return (
+
                 <Catalogue
                     pic={pic}
                     desc={desc}
@@ -62,6 +63,7 @@ class Body extends React.Component {
                     index={index}
                     key={index}
                 />
+
             );
           })}
         </div>

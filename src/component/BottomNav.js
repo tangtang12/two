@@ -7,7 +7,7 @@ import '../static/css/common.less'
 
 class BottomNav extends React.Component {
     constructor(props, context) {
-        super(props, context);
+       super(props, context);
     }
 
     render() {

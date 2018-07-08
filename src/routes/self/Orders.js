@@ -88,6 +88,7 @@ class Orders extends React.Component {
                 <li>
                     <Link to="/self/orders?type=4">待收货</Link>
                 </li>*/}
+
         </ul>
         <div className="order-container">
           {data.length === 0 ? (
@@ -122,11 +123,11 @@ class Orders extends React.Component {
                 <div className="hasOrders" key={index}>
                   <div className="order">
                     <header className="header">
-                      订单编号:{shopDesc + "AdSwFE" + shopDesc}
+                      订单编号:{time + "" + price}
                       <span className="order-status">
-                        {this.type === 1
+                        {state === 1
                           ? "待付款"
-                          : this.type === 2
+                          : state === 2
                             ? "待发货"
                             : "待购买"}
                       </span>
@@ -157,7 +158,7 @@ class Orders extends React.Component {
                       <span className="sum-cost">¥{price}}</span>
                     </footer>
 
-                    {this.type !== 2 && this.type !== 3 ? (
+                    {state!== 2 && state !== 3 ? (
                       <div className="order-opt">
                         <a
                           href="javascript:;"
@@ -185,10 +186,22 @@ class Orders extends React.Component {
                         </a>
                       </div>
                     ) : (
-                      ""
+                        <div className="order-opt">
+                        <a
+                          href="javascript:;"
+                          onClick={async () => {
+                            let res = await cancel({
+                              time
+                            });
+                            if (res.code === 0) {
+                              this.changeStatus();
+                            }
+                          }}
+                        >
+                          我要退货
+                        </a>
+                      </div>
                     )}
-                    {/* <a href="javascript:;">取消订单</a>
-                          <a href="javascript:;">立即付款</a> */}
                   </div>
                 </div>
               );
