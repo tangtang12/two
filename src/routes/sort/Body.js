@@ -88,6 +88,7 @@ class Body extends React.Component {
             let { pic, desc, price, name, data, moods, id, oldPrice } = item;
             return (
               <Catalogue
+                key={index}
                 pic={pic}
                 desc={desc}
                 price={price}

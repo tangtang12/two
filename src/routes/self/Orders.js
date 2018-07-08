@@ -85,9 +85,9 @@ class Orders extends React.Component {
                {data.length===0? <div className="no-order">
                     <div className="icon"><Icon type="file-text"/></div>
                     <span>您还没有下订单</span>
-                    <a href="#">随便逛逛</a>
+                    <Link to={"/sort"} href="#">随便逛逛</Link>
                 </div>:   ( data.map((item,index)=>{
-                   let {data,pic,desc,hot,moods,price,shopDesc,shop,name,oldPrice,size,color,id,num,state} = item;
+                   let {data,pic,desc,hot,moods,price,shopDesc,shop,name,oldPrice,size,color,id,num,state,shopId} = item;
                 
                     return  <div className="hasOrders" key={index}>
            
