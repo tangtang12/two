@@ -13,7 +13,8 @@ route.post("/add", (req, res) => {
 
   //=>已经登录状态下，把信息直接存储到JSON中即可(用户在其他平台上登录，也可以从JSON中获取数据，实现信息跨平台)
   if (personID) {
-    utils.ADD_STORE(req, res, {
+    utils
+      .ADD_STORE(req, res, {
         shopId,
         num,
         size,
@@ -324,14 +325,14 @@ route.post("/cancel", (req, res) => {
         item.color !== color &&
         item.size !== size &&
         item.state !== state
-	  );
-	});
-	writeFile(STORE_PATH, req.storeDATA).then(() => {
-        res.send({
-          code: 0,
-          msg: "OK!"
-        });
+      );
+    });
+    writeFile(STORE_PATH, req.storeDATA).then(() => {
+      res.send({
+        code: 0,
+        msg: "OK!"
       });
+    });
   } else {
     res.send({
       code: 1,
@@ -340,40 +341,40 @@ route.post("/cancel", (req, res) => {
   }
 });
 //购买单个(将state改为2)
-route.post("/singlepay",(req,res)=>{
-	let personID = req.session.personID;
+route.post("/singlepay", (req, res) => {
+  let personID = req.session.personID;
   if (personID) {
-    let { id, num, color, size} = req.body,
+    let { id, num, color, size } = req.body,
       shopId = parseFloat(id);
     num = parseFloat(num);
-    let res = req.storeDATA.find(item => {
+    let result = req.storeDATA.find(item => {
       return (
         item.shopId !== shopId &&
         item.num !== num &&
         item.color !== color &&
         item.size !== size &&
         item.state !== -1
-	  );
-	});
-	if(res){
-		writeFile(STORE_PATH, req.storeDATA).then(() => {
+      );
+    });
+    if (result) {
+      result.state = 2;
+      writeFile(STORE_PATH, req.storeDATA).then(() => {
         res.send({
           code: 0,
           msg: "OK!"
         });
       });
-	}else{
-		res.send({
-			code: 1,
-			msg: "未找到!"
-		  });
-	}
-	
+    } else {
+      res.send({
+        code: 1,
+        msg: "未找到!"
+      });
+    }
   } else {
     res.send({
       code: 1,
       msg: "用户未登录!"
     });
   }
-})
+});
 module.exports = route;
