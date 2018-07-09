@@ -46,14 +46,16 @@ route.post("/add", (req, res) => {
 //修改添加到购物车的数量，state为0
 route.post("/modify", (req, res) => {
   let personID = req.session.personID, //登录用户得ID
-    { id, num } = req.body;
+    { id, num, time } = req.body;
   let shopId = parseFloat(id);
+  time = parseFloat;
   if (personID) {
     //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
     req.storeDATA.forEach(item => {
       if (
         parseFloat(item.personID) === personID &&
-        parseFloat(item.shopId) === shopId
+        parseFloat(item.shopId) === shopId &&
+        parseFloat(item.time) === time
       ) {
         item.num = parseFloat(num);
       }
@@ -269,18 +271,12 @@ route.post("/unpay", (req, res) => {
 //购物车商品的点击状态
 route.post("/check", (req, res) => {
   let personID = req.session.personID, //登录用户得ID
-    { id, num, color, size } = req.body;
-  let shopId = parseFloat(id);
+    { time } = req.body;
+  time = parseFloat(time);
   if (personID) {
     //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
     let result = req.storeDATA.find(item => {
-      return (
-        parseFloat(item.shopId) === shopId &&
-        parseFloat(item.num) === parseFloat(num) &&
-        personID === parseFloat(item.personID) &&
-        item.color === color &&
-        item.size === size
-      );
+      return parseFloat(item.time) === time;
     });
     if (result) {
       result.isCheck = !result.isCheck;
@@ -303,6 +299,7 @@ route.post("/check", (req, res) => {
           nums
         });
       });
+      req.allCheck = allCheck;
     } else {
       res.send({
         code: 1,
@@ -367,3 +364,33 @@ route.post("/singlepay", (req, res) => {
   }
 });
 module.exports = route;
+//实现全选与非全选
+route.post("/allcheck", (req, res) => {
+  let personID = req.session.personID; //登录用户得ID
+  let { allCheck } = req.body;
+  allCheck = allCheck === "true";
+  if (personID) {
+    //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
+    allCheck = !allCheck;
+    req.storeDATA.forEach(item => {
+      item.isCheck = allCheck;
+    });
+    let nums = 0,
+      allPrice = 0;
+    if (allCheck) {
+      req.storeDATA.forEach(item => {
+        nums += parseFloat(item.num);
+        allPrice += parseFloat(item.num) * parseFloat(item.price);
+      });
+    }
+    writeFile(STORE_PATH, req.storeDATA).then(() => {
+      res.send({
+        code: 0,
+        msg: "OK!",
+        allCheck,
+        allPrice,
+        nums
+      });
+    });
+  }
+});
