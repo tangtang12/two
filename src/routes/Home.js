@@ -11,6 +11,7 @@ import MaybeLike from "./home/MaybeLike";
 import HomeFooter from "./home/HomeFooter";
 import {Icon} from "antd";
 import {isLogin} from "../api/person";
+import BottomNav from "../component/BottomNav";
 
 
 class Home extends React.Component {
@@ -103,6 +104,7 @@ class Home extends React.Component {
                     </li>
                 </ul>
             </div>
+            <BottomNav></BottomNav>
         </section>;
     }
 

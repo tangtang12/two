@@ -5,7 +5,7 @@ import {withRouter,  Switch, Route} from 'react-router-dom'
 import action from "../store/action/index"
 import Orders from "./self/Orders";
 import MySelf from "./self/MySelf";
-
+import BottomNav from "../component/BottomNav";
 
 class Self extends React.Component {
     constructor(props, context) {
@@ -18,6 +18,7 @@ class Self extends React.Component {
                 <Route path="/self" exact component={MySelf}/>
                 <Route path="/self/orders" component={Orders}/>
             </Switch>
+            <BottomNav></BottomNav>
         </div>;
     }
 

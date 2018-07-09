@@ -8,6 +8,7 @@ import { isLogin } from "../api/person";
 import CartLogin from "./cartLogin/CartLogin";
 import action from "../store/action";
 import { Link } from "react-router-dom";
+import BottomNav from "../component/BottomNav";
 
 class Cart extends React.Component {
   constructor(props, context) {
@@ -96,31 +97,7 @@ class Cart extends React.Component {
           </div>
         )}
 
-        <div className="forYou" style={{ marginTop: ".2rem" }}>
-          <p className="title">为你优选商品</p>
-          <ul className="goods-list">
-            {data.map((item, index) => {
-              return (
-                <li className="goods-info" key={index}>
-                  <div className="imgBox">
-                    <Link href="#" to={`/details?id=${item.id}`}>
-                      <img src={item.pic} alt={item.desc} />
-                    </Link>
-                    <div className="similar" />
-                  </div>
-                  <div className="detail">
-                    <p className="name">{item.desc}</p>
-                    <p className="price">
-                      ¥{item.price}
-                      <del>{item.oldPrice}</del>
-                    </p>
-                    <Icon className="similarIcon" type="ellipsis" />
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+        <BottomNav />
       </section>
     );
   }
