@@ -1,20 +1,21 @@
-import React from 'react';
-import {connect} from 'react-redux'
-import Topbox from './Topbox'
-import  List from './List'
+import React from "react";
+import { connect } from "react-redux";
+import Topbox from "./Topbox";
+import List from "./List";
 
 class Men extends React.Component {
-    constructor(props, context) {
-        super(props, context)
-    }
+  constructor(props, context) {
+    super(props, context);
+  }
 
-    render() {
-        return <div>
-            <Topbox/>
-            <List type='womenList'/>
-        </div>
-
-    }
+  render() {
+    return (
+      <div>
+        <Topbox />
+        <List type="kidsList" />
+      </div>
+    );
+  }
 }
 
-export default connect()(Men)
+export default connect()(Men);

@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Icon, Button } from "antd";
 import "../static/css/cart.less";
-import { query } from "../api/home";
 import { isLogin } from "../api/person";
 
 import CartLogin from "./cartLogin/CartLogin";
@@ -22,19 +21,19 @@ class Cart extends React.Component {
   }
 
   async componentWillMount() {
-    let result = await query("maybe_link");
     let results = await isLogin();
     console.log(this.props);
     if (this.props.unPay.length === 0) {
       this.props.getCart();
     }
-    if (result.code === 0) {
-      this.setState({
-        data: result.data,
-        results,
-        CartData: this.props.unPay
-      });
+    if (this.props.homeData.maybeLike.length === 0) {
+      this.props.queryMaybe();
     }
+    this.setState({
+      data: this.props.homeData.maybeLike, //类似猜你喜欢的数据
+      results,
+      CartData: this.props.unPay
+    });
   }
 
   render() {
@@ -108,8 +107,8 @@ class Cart extends React.Component {
     });
   };
 }
-
+//queryMaybe: action.home.queryMaybe
 export default connect(
   state => ({ ...state.home, ...state.cart }),
-  { ...action.person, ...action.cart }
+  { ...action.person, ...action.cart, ...action.home }
 )(Cart);
