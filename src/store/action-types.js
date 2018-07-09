@@ -13,7 +13,6 @@ export const SET_NUM = "SET_NUM"; //修改商品数量
 
 //获取已支付、未支付、支付未成功的商品信息
 export const GET_CART = "GET_CART";
-
 //商品支付成功
 export const CART_PAY = "CART_PAY";
 //商品支付失败

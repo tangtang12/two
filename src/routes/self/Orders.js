@@ -17,31 +17,52 @@ class Orders extends React.Component {
 
   componentWillMount() {
     setTimeout(async () => {
+      this.props.getCart();
       this.type = parseFloat(this.props.location.search.slice(-1));
-      let result = await getCart(this.type);
-      if (result.code === 0) {
-        this.setState({
-          data: result.data
-        });
-      }
+      this.props.getCart(this.type);
+    //   let result = await getCart(this.type);
+    //   if (result.code === 0) {
+    //     this.setState({
+    //       data: result.data
+    //     });
+    //   }
     }, 0);
   }
 
   changeStatus = () => {
     setTimeout(async () => {
       this.type = parseFloat(this.props.location.search.slice(-1));
-      let result = await getCart(this.type);
-      if (result.code === 0) {
-        this.setState({
-          data: result.data
-        });
-      }
+      this.props.getCart(this.type);
+    //   let result = await getCart(this.type);
+    //   if (result.code === 0) {
+    //     this.setState({
+    //       data: result.data
+    //     });
+    //   }
     }, 0);
   };
 
   render() {
     let orderNav = ["全部", "待付款", "待发货", "待收货"];
-    let data = this.state.data;
+    let { unPay, //购物车数据
+        Pay, //支付成功的数据
+        unSuccess, //未支付成功
+        allCart //所有的数据
+        } = this.props;
+        let data = [];
+        switch(this.type){
+            case 0:
+            data = allCart;
+            break;
+            case 1:
+            data = unSuccess;
+            break;
+            case 2:
+            data = Pay
+        }
+       
+        
+    // let data = this.state.data;
     return (
       <div className="ordersBox">
         <div className="topNavBox">
@@ -76,19 +97,7 @@ class Orders extends React.Component {
               </li>
             );
           })}
-          {/* <li className="active">
-                    <Link to="/self/orders?type=1">全部</Link>
-                </li>
-                <li>
-                    <Link to="/self/orders?type=2">待付款</Link>
-                </li>
-                <li>
-                    <Link to="/self/orders?type=3">待发货</Link>
-                </li>
-                <li>
-                    <Link to="/self/orders?type=4">待收货</Link>
-                </li>*/}
-
+        
         </ul>
         <div className="order-container">
           {data.length === 0 ? (
@@ -154,8 +163,8 @@ class Orders extends React.Component {
                       </div>
                     </section>
                     <footer className="footer">
-                      共一件商品&nbsp;实付:{" "}
-                      <span className="sum-cost">¥{price}}</span>
+                      共{num}件商品&nbsp;实付:{" "}
+                      <span className="sum-cost">¥{price*num}</span>
                     </footer>
 
                     {state!== 2 && state !== 3 ? (
@@ -178,7 +187,7 @@ class Orders extends React.Component {
                           onClick={async () => {
                             let res = await payOne({ time });
                             if (res.code === 0) {
-                              this.changeStatus();
+                                this.changeStatus();
                             }
                           }}
                         >
@@ -215,7 +224,7 @@ class Orders extends React.Component {
 
 export default withRouter(
   connect(
-    state => ({ ...state.person }),
-    { ...action.person, ...action.homeData }
+    state => ({ ...state.person,...state.cart }),
+    { ...action.person, ...action.homeData,...action.cart }
   )(Orders)
 );

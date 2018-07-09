@@ -19,7 +19,6 @@ export default function cart(state = init_state, action) {
   state = JSON.parse(JSON.stringify(state));
   switch (action.type) {
     case TYPES.GET_CART:
-      console.log(action.payload);
       let { code, data } = action.payload;
       if (parseFloat(code) === 0) {
         switch (action.state) {
