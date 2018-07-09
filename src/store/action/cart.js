@@ -5,7 +5,7 @@ let cart = {
   getCart(cur) {
     return async dispatch => {
       let result = await getCart(cur);
-      dispatch({ type: TYPES.GET_CART, payload: result });
+      dispatch({ type: TYPES.GET_CART, payload: result,state:cur });
     };
   },
   removeCart() {
