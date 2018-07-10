@@ -17,7 +17,7 @@ class Orders extends React.Component {
 
   componentWillMount() {
       this.props.getCart(0);
-    setTimeout(async () => {    
+     setTimeout(async () => {    
       this.props.getCart();
       this.type = parseFloat(this.props.location.search.slice(-1));
       this.props.getCart(this.type);

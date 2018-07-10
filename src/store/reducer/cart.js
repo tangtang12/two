@@ -111,14 +111,14 @@ export default function cart(state = init_state, action) {
             break;
         case TYPES.SINGLE:
             state.allCart.forEach(item => {
-                item.time == action.obj.time ? item.state === 2 : null;
+                item.time == action.obj.time ? item.state = 2 : null;
             });
             state.unPay = state.allCart.filter(item => item.state === -1);
             state.unSuccess = state.allCart.filter(item => item.state === 1);
             state.Pay = state.allCart.filter(item => item.state === 2);
             break;
         case TYPES.CANCEL:
-            state.allCart.filter(item => item.time !== action.time);
+            state.allCart = state.allCart.filter(item => item.time !== action.obj.time);
             state.unPay = state.allCart.filter(item => item.state === -1);
             state.unSuccess = state.allCart.filter(item => item.state === 1);
             state.Pay = state.allCart.filter(item => item.state === 2);
