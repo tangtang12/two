@@ -81,6 +81,11 @@ let cart = {
         return {
             type: TYPES.ORDER_GET_ALL
         }
+    },
+    getAllChecked(){
+        return {
+            type:TYPES.GETALLCHECKED
+        }
     }
-}
+};
 export default cart;

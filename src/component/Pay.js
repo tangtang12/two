@@ -1,12 +1,11 @@
 import React from "react";
 import {Modal, Button} from 'antd';
 import {withRouter} from "react-router-dom";
-import {connect}from 'react-redux';
+import {connect} from 'react-redux';
 import action from "../store/action"
 import {pay, Unpay} from "../api/car.js"
 
 class Pay extends React.Component {
-
 
 
     state = {
@@ -44,15 +43,15 @@ class Pay extends React.Component {
             });
 
             setTimeout(async () => {
-                this.setState({
-                    visible: false,
-                    confirmLoading: false,
-                });
-
                 let res = await pay();
                 if (res.code === 0) {
                     window.location.reload()
                 }
+
+                this.setState({
+                    visible: false,
+                    confirmLoading: false,
+                });
 
 
             }, 1000);
@@ -92,4 +91,4 @@ class Pay extends React.Component {
     }
 }
 
-export default withRouter(connect(...state=>state.cart,action.cart)(Pay))
+export default withRouter(connect(...state => state.cart, action.cart)(Pay))

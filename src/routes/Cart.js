@@ -23,25 +23,20 @@ class Cart extends React.Component {
 
   async componentWillMount() {
     let results = await isLogin();
-    let mayLike = await query("MAYBE_LINK");
-
     if (this.props.unPay.length === 0) {
       this.props.getCart();
     }
     if (this.props.homeData.maybeLike.length === 0) {
-      this.props.queryMaybe();
+     await this.props.queryMaybe();
     }
       this.setState({
-      data: mayLike.data, //类似猜你喜欢的数据
       results,
       CartData: this.props.unPay
     });
   }
 
   render() {
-    let data = this.state.data;
-    if (!data) return "";
-    return (
+      return (
       <section className="cartBox">
         {/*头部*/}
         <div className="homeBox1">
@@ -90,18 +85,18 @@ class Cart extends React.Component {
             </p>
             <div className="priceCartBox">
               <div className="cart-zero">
-                <Icon type="shopping-cart" />
-                <p>您的购物车暂无商品</p>
-                <a href="#">随便逛逛</a>
+                  <Icon type="shopping-cart" />
+                  <p>您的购物车暂无商品</p>
+                  <a href="#">随便逛逛</a>
               </div>
-            </div>
+          </div>
           </div>
         )}
 
           <div className="forYou" style={{marginTop: '.2rem'}}>
               <p className="title">为你优选商品</p>
               <ul className="goods-list">
-                  {data.map((item, index) => {
+                  {this.props.homeData.maybeLike.length===0?"":this.props.homeData.maybeLike.map((item, index) => {
                       return <li className="goods-info" key={index}>
                           <div className="imgBox">
                               <Link href="#" to={`/details?id=${item.id}`}>

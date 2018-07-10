@@ -14,8 +14,6 @@ class Collapsed extends React.Component {
         super(props);
         this.state = {
             num: this.props.num,
-            //isCheck: this.props.isCheck,
-            checkAll: false
         };
     }
 
@@ -85,16 +83,14 @@ class CartLogin extends React.Component {
             getInfo: [],
             bothChecked: [],
             price: 0,
-            num: 0,
-            checkAll: false
+            num: 0
         };
     }
 
     async componentWillMount() {
         if (this.props.unPay.length === 0) {
             await this.props.getCart();
-            this.props.allChecked()
-
+           await this.props.getAllChecked();
         }
 
     }
@@ -102,6 +98,9 @@ class CartLogin extends React.Component {
     render() {
         return (
             <div className="cartLogin-f">
+
+
+
                 {/*减运费*/}
                 <div className="tip-plus">
           <span>
@@ -164,7 +163,13 @@ class CartLogin extends React.Component {
                             </div>
                         );
                     })}
-
+                {this.props.unPay.length===0?  <div className="priceCartBox">
+                    <div className="cart-zero">
+                        <Icon type="shopping-cart" />
+                        <p>您的购物车暂无商品</p>
+                        <a href="#">随便逛逛</a>
+                    </div>
+                </div>:null}
                 {this.props.collapsed ? (
                     <div>
                         <div className="message-f">
@@ -259,8 +264,7 @@ class CartLogin extends React.Component {
 
 
     //全选的点击事件
-    checked = async () => {
-        let res = await bothChecked(this.props.all);
+    checked =  () => {
         this.props.allChecked();
     }
 

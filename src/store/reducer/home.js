@@ -58,8 +58,8 @@ export default function home(state = init_state, action) {
         state.homeData.n++;
       }
       break;
-    case TYPES.MAYBE_LINK:
-      state.maybeLike = action.data;
+      case TYPES.MAYBE_LINK:
+      state.homeData.maybeLike = action.data;
       break;
   }
   return state;
