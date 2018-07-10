@@ -1,4 +1,4 @@
-import axios from './index';
+    import axios from './index';
 
 //获取商品列表或详情，传参是详情不传参是商品列表
 

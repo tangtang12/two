@@ -97,7 +97,7 @@ export default function cart(state = init_state, action) {
       state.fahuo = [];
       break;
       case TYPES.ORDER_GET_ALL:
-      state.allCart = state.allCart;
+      state.allCart = state.allCart
   }
   return state;
 }

@@ -48,7 +48,7 @@ export function cancel(obj) {
 }
 
 //全选与非全选
-export function allChecked(allCheck) {
+export function bothChecked(allCheck) {
   return axios.post("/store/allcheck", {
     allCheck
   });

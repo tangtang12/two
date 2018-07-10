@@ -43,12 +43,12 @@ route.post("/add", (req, res) => {
     msg: "OK!"
   });
 });
-//修改添加到购物车的数量，state为0
+//修改添加到购物车的数量，state为-1
 route.post("/modify", (req, res) => {
   let personID = req.session.personID, //登录用户得ID
     { id, num, time } = req.body;
   let shopId = parseFloat(id);
-  time = parseFloat;
+  time = parseFloat(time);
   if (personID) {
     //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
     req.storeDATA.forEach(item => {
@@ -170,21 +170,23 @@ route.get("/info", (req, res) => {
   }
   //根据上面查找的课程ID(storeList)，
   let data = [];
-  storeList.forEach(({ id, storeID, num, size, color, isCheck, time ,state} = {}) => {
-    let item = req.courseDATA.find(
-      item => parseFloat(item.id) === parseFloat(storeID)
-    );
-    /*item.id = storeID;*/
-    data.push({
-      ...item,
-      num,
-      size,
-      color,
-      isCheck,
-      time,
-      state
-    });
-  });
+  storeList.forEach(
+    ({ id, storeID, num, size, color, isCheck, time, state } = {}) => {
+      let item = req.courseDATA.find(
+        item => parseFloat(item.id) === parseFloat(storeID)
+      );
+      /*item.id = storeID;*/
+      data.push({
+        ...item,
+        num,
+        size,
+        color,
+        isCheck,
+        time,
+        state
+      });
+    }
+  );
   res.send({
     code: 0,
     msg: "OK!",
@@ -285,7 +287,7 @@ route.post("/check", (req, res) => {
         allPrice = 0,
         nums = 0;
       req.storeDATA.forEach(item => {
-        if (item.isCheck) {
+        if (item.isCheck && item.state === -1) {
           nums += parseFloat(item.num);
           allPrice += parseFloat(item.num) * parseFloat(item.price);
         }
@@ -372,7 +374,6 @@ route.post("/allcheck", (req, res) => {
   allCheck = allCheck === "true";
   if (personID) {
     //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
-    allCheck = !allCheck;
     req.storeDATA.forEach(item => {
       item.isCheck = allCheck;
     });
