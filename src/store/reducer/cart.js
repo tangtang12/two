@@ -1,5 +1,4 @@
 import * as TYPES from "../action-types";
-
 let init_state = {
 
     unPay: [], //购物车数据
@@ -75,7 +74,6 @@ export default function cart(state = init_state, action) {
                     state.nums = nums;
                     state.prices = prices;
                 }
-
             }
             ;
 
@@ -131,6 +129,7 @@ export default function cart(state = init_state, action) {
             state.unPay.forEach(item => {
                 item.state === -1 ? (item.isCheck = state.all) : null;
             });
+            /////
             if (state.all) {
                 let prices = nums = 0;
                 state.unPay.forEach(item => {

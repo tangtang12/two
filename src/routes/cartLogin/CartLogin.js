@@ -264,8 +264,9 @@ class CartLogin extends React.Component {
 
 
     //全选的点击事件
-    checked =  () => {
-        this.props.allChecked();
+    checked = async () => {
+       await this.props.allChecked();
+      await  bothChecked(this.props.all);
     }
 
 
