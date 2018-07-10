@@ -170,21 +170,23 @@ route.get("/info", (req, res) => {
   }
   //根据上面查找的课程ID(storeList)，
   let data = [];
-  storeList.forEach(({ id, storeID, num, size, color, isCheck, time ,state} = {}) => {
-    let item = req.courseDATA.find(
-      item => parseFloat(item.id) === parseFloat(storeID)
-    );
-    /*item.id = storeID;*/
-    data.push({
-      ...item,
-      num,
-      size,
-      color,
-      isCheck,
-      time,
-      state
-    });
-  });
+  storeList.forEach(
+    ({ id, storeID, num, size, color, isCheck, time, state } = {}) => {
+      let item = req.courseDATA.find(
+        item => parseFloat(item.id) === parseFloat(storeID)
+      );
+      /*item.id = storeID;*/
+      data.push({
+        ...item,
+        num,
+        size,
+        color,
+        isCheck,
+        time,
+        state
+      });
+    }
+  );
   res.send({
     code: 0,
     msg: "OK!",
@@ -285,7 +287,7 @@ route.post("/check", (req, res) => {
         allPrice = 0,
         nums = 0;
       req.storeDATA.forEach(item => {
-        if (item.isCheck) {
+        if (item.isCheck && item.state === -1) {
           nums += parseFloat(item.num);
           allPrice += parseFloat(item.num) * parseFloat(item.price);
         }

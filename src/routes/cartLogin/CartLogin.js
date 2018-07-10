@@ -7,14 +7,14 @@ import { Icon, Button } from "antd";
 import Box from "../../component/Box";
 import Pay from "../../component/Pay";
 
-import {  modify, selected, remove, allChecked } from "../../api/car";
+import { modify, selected, remove, allChecked } from "../../api/car";
 
 class Collapsed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       num: this.props.num,
-      isCheck: this.props.isCheck,
+      //isCheck: this.props.isCheck,
       checkAll: false
     };
   }
@@ -31,7 +31,7 @@ class Collapsed extends React.Component {
   };
 
   render() {
-    let { num, desc, name, price, id, size, color, isCheck, time } = this.props;
+    let { desc, name, price, id, size, color, isCheck, time } = this.props;
     return (
       <a href="javascript:;">
         <div
@@ -40,7 +40,7 @@ class Collapsed extends React.Component {
             time
           })}
         >
-          {this.state.isCheck ? <Icon type="check" /> : ""}
+          {isCheck ? <Icon type="check" /> : ""}
         </div>
         <div className="tip-shop-2">x{this.state.num}</div>
         {this.props.collapsed ? (
@@ -71,13 +71,11 @@ class Collapsed extends React.Component {
   }
 
   selectedOne = async obj => {
-    let res = await selected(obj);
+    let res = await selected(obj); //服务器传的
+    await this.props.check(obj.time); //redux传的
     if (res.code === 0) {
-      this.setState({
-        isCheck: res.isCheck
-      });
       let { allPrice, nums, allCheck } = res;
-      this.props.getCheckAll({ allPrice, nums, allCheck });
+      this.props.getCheckAll({ allPrice, nums });
     }
   };
 }
@@ -100,9 +98,6 @@ class CartLogin extends React.Component {
     if (this.props.unPay.length === 0) {
       await this.props.getCart();
     }
-    this.setState({
-      getInfo: this.props.unPay
-    });
   }
 
   render() {
@@ -116,9 +111,9 @@ class CartLogin extends React.Component {
           <Link to="/classify">去凑单 &gt; </Link>
         </div>
         {/*商品信息和价格*/}
-        {this.state.getInfo.length === 0
+        {this.props.unPay.length === 0
           ? ""
-          : this.state.getInfo.map((item, index) => {
+          : this.props.unPay.map((item, index) => {
               let {
                 hot,
                 pic = [],
@@ -163,6 +158,9 @@ class CartLogin extends React.Component {
                       isCheck={isCheck}
                       getCheckAll={this.getCheckAll}
                       time={time}
+                      all={this.props.all}
+                      allChecked={this.props.allChecked}
+                      check={this.props.check}
                     />
                   </div>
                 </div>
@@ -204,7 +202,7 @@ class CartLogin extends React.Component {
                 href="javascript:;"
                 onClick={this.checked}
               >
-                {this.state.checkAll ? <Icon type="check" /> : ""}
+                {this.props.all ? <Icon type="check" /> : ""}
               </a>
               <p>全选</p>
               <span className="span-f">
@@ -233,7 +231,7 @@ class CartLogin extends React.Component {
                 href="javascript:;"
                 onClick={this.checked}
               >
-                {this.state.checkAll ? <Icon type="check" /> : ""}
+                {this.props.all ? <Icon type="check" /> : ""}
               </a>
               <p>全选</p>
               <Button
@@ -264,20 +262,19 @@ class CartLogin extends React.Component {
   getCheckAll = ({ allPrice, nums, allCheck }) => {
     this.setState({
       price: allPrice,
-      num: nums,
-      checkAll: allCheck
+      num: nums
     });
   };
+  //全选的点击事件
   checked = async () => {
-    console.log(this.state.checkAll);
-    let res = await allChecked(this.state.checkAll);
+    let res = await allChecked(this.props.all);
     if (res.code === 0) {
-      let { allPrice, nums, allCheck } = res;
+      let { allPrice, nums } = res;
       this.setState({
         price: allPrice,
-        num: nums,
-        checkAll: allCheck
+        num: nums
       });
+      this.props.allChecked();
     }
   };
 }
