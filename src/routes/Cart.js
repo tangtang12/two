@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Icon, Button } from "antd";
 import "../static/css/cart.less";
 import { isLogin } from "../api/person";
+import { query } from "../api/home";
 
 import CartLogin from "./cartLogin/CartLogin";
 import action from "../store/action";
@@ -22,15 +23,16 @@ class Cart extends React.Component {
 
   async componentWillMount() {
     let results = await isLogin();
-    console.log(this.props);
+    let mayLike = await query("MAYBE_LINK");
+
     if (this.props.unPay.length === 0) {
       this.props.getCart();
     }
     if (this.props.homeData.maybeLike.length === 0) {
       this.props.queryMaybe();
     }
-    this.setState({
-      data: this.props.homeData.maybeLike, //类似猜你喜欢的数据
+      this.setState({
+      data: mayLike.data, //类似猜你喜欢的数据
       results,
       CartData: this.props.unPay
     });
@@ -95,6 +97,30 @@ class Cart extends React.Component {
             </div>
           </div>
         )}
+
+          <div className="forYou" style={{marginTop: '.2rem'}}>
+              <p className="title">为你优选商品</p>
+              <ul className="goods-list">
+                  {data.map((item, index) => {
+                      return <li className="goods-info" key={index}>
+                          <div className="imgBox">
+                              <Link href="#" to={`/details?id=${item.id}`}>
+                                  <img src={item.pic} alt={item.desc}/>
+                              </Link>
+                              <div className="similar"></div>
+                          </div>
+                          <div className="detail">
+                              <p className="name">{item.desc}</p>
+                              <p className="price">¥{item.price}
+                                  <del>{item.oldPrice}</del>
+                              </p>
+                              <Icon className="similarIcon" type="ellipsis"></Icon>
+                          </div>
+                      </li>
+                  })}
+              </ul>
+          </div>
+
 
         <BottomNav />
       </section>
