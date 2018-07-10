@@ -19,9 +19,10 @@ function filterData(data, state) {
     data.allCart.forEach(item => {
         item.isCheck ? (item.state = state) : null;
     });
-    data.unPay = state.allCart.filter(item => item.state === -1);
-    data.unSuccess = state.allCart.filter(item => item.state === 1);
-    data.Pay = state.allCart.filter(item => item.state === 2);
+    console.log(data.allCart);
+    data.unPay = data.allCart.filter(item => item.state === -1);
+    data.unSuccess = data.allCart.filter(item => item.state === 1);
+    data.Pay = data.allCart.filter(item => item.state === 2);
 
   data.allCart.forEach(item => {
     item.isCheck ? (item.state = state) : null;
