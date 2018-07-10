@@ -7,7 +7,7 @@ import { Icon, Button } from "antd";
 import Box from "../../component/Box";
 import Pay from "../../component/Pay";
 
-import { modify, selected, remove, allChecked } from "../../api/car";
+import { modify, selected, remove, bothChecked } from "../../api/car";
 
 class Collapsed extends React.Component {
   constructor(props) {
@@ -206,9 +206,7 @@ class CartLogin extends React.Component {
               </a>
               <p>全选</p>
               <span className="span-f">
-                总计：￥{parseFloat(this.state.price)}.00（{parseFloat(
-                  this.state.num
-                )}件）
+                总计：￥{parseFloat(this.state.price)}.00（{parseFloat(this.state.num)}件）
               </span>
               <p
                 style={{
@@ -220,7 +218,7 @@ class CartLogin extends React.Component {
               >
                 不含运费
               </p>
-              <Pay text="结算" num={this.state.num} />
+              <Pay text="结算" num={this.state.num}  />
             </div>
           </div>
         ) : (
@@ -267,7 +265,7 @@ class CartLogin extends React.Component {
   };
   //全选的点击事件
   checked = async () => {
-    let res = await allChecked(this.props.all);
+    let res = await bothChecked(this.props.all);
     if (res.code === 0) {
       let { allPrice, nums } = res;
       this.setState({
@@ -275,6 +273,7 @@ class CartLogin extends React.Component {
         num: nums
       });
       this.props.allChecked();
+
     }
   };
 }

@@ -374,7 +374,6 @@ route.post("/allcheck", (req, res) => {
   allCheck = allCheck === "true";
   if (personID) {
     //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
-    allCheck = !allCheck;
     req.storeDATA.forEach(item => {
       item.isCheck = allCheck;
     });
