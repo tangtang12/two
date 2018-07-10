@@ -1,6 +1,7 @@
 import * as TYPES from "../action-types";
 
 let init_state = {
+
     unPay: [], //购物车数据
     Pay: [], //支付成功的数据
     unSuccess: [], //未支付成功
@@ -8,15 +9,27 @@ let init_state = {
     all: false,
     prices: 0,
     nums: 0,
+  fahuo:[],
+  allChecked: false
+
 };
 
 function filterData(data, state) {
+
     data.allCart.forEach(item => {
         item.isCheck ? (item.state = state) : null;
     });
     data.unPay = state.allCart.filter(item => item.state === -1);
     data.unSuccess = state.allCart.filter(item => item.state === 1);
     data.Pay = state.allCart.filter(item => item.state === 2);
+
+  data.allCart.forEach(item => {
+    item.isCheck ? (item.state = state) : null;
+  });
+  data.unPay = data.allCart.filter(item => (item.state === -1));
+  data.unSuccess = data.allCart.filter(item => (item.state === 1));
+  data.Pay = data.allCart.filter(item => (item.state === 2));
+
 }
 
 export default function cart(state = init_state, action) {
@@ -73,6 +86,7 @@ export default function cart(state = init_state, action) {
             let {code, data} = action.payload;
             code === 0 ? (state.unPay = data) : null;
         }
+
             break;
         case TYPES.CART_PAY:
             filterData(state, 2);
@@ -133,18 +147,18 @@ export default function cart(state = init_state, action) {
                 state.nums=0;
             }
             break;
-        // case TYPES.PRICES_ALL:
-        //     state.unPay.forEach((item,index)=>{
-        //         let {num,price}=item;
-        //         state.prices=price*num
-        //     });
-        //     break;
-        // case TYPES.NUM_ALL:
-        //     state.unPay.forEach((item,index)=>{
-        //         let{num}=item;
-        //         state.nums=parseFloat(num);
-        //     });
-         //   break;
+        case TYPES.FAHUO:
+            state.fahuo = [];
+            break;
+        case TYPES.ORDER_GET_ALL:
+            state.allCart = state.allCart
+            break;
     }
     return state;
-}
+
+
+
+  }
+
+
+

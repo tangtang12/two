@@ -27,11 +27,23 @@ export const SINGLE = "SINGLE";
 export const CANCEL = "CANCEL";
 //全选
 export const ALLCEHCKED = "ALLCEHCKED";
+
+
+
+//发货
+export const FAHUO = "FAHUO";
+//获取全部订单信息
+export const ORDER_GET_ALL = "ORDER_GET_ALL"
+
 //classify分类页面的数据
 export const CLASSIFY_DATA = "CLASSIFY_DATA";
 //wander 的数据
 export const WANDER_ALL_DATA = "WANDER_ALL_DATA";
+
 //总数量
 export const  NUM_ALL= "NUM_ALL";
 //总价格
 export const PRICES_ALL = "PRICES_ALL";
+
+
+
