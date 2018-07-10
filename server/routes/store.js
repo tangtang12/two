@@ -43,12 +43,12 @@ route.post("/add", (req, res) => {
     msg: "OK!"
   });
 });
-//修改添加到购物车的数量，state为0
+//修改添加到购物车的数量，state为-1
 route.post("/modify", (req, res) => {
   let personID = req.session.personID, //登录用户得ID
     { id, num, time } = req.body;
   let shopId = parseFloat(id);
-  time = parseFloat;
+  time = parseFloat(time);
   if (personID) {
     //登录下是从JSON文件中获取:在STORE.json中找到所有personID和登录用户相同的ID(服务器从session中获取的ID)
     req.storeDATA.forEach(item => {
