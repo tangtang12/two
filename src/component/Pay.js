@@ -6,6 +6,9 @@ import action from "../store/action"
 import {pay, Unpay} from "../api/car.js"
 
 class Pay extends React.Component {
+
+
+
     state = {
         ModalText: '有钱吗?有钱吗？',
 
@@ -16,7 +19,7 @@ class Pay extends React.Component {
     showModal = () => {
         console.log(this.props);
 
-        if (this.props.num === 0) {
+        if (this.props.nums === 0) {
             this.setState({
                 ModalText: '选个东西在结算吧！！', visible: true,
             })
@@ -28,7 +31,7 @@ class Pay extends React.Component {
     }
 
     handleOk = () => {
-        if (this.props.num === 0) {
+        if (this.props.nums === 0) {
             this.setState({
                 ModalText: '正在退出...',
                 visible: false,
@@ -59,7 +62,7 @@ class Pay extends React.Component {
     }
 
     handleCancel = async () => {
-        if (this.props.num === 0) return this.setState({
+        if (this.props.nums === 0) return this.setState({
             visible: false,
         })
 
@@ -89,4 +92,4 @@ class Pay extends React.Component {
     }
 }
 
-export default withRouter(connect(null,action.cart)(Pay))
+export default withRouter(connect(...state=>state.cart,action.cart)(Pay))

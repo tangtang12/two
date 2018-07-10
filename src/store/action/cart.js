@@ -52,7 +52,19 @@ let cart = {
       type: TYPES.ALLCEHCKED,
       all
     };
-  }
+  },
+    allNum(num){
+    return {
+      type:TYPES.NUM_ALL,
+        num
+    }
+    },
+    allPrices(prices){
+    return {
+      type:TYPES.PRICES_ALL,
+        prices
+    }
+    }
 };
 
 export default cart;

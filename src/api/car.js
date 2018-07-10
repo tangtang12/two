@@ -13,6 +13,7 @@ export function getCart(state) {
   });
 }
 
+//改变数量
 export function modify(obj) {
   return axios.post("/store/modify", obj);
 }

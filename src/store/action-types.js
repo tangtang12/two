@@ -2,14 +2,16 @@
 export const HOME_DATA = "HOME_DATA";
 export const IS_LOGIN = "IS_LOGIN";
 export const PERSON_QUERY_INFO = "PERSON_QUERY_INFO";
-
 //多次使用MAYBE_LINK的数据
 export const MAYBE_LINK = "MAYBE_LINK";
-
 //购物车的操作
-export const ADD_CAR = "ADD_CAR"; //商品添加购物车
-export const REMOVE_CAR = "REMOVE_CAR"; //移除购物车的内容
-export const SET_NUM = "SET_NUM"; //修改商品数量
+export const ADD_CAR = "ADD_CAR";
+//商品添加购物车
+export const REMOVE_CAR = "REMOVE_CAR";
+//移除购物车的内容
+export const SET_NUM = "SET_NUM";
+//修改商品数量
+
 
 //获取已支付、未支付、支付未成功的商品信息
 export const GET_CART = "GET_CART";
@@ -25,9 +27,11 @@ export const SINGLE = "SINGLE";
 export const CANCEL = "CANCEL";
 //全选
 export const ALLCEHCKED = "ALLCEHCKED";
-
 //classify分类页面的数据
 export const CLASSIFY_DATA = "CLASSIFY_DATA";
-
 //wander 的数据
 export const WANDER_ALL_DATA = "WANDER_ALL_DATA";
+//总数量
+export const  NUM_ALL= "NUM_ALL";
+//总价格
+export const PRICES_ALL = "PRICES_ALL";
