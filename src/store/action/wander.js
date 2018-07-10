@@ -1,18 +1,19 @@
 import * as TYPES from "../action-types";
 import queryData from "../../api/wander";
 
-let home = {
+let wonder = {
   allData(isWho) {
     return async dispatch => {
       let { code, data } = await queryData(isWho);
-      if (code === 1) {
+      if (code === 0) {
         dispatch({
           type: TYPES.WANDER_ALL_DATA,
-          data
+          data,
+          isWho
         });
       }
     };
   }
 };
 
-export default home;
+export default wonder;
