@@ -38,6 +38,7 @@ class Pay extends React.Component {
 
             })
         } else {
+            
             this.setState({
                 ModalText: '正在结算中...',
                 confirmLoading: true,

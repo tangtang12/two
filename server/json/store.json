@@ -1,1 +1,1 @@
-[{"id":1,"shopId":1,"num":1,"size":"XLLL","color":"灰色","personID":1,"price":209,"state":-1,"time":1531217650844,"isCheck":false}]
+[{"id":1,"shopId":2,"num":6,"size":"XLL","color":"黑色","personID":1,"price":698,"state":1,"time":1531218290628,"isCheck":false},{"id":2,"shopId":1,"num":10,"size":"X","color":"黑色","personID":1,"price":209,"state":-1,"time":1531218297725,"isCheck":false},{"id":3,"shopId":6,"num":1,"size":"XLLL","color":"灰色","personID":1,"price":799,"state":2,"time":1531218618183,"isCheck":false}]
