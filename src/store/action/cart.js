@@ -52,6 +52,22 @@ let cart = {
       type: TYPES.ALLCEHCKED,
       all
     };
+  },
+  cancel(obj){
+      return {
+          type:TYPES.CANCEL,
+          obj
+      }
+  },
+  fahuo(){
+      return {
+          type:TYPES.FAHUO
+      }
+  },
+  getAll(){
+      return {
+          type:TYPES.ORDER_GET_ALL
+      }
   }
 };
 

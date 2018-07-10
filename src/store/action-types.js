@@ -22,3 +22,7 @@ export const SINGLE = "SINGLE";
 export const CANCEL = "CANCEL";
 //全选
 export const ALLCEHCKED = "ALLCEHCKED";
+//发货
+export const FAHUO = "FAHUO";
+//获取全部订单信息
+export const ORDER_GET_ALL = "ORDER_GET_ALL"

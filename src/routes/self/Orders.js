@@ -16,38 +16,41 @@ class Orders extends React.Component {
   }
 
   componentWillMount() {
-    setTimeout(async () => {
+      this.props.getCart(0);
+    setTimeout(async () => {    
       this.props.getCart();
       this.type = parseFloat(this.props.location.search.slice(-1));
       this.props.getCart(this.type);
-    //   let result = await getCart(this.type);
-    //   if (result.code === 0) {
-    //     this.setState({
-    //       data: result.data
-    //     });
-    //   }
     }, 0);
   }
 
-  changeStatus = () => {
+  changeStatus = ev => {
     setTimeout(async () => {
       this.type = parseFloat(this.props.location.search.slice(-1));
-      this.props.getCart(this.type);
-    //   let result = await getCart(this.type);
-    //   if (result.code === 0) {
-    //     this.setState({
-    //       data: result.data
-    //     });
-    //   }
+      if(this.type === 0){
+        this.props.getAll();
+      }
+      if(this.type === 1){
+        this.props.unsuccess();
+      }
+      if(this.type===2){
+          this.props.pay();
+      }
+      if(this.type === 3){
+        this.props.fahuo()
+      }
+      //this.props.getCart(this.type);
     }, 0);
   };
+
 
   render() {
     let orderNav = ["全部", "待付款", "待发货", "待收货"];
     let { unPay, //购物车数据
         Pay, //支付成功的数据
         unSuccess, //未支付成功
-        allCart //所有的数据
+        allCart, //所有的数据
+        fahuo
         } = this.props;
         let data = [];
         switch(this.type){
@@ -59,6 +62,9 @@ class Orders extends React.Component {
             break;
             case 2:
             data = Pay
+            break;
+            default:
+            data = fahuo;
         }
        
         
@@ -90,7 +96,11 @@ class Orders extends React.Component {
               <li key={index} className={type === index ? "active" : ""}>
                 <Link
                   to={`/self/orders?type=${index}`}
-                  onClick={this.changeStatus}
+                  onClick={ev=>{
+                    let tarParClass = ev.target.parentNode.className;
+                    if(tarParClass === "active")return;
+                    this.changeStatus()
+                  }}
                 >
                   {item}
                 </Link>
@@ -176,7 +186,7 @@ class Orders extends React.Component {
                               time
                             });
                             if (res.code === 0) {
-                              this.changeStatus();
+                             this.props.cancel({time})
                             }
                           }}
                         >
@@ -187,7 +197,8 @@ class Orders extends React.Component {
                           onClick={async () => {
                             let res = await payOne({ time });
                             if (res.code === 0) {
-                                this.changeStatus();
+                                this.props.single({time})
+                                //this.changeStatus();
                             }
                           }}
                         >
@@ -203,7 +214,8 @@ class Orders extends React.Component {
                               time
                             });
                             if (res.code === 0) {
-                              this.changeStatus();
+                             await this.props.cancel({time})
+                              //this.changeStatus();
                             }
                           }}
                         >

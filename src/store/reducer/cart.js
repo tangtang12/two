@@ -5,15 +5,16 @@ let init_state = {
   Pay: [], //支付成功的数据
   unSuccess: [], //未支付成功
   allCart: [], //所有的数据
+  fahuo:[],
   allChecked: false
 };
 function filterData(data, state) {
   data.allCart.forEach(item => {
     item.isCheck ? (item.state = state) : null;
   });
-  data.unPay = state.allCart.filter(item => (item.state = -1));
-  data.unSuccess = state.allCart.filter(item => (item.state = 1));
-  data.Pay = state.allCart.filter(item => (item.state = 2));
+  data.unPay = data.allCart.filter(item => (item.state === -1));
+  data.unSuccess = data.allCart.filter(item => (item.state === 1));
+  data.Pay = data.allCart.filter(item => (item.state === 2));
 }
 export default function cart(state = init_state, action) {
   state = JSON.parse(JSON.stringify(state));
@@ -75,21 +76,28 @@ export default function cart(state = init_state, action) {
       break;
     case TYPES.SINGLE:
       state.allCart.forEach(item => {
-        item.time == action.obj.time ? item.state === 2 : null;
+        console.log( item.time == action.obj.time )
+        item.time == action.obj.time ? item.state = 2 : null;
       });
-      state.unPay = state.allCart.filter(item => (item.state = -1));
-      state.unSuccess = state.allCart.filter(item => (item.state = 1));
-      state.Pay = state.allCart.filter(item => (item.state = 2));
+      state.unPay = state.allCart.filter(item => (item.state == -1));
+      state.unSuccess = state.allCart.filter(item => (item.state == 1));
+      state.Pay = state.allCart.filter(item => (item.state == 2));
+      console.log(state.unPay,state.unSuccess,state.Pay)
       break;
     case TYPES.CANCEL:
-      state.allCart.filter(item => item.time !== action.time);
-      state.unPay = state.allCart.filter(item => (item.state = -1));
-      state.unSuccess = state.allCart.filter(item => (item.state = 1));
-      state.Pay = state.allCart.filter(item => (item.state = 2));
+    state.allCart= state.allCart.filter(item => item.time !== action.obj.time);
+      state.unPay = state.allCart.filter(item => (item.state == -1));
+      state.unSuccess = state.allCart.filter(item => (item.state == 1));
+      state.Pay = state.allCart.filter(item => (item.state == 2));
       break;
     case TYPES.ALLCEHCKED:
       state.allChecked = !action.all;
       break;
+      case TYPES.FAHUO:
+      state.fahuo = [];
+      break;
+      case TYPES.ORDER_GET_ALL:
+      state.allCart = state.allCart;
   }
   return state;
 }
