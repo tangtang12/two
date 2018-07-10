@@ -11,11 +11,17 @@ class Box extends React.Component {
     };
   }
 
-  increase() {
-    this.setState({
+  async increase() {
+   await this.setState({
       num:
         this.state.num == this.props.max ? this.props.max : this.state.num + 1
     });
+    this.props.setNum({
+        shopId:this.props.id,
+        num:this.state.num,
+        time:this.props.time
+    })
+
   }
   componentDidUpdate() {
     if (this.num === this.state.num) return;
@@ -29,15 +35,26 @@ class Box extends React.Component {
       : "";
     this.props.getNum(this.num);
   }
-  decrease() {
+  async decrease () {
     this.setState({
       num:
         this.state.num == this.props.min ? this.props.min : this.state.num - 1
     });
+    await this.props.setNum({
+        shopId:this.props.id,
+        num:this.state.num,
+        time:this.props.time
+    })
+      console.log(this.state.num);
+      this.props.setNum({
+          shopId:this.props.id,
+          num:this.state.num,
+          time:this.props.time
+      })
   }
   /*渲染组件*/
   render() {
-    return (
+      return (
       <div className="num">
         <input
           type="button"
