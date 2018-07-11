@@ -223,7 +223,7 @@ class CartLogin extends React.Component {
                             >
                                 不含运费
                             </p>
-                            <Pay text="结算" num={this.state.num}/>
+                            <Pay text="结算" num={this.props.nums}/>
                         </div>
                     </div>
                 ) : (

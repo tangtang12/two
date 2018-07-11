@@ -1,5 +1,6 @@
 import * as TYPES from "../action-types";
 import { query } from "../../api/home";
+import queryData from "../../api/wander";
 
 let home = {
   queryData() {

@@ -1,6 +1,5 @@
 import React from "react";
 import {connect} from "react-redux";
-import {query} from "../../api/home";
 import action from "../../store/action";
 import {Carousel} from "antd";
 import {Link} from "react-router-dom";

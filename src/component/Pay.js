@@ -6,63 +6,48 @@ import action from "../store/action"
 import {pay, Unpay} from "../api/car.js"
 
 class Pay extends React.Component {
-
-
     state = {
         ModalText: '有钱吗?有钱吗？',
-
         visible: false,
         confirmLoading: false,
-    }
-
+    };
     showModal = () => {
-        console.log(this.props);
-
-        if (this.props.nums === 0) {
+        if (this.props.num === 0) {
             this.setState({
                 ModalText: '选个东西在结算吧！！', visible: true,
-            })
+            });
             return
         }
         this.setState({
             ModalText: '有钱吗?有钱吗？', visible: true,
         })
-    }
-
+    };
     handleOk = () => {
-        if (this.props.nums === 0) {
+        if (this.props.num === 0) {
             this.setState({
                 ModalText: '正在退出...',
                 visible: false,
-
             })
         } else {
-            
             this.setState({
                 ModalText: '正在结算中...',
                 confirmLoading: true,
             });
-
             setTimeout(async () => {
                 let res = await pay();
                 if (res.code === 0) {
                     window.location.reload()
                 }
-
                 this.setState({
                     visible: false,
                     confirmLoading: false,
                 });
-
-
             }, 1000);
         }
-
-
     }
 
     handleCancel = async () => {
-        if (this.props.nums === 0) return this.setState({
+        if (this.props.num === 0) return this.setState({
             visible: false,
         })
 
@@ -71,7 +56,6 @@ class Pay extends React.Component {
         if (resu.code === 0) {
             window.location.reload()
         }
-
     }
 
     render() {

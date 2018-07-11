@@ -54,26 +54,3 @@ render(<Provider store={store}>
         </LocaleProvider>
     </HashRouter>
 </Provider>, window.root);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,14 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Icon, Button } from "antd";
+import { Icon } from "antd";
 import "../static/css/cart.less";
 import { isLogin } from "../api/person";
-import { query } from "../api/home";
-
 import CartLogin from "./cartLogin/CartLogin";
 import action from "../store/action";
 import { Link } from "react-router-dom";
 import BottomNav from "../component/BottomNav";
+import { query } from "../api/home";
+
 
 class Cart extends React.Component {
   constructor(props, context) {
@@ -128,7 +128,6 @@ class Cart extends React.Component {
     });
   };
 }
-//queryMaybe: action.home.queryMaybe
 export default connect(
   state => ({ ...state.home, ...state.cart }),
   { ...action.person, ...action.cart, ...action.home }

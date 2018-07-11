@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import "../static/css/home.less";
-import {Switch, Route,Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import HomeTop from "./home/HomeTop";
 import HotCategory from "./home/HotCategory";
 import HotBrand from "./home/HotBrand";
@@ -12,7 +12,6 @@ import HomeFooter from "./home/HomeFooter";
 import {Icon} from "antd";
 import {isLogin} from "../api/person";
 import BottomNav from "../component/BottomNav";
-
 
 class Home extends React.Component {
     constructor(props, context) {
@@ -43,13 +42,9 @@ class Home extends React.Component {
 
 
     render() {
-
-        let {isLogin} = this.state;
-
-        let {homeData} = this.props;
+        let {isLogin,left, right, mark} = this.state,
+            {homeData} = this.props;
         if (homeData.n < 8) return "";
-        let {left, right, mark} = this.state;
-
 
         return <section className="homeBox">
             <div className={right} ref="right">
@@ -104,7 +99,7 @@ class Home extends React.Component {
                     </li>
                 </ul>
             </div>
-            <BottomNav></BottomNav>
+            <BottomNav/>
         </section>;
     }
 
@@ -117,10 +112,9 @@ class Home extends React.Component {
     };
 
     leftOn = ev => {
-        let right = this.state.right.replace("on", "off");
         this.setState({
             left: this.state.left + " on",
-            right,
+            right:this.state.right.replace("on", "off"),
             mark: this.state.mark + " dis"
         });
     };
