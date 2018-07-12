@@ -16,4 +16,4 @@ class Sort extends React.Component {
     }
 }
 
-export default connect()(Sort)
+export default Sort

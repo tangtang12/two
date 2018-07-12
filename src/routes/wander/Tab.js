@@ -5,9 +5,6 @@ import action from "../../store/action";
 class Slide extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      slideData: []
-    };
   }
 
   async componentDidMount() {

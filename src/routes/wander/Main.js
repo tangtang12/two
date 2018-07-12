@@ -16,7 +16,7 @@ class Main extends React.Component {
     return (
       <div className="main">
         {SHOW_IMG.map((item, index) => {
-          let { pic, title, desc, show, type } = item;
+          let { pic, title, show, type } = item;
           return (
             <div key={index} className="blockBox">
               {title ? (
@@ -33,7 +33,7 @@ class Main extends React.Component {
                   <div className="banner">
                     <Carousel autoplay>
                       {pic.map((item, index) => {
-                        let { pic, id, desc } = item;
+                        let { pic, desc } = item;
                         return (
                           <div key={index}>
                             <img src={pic} alt="" />
